@@ -6,9 +6,6 @@ layout: simple
 ---
 
 
-
-
-
 Data professional with a wealth of experience in impactful data-driven projects and with proven track record in leading successful data and analytics teams.
 
 Currently, I manage the Product Analytics unit at Bitpanda, a leading European fintech specialised in cryptocurrencies and tokenised assets. In the course of my career, I have worked in several application fields — SaaS, intelligent transport systems, IoT, smart cities, geographical analytics, human mobility, computer network monitoring — filling the gap between technology and business impact.
