@@ -5,7 +5,7 @@ isoCode = "en"
 weight = 1
 rtl = false
 
-title = "P. Fiadino's home page"
+title = "Piero's home page"
 # logo = "img/logo.png"
 description = "Resume and contacts"
 copyright = "©2023 All Rights Reserved"
@@ -16,7 +16,7 @@ dateFormat = "2 January 2006"
   name = "Pierdomenico Fiadino, PhD"
   #image = "img/pf_square.png"
   headline = "Data Analytics & Decision Science leader @ Bitpanda"
-  bio = "test test test"
+  bio = "data stuff since 2010"
   links = [
      { email = "mailto:p@fiadino.org" },
   #   { link = "https://link-to-some-website.com/" },
