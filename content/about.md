@@ -5,12 +5,14 @@ draft: false
 layout: simple
 ---
 
+---
 
-Data professional with a wealth of experience in impactful data-driven projects and with proven track record in leading successful data and analytics teams.
+<p style="text-align:left"><img alt="" src="https://fiadino.org/assets/images/pf.jpg" style="float:left; height:252px; margin:5px 10px; " />Data professional with a wealth of experience in impactful data-driven projects and with proven track record in building and leading successful data and analytics teams.</p>
 
-Currently, I manage the Product Analytics unit at Bitpanda, a leading European fintech specialised in cryptocurrencies and tokenised assets. In the course of my career, I have worked in several application fields — SaaS, intelligent transport systems, IoT, smart cities, geographical analytics, human mobility, computer network monitoring — filling the gap between technology and business impact.
+<p style="text-align:left">Currently, I manage the Product Analytics unit at Bitpanda, a leading European fintech specialised in cryptocurrencies and tokenised assets. In the course of my career, I have worked in several fields (crypto, SaaS, telecommunications and others) bridging technology and business impact.</p>
 
-The years spent in R&D centres and my PhD studies in Data Mining and Machine Learning at TU Wien completed my hands-on profile with a theoretical and research attitude. During my PhD, I have co-authored more than 30 research publications in major international conferences and journals.
+<p style="text-align:left">The years spent in R&amp;D centres and my PhD studies in Data Mining and Machine Learning at TU Wien completed my hands-on profile with a theoretical and research attitude. During my PhD, I have co-authored 30+ publications in international conferences and journals.</p>
 
-![profile](/img/pf_square.png)
+---
+
 
