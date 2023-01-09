@@ -17,7 +17,7 @@ enableCodeCopy = true
 
 # disableImageOptimization = false
 
-# defaultBackgroundImage = "IMAGE.jpg" # used as default for background images 
+defaultBackgroundImage = "img/background.jpg" # used as default for background images 
 
 [header]
   layout = "fixed" # valid options: basic, fixed
@@ -47,13 +47,13 @@ enableCodeCopy = true
   showDateUpdated = false
   showAuthor = true
   showHero = true
-  heroStyle = "basic" # valid options: basic, big, background, thumbAndBackground
-  layoutBackgroundBlur = false # only used when heroStyle equals background or thumbAndBackground
+  heroStyle = "background" # valid options: basic, big, background, thumbAndBackground
+  layoutBackgroundBlur = true # only used when heroStyle equals background or thumbAndBackground
   layoutBackgroundHeaderSpace = true # only used when heroStyle equals background
   showBreadcrumbs = true
   showDraftLabel = true
   showEdit = true
-  # editURL = "https://github.com/username/repo/"
+  editURL = "https://github.com/pierdom/pierdom.github.io/"
   editAppendPath = true
   seriesOpened = false
   showHeadingAnchors = true
@@ -65,7 +65,7 @@ enableCodeCopy = true
   showAuthorsBadges = false 
   showWordCount = true
   showSummary = true
-  #sharingLinks = [ "linkedin", "mastidonb", "reddit", "pinterest", "facebook", "email"]
+  #sharingLinks = [ "linkedin", "reddit", "pinterest", "facebook", "email"]
   sharingLinks = []
 
 [list]
