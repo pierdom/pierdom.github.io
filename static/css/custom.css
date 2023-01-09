@@ -1,0 +1,16 @@
+html {
+    font-size: 13pt;
+  }
+  
+button {
+    font-size: 1.2em;
+    margin: 2px;
+  }
+
+.pub_authors {
+    font-style: italic;
+}
+.pub_title {
+    font-weight: bolder;
+    font-size: 1.1em;
+}
