@@ -3,7 +3,7 @@ html {
   }
   
 button {
-    font-size: 1.2em;
+    font-size: 1.1em;
     margin: 2px;
   }
 
@@ -13,4 +13,39 @@ button {
 .pub_title {
     font-weight: bolder;
     font-size: 1.1em;
+}
+
+.flex-container {
+  padding: 10px;
+  margin: 10px;
+  list-style: none;
+  -ms-box-orient: horizontal;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -moz-flex;
+  display: -webkit-flex;
+  display: flex;
+}
+
+.nowrap  { 
+  -webkit-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+}
+
+.wrap    { 
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+}  
+
+.flex-item {
+  padding: 1px;
+  width: 255px;
+  height: 50px;
+  margin: 2px;
+  
+  line-height: 100px;
+  color: white;
+  font-weight: bold;
+  text-align: center;
 }
