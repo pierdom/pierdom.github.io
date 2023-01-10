@@ -49,3 +49,6 @@ button {
   font-weight: bold;
   text-align: center;
 }
+.flex-container ul {
+  list-style: none;
+}
