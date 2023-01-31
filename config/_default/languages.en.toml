@@ -15,7 +15,7 @@ dateFormat = "2 January 2006"
 [author]
   name = "Pierdomenico Fiadino, PhD"
   #image = "img/pf_square.png"
-  headline = "Data Analytics & Decision Science leader @ Bitpanda"
+  headline = "Head of Data and Analytics @ MessageBird"
   bio = "data stuff since 2010"
   links = [
      { email = "mailto:p@fiadino.org" },
