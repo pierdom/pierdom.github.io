@@ -27,26 +27,53 @@ Deployment is fully automated: push to `master` triggers GitHub Actions (`.githu
 - `menus.en.toml` — navigation structure (Home, About me, Experience, Education, Publications)
 - `markup.toml` — Goldmark with unsafe HTML enabled (required for inline HTML in content)
 
-**Content** (`content/`) uses HTML files with YAML frontmatter. All pages use the custom `simple_custom` layout (`layout: "simple_custom"`). Content is written as HTML, not Markdown, to allow fine-grained styling.
+**Content** (`content/`) uses HTML files with YAML frontmatter. All pages use the custom `simple_custom` layout (`layout: "simple_custom"`). Content is written as HTML, not Markdown, to allow fine-grained styling. The homepage is `content/_index.md` — its `.Content` renders inside the Blowfish `background` layout hero section.
 
 **Customizations** over the base Blowfish theme:
 - `layouts/_default/simple_custom.html` — custom article layout with hero image, breadcrumbs, TOC, and sharing links
 - `layouts/partials/extend-head.html` — injects LinkedIn badge script, FontAwesome v5.12.1, and custom CSS
+- `layouts/partials/extend-footer.html` — currently empty; reserved for site-wide footer injections
 - `static/css/custom.css` — site-specific styles
+
+**CSS caching caveat**: `custom.css` is served with aggressive browser caching in local dev. When adding new CSS rules, embed them in an inline `<style>` block directly in the relevant content HTML file as well — this ensures they take effect immediately without a cache-bust.
 
 **Theme** is a git submodule at `themes/blowfish/`. After cloning, run `git submodule update --init` if the theme directory is empty.
 
 **Static assets**: papers (PDFs) in `static/papers/`, profile images in `static/img/` and `assets/img/` (the latter go through Hugo's asset pipeline for optimization).
 
-## Retro page
+## Alternate pages (retro & terminal)
 
-`static/retro/index.html` is a self-contained 90s-style alternate version of the site, served at `fiadino.org/retro`. Hugo copies it verbatim — no templating or theme processing applies.
+Both pages follow the same pattern: self-contained single HTML files under `static/`, served verbatim by Hugo at their respective paths. No templating or theme processing applies. All CSS and JavaScript are inline.
 
-It is a **single HTML file** with all CSS and JavaScript inline. It contains a parallel copy of the career history, bio, skills, education, and publications. **It must be updated manually** whenever the main content pages change — it is not generated from the Hugo content files.
+### `static/retro/index.html` → `fiadino.org/retro`
+90s-style alternate version with a dark cosmic palette. Contains a parallel copy of the career history, bio, skills, education, and publications. **Must be updated manually** when main content changes.
 
-Things to keep in sync with the main site when updating:
-- Current role title and company (appears in the header tagline, About section, Experience timeline, and the 88×31 pixel badge row)
+Things to keep in sync:
+- Current role title and company (header tagline, About section, Experience timeline, 88×31 badge row)
 - Employment dates and job descriptions (Experience timeline)
 - Bio text (About section)
 - Copyright year (footer `© 1997–YYYY`)
-- The header comment and Konami easter egg alert both reference the current year — update those too
+- The header comment and Konami easter egg alert both reference the current year
+
+Notable features: animated starfield canvas background, 56k modem photo-loading effect (IntersectionObserver + `clip-path` reveal with glowing scan line), skill bars animated on scroll, visitor counter via `localStorage`, Konami code easter egg.
+
+### `static/terminal/index.html` → `fiadino.org/terminal`
+Modern terminal-themed version using the Dracula palette on pure black, styled after powerlevel10k/oh-my-posh. Contains a parallel copy of the same content.
+
+Things to keep in sync with the main site:
+- Current role (neofetch info block, btop process table)
+- Employment history (btop process table — each job is a process row)
+- Education (systemd daemon status blocks)
+- Bio / uptime (neofetch — uptime is calculated from birth date June 1987)
+- Publications (BibTeX-style listing)
+
+Notable features: macOS-style title bar with a `← fiadino.org` back link, powerlevel10k two-line prompt (`╭─`/`╰─❯`), neofetch block with rainbow ASCII logo, btop-style experience table (`grid-template-columns: 54px 36px 172px 82px 112px 1fr 80px`), systemd education blocks, interactive JS terminal (commands: `help`, `about`, `ls`, `contact`, `cv`, `hire piero`, `fortune`, `uname -a`, `clear`, `exit`), Konami code easter egg.
+
+### Theme-aware logos (jobs page)
+Company logos in `content/jobs.html` use a two-`<img>` pattern toggled by CSS:
+```css
+.logo-dark { display: none; }
+.dark .logo-dark { display: inline; }
+.dark .logo-light { display: none; }
+```
+Both the `custom.css` entry and an inline `<style>` block in `jobs.html` carry these rules (the inline block bypasses browser caching in local dev).
