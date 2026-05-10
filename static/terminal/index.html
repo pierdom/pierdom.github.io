@@ -1,0 +1,1125 @@
+<!DOCTYPE html>
+<!--
+  ┌─────────────────────────────────────────────────────────────┐
+  │  PIERDOMENICO FIADINO — Terminal Edition                    │
+  │  Theme: powerlevel10k / Dracula                             │
+  │                                                             │
+  │  $ cat README.md                                            │
+  │  A self-contained terminal-themed portfolio page.           │
+  │  No frameworks. No build step. No regrets.                  │
+  │                                                             │
+  │  Try the interactive prompt at the bottom.                  │
+  │  Or the Konami code. If you know, you know.                 │
+  └─────────────────────────────────────────────────────────────┘
+-->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>piero@fiadino.org:~/portfolio</title>
+  <style>
+    /* ── Dracula palette on pure black ─────────────── */
+    :root {
+      --bg:     #000000;
+      --term:   #0d0d0d;
+      --line:   #1e1f29;
+      --subtle: #282a36;
+      --muted:  #44475a;
+      --dim:    #6272a4;
+
+      --text:   #f8f8f2;
+      --green:  #50fa7b;
+      --cyan:   #8be9fd;
+      --pink:   #ff79c6;
+      --purple: #bd93f9;
+      --red:    #ff5555;
+      --orange: #ffb86c;
+      --yellow: #f1fa8c;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Fira Code', 'Cascadia Code', 'JetBrains Mono', 'SF Mono', 'Monaco',
+                   'Menlo', 'Consolas', 'Courier New', monospace;
+      font-size: 14px;
+      line-height: 1.7;
+      min-height: 100vh;
+      overflow-x: hidden;
+      padding: 20px 16px 40px;
+    }
+
+    /* ── Terminal window chrome ─────────────────────── */
+    .win {
+      max-width: 940px;
+      margin: 0 auto;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow:
+        0 0 0 1px rgba(255,255,255,0.07),
+        0 28px 90px rgba(0,0,0,0.95),
+        0 0 80px rgba(189,147,249,0.07);
+    }
+
+    .titlebar {
+      background: #1c1c1e;
+      padding: 11px 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      user-select: none;
+    }
+    .dot   { width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0; }
+    .dot-r { background: #ff5f57; }
+    .dot-y { background: #febc2e; }
+    .dot-g { background: #28c840; }
+    .tab-title {
+      flex: 1;
+      text-align: center;
+      font-size: 0.82em;
+      color: #707070;
+      letter-spacing: 0.2px;
+    }
+
+    .body {
+      background: var(--term);
+      padding: 20px 24px 52px;
+    }
+
+    /* ── Prompt ─────────────────────────────────────── */
+    .prompt { margin-top: 36px; margin-bottom: 6px; line-height: 1.35; }
+    .prompt:first-child { margin-top: 12px; }
+
+    /* top row of prompt */
+    .p1 { font-size: 0.87em; }
+    .p1 .sep  { color: var(--muted); }
+    .p1 .seg  { font-weight: bold; }
+    .seg-user { color: var(--pink); }
+    .seg-dir  { color: var(--purple); }
+    .seg-git  { color: var(--green); }
+    .seg-time { color: var(--dim); }
+
+    /* bottom row with command */
+    .p2 { display: flex; align-items: center; gap: 8px; font-size: 0.96em; }
+    .p2-arrow { color: var(--green); font-size: 1.05em; }
+
+    .c-name { color: var(--green); }
+    .c-flag { color: var(--cyan); }
+    .c-arg  { color: var(--orange); }
+    .c-pipe { color: var(--pink); }
+    .c-str  { color: var(--yellow); }
+
+    /* ── Output wrapper ─────────────────────────────── */
+    .out { margin-left: 2px; padding-left: 2px; }
+
+    /* ── MOTD ───────────────────────────────────────── */
+    .motd {
+      border-left: 3px solid var(--purple);
+      padding: 10px 16px;
+      background: rgba(189,147,249,0.04);
+      font-size: 0.88em;
+    }
+    .motd-login { color: var(--dim); margin-bottom: 2px; }
+    .motd-line  { color: var(--dim); }
+    .motd-line .hl { color: var(--green); }
+
+    /* ── Nav ────────────────────────────────────────── */
+    .nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px 0;
+      font-size: 0.85em;
+      margin: 6px 0 0;
+      color: var(--dim);
+    }
+    .nav a {
+      color: var(--cyan);
+      text-decoration: none;
+      padding: 0 10px 0 0;
+    }
+    .nav a:hover { color: var(--yellow); }
+    .nav-sep { color: var(--muted); padding-right: 10px; }
+
+    /* ── neofetch ───────────────────────────────────── */
+    .neo {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 0 32px;
+      align-items: start;
+    }
+    .neo-logo {
+      line-height: 1.2;
+      font-size: 1.12em;
+      user-select: none;
+      white-space: pre;
+    }
+    .nl1 { color: var(--pink); }
+    .nl2 { color: var(--purple); }
+    .nl3 { color: var(--cyan); }
+    .nl4 { color: var(--green); }
+    .nl5 { color: var(--yellow); }
+    .nl6 { color: var(--orange); }
+    .nl7 { color: var(--red); }
+
+    .neo-info {}
+    .neo-head { color: var(--cyan); font-weight: bold; font-size: 1.05em; }
+    .neo-head .at { color: var(--dim); }
+    .neo-head .host { color: var(--text); }
+    .neo-sep { color: var(--muted); margin: 2px 0 8px; font-size: 0.88em; }
+
+    .neo-row { display: flex; gap: 4px; line-height: 1.55; font-size: 0.91em; }
+    .neo-k { color: var(--cyan); font-weight: bold; min-width: 130px; flex-shrink: 0; }
+    .neo-v { color: var(--text); }
+    .neo-v a { color: var(--green); text-decoration: none; }
+    .neo-v a:hover { color: var(--yellow); }
+
+    .color-swatch {
+      display: flex;
+      gap: 5px;
+      margin-top: 12px;
+    }
+    .sw { width: 16px; height: 16px; border-radius: 50%; }
+
+    /* ── ls -la ─────────────────────────────────────── */
+    .ls-row {
+      display: flex;
+      gap: 12px;
+      align-items: baseline;
+      font-size: 0.91em;
+      line-height: 1.65;
+    }
+    .ls-perm { color: var(--dim);    min-width: 102px; flex-shrink: 0; font-size: 0.88em; }
+    .ls-size { color: var(--yellow); min-width: 38px;  text-align: right; flex-shrink: 0; }
+    .ls-date { color: var(--dim);    min-width: 78px;  flex-shrink: 0; }
+    .ls-name { color: var(--cyan);   font-weight: bold; }
+    .ls-tag  { color: var(--dim);    font-size: 0.88em; font-style: italic; }
+
+    /* ── btop process table ─────────────────────────── */
+    .btop {
+      border: 1px solid rgba(139,233,253,0.28);
+      margin: 4px 0;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+    .btop-hdr {
+      border-bottom: 1px solid rgba(139,233,253,0.18);
+      padding: 3px 10px;
+      font-size: 0.84em;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0;
+      background: rgba(139,233,253,0.05);
+      white-space: nowrap;
+      user-select: none;
+    }
+    .btop-hdr-sep { color: var(--muted); padding: 0 8px; }
+    .btop-cols {
+      display: grid;
+      grid-template-columns: 54px 36px 172px 82px 112px 1fr 80px;
+      min-width: 640px;
+      padding: 3px 8px;
+      background: rgba(255,255,255,0.05);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      font-weight: bold;
+      font-size: 0.84em;
+      color: var(--cyan);
+      letter-spacing: 0.5px;
+      user-select: none;
+    }
+    .btop-row {
+      display: grid;
+      grid-template-columns: 54px 36px 172px 82px 112px 1fr 80px;
+      min-width: 640px;
+      padding: 4px 8px;
+      border-bottom: 1px solid rgba(255,255,255,0.025);
+      line-height: 1.5;
+      cursor: default;
+    }
+    .btop-row:hover { background: rgba(255,255,255,0.03); }
+    .btop-row.running { background: rgba(80,250,123,0.08); }
+
+    .bc-pid   { color: var(--dim); font-size: 0.92em; }
+    .bc-pid-r { color: var(--green); font-weight: bold; }
+    .bc-s-r   { color: var(--green); font-weight: bold; }
+    .bc-s-s   { color: var(--muted); }
+    .bc-date  { color: var(--dim); font-size: 0.9em; overflow: hidden; white-space: nowrap; }
+    .bc-ela   { color: var(--yellow); font-size: 0.9em; }
+    .bc-co    { color: var(--pink); font-weight: bold; overflow: hidden; white-space: nowrap; }
+    .bc-role  { color: var(--text); overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+    .btop-row.running .bc-role { color: var(--green); font-weight: bold; }
+    .bc-bar   { color: var(--cyan); letter-spacing: -0.5px; font-size: 0.9em; }
+    .btop-row.running .bc-bar { color: var(--green); }
+    .bar-empty { opacity: 0.22; }
+
+    .btop-selected {
+      padding: 7px 10px;
+      border-top: 1px solid rgba(139,233,253,0.15);
+      background: rgba(139,233,253,0.03);
+      font-size: 0.84em;
+      line-height: 1.6;
+      min-width: 640px;
+    }
+    .btop-footer {
+      padding: 3px 10px;
+      border-top: 1px solid rgba(255,255,255,0.05);
+      background: rgba(0,0,0,0.2);
+      font-size: 0.8em;
+      color: var(--dim);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0;
+      white-space: nowrap;
+      min-width: 640px;
+      user-select: none;
+    }
+    .btop-footer-seg { padding: 2px 8px; border-right: 1px solid var(--muted); }
+    .btop-footer-seg:last-child { border-right: none; }
+
+    /* ── systemd status ─────────────────────────────── */
+    .sysd { margin: 20px 0 0; font-size: 0.88em; line-height: 1.55; }
+    .sysd:first-child { margin-top: 4px; }
+
+    .sysd-head { display: flex; align-items: baseline; gap: 7px; margin-bottom: 1px; }
+    .sysd-dot  { font-size: 1.05em; color: #888; }
+    .sysd-svc  { font-weight: bold; color: var(--text); }
+    .sysd-desc { color: var(--dim); }
+
+    .sysd-row { display: flex; padding-left: 5px; line-height: 1.55; }
+    .sysd-key {
+      color: var(--dim);
+      min-width: 116px;
+      text-align: right;
+      padding-right: 3px;
+      flex-shrink: 0;
+    }
+    .sysd-val { color: var(--text); }
+    .sysd-val .ok   { color: var(--green); }
+    .sysd-val .dead { color: #888; }
+    .sysd-val .ago  { color: var(--dim); }
+    .sysd-val .arg  { color: var(--orange); }
+    .sysd-val .flag { color: var(--cyan); }
+
+    .sysd-log { padding-top: 5px; padding-left: 5px; }
+    .sysd-log-line { display: flex; gap: 8px; line-height: 1.45; font-size: 0.9em; flex-wrap: wrap; }
+    .sysd-log-ts  { color: var(--dim);    flex-shrink: 0; min-width: 160px; }
+    .sysd-log-src { color: var(--purple); flex-shrink: 0; }
+    .sysd-log-msg { color: var(--text); }
+    .sysd-log-msg .ok  { color: var(--green); font-weight: bold; }
+    .sysd-log-msg .dim { color: var(--dim); }
+
+    /* ── BibTeX / publications ──────────────────────── */
+    .pub-section-label {
+      font-weight: bold;
+      font-size: 0.88em;
+      margin: 14px 0 6px;
+    }
+
+    .bib {
+      border-left: 2px solid var(--muted);
+      padding: 7px 14px;
+      margin: 8px 0;
+      font-size: 0.89em;
+      line-height: 1.7;
+    }
+    .bib-type  { color: var(--pink); }
+    .bib-key   { color: var(--yellow); }
+    .bib-field { color: var(--cyan); }
+    .bib-val   { color: var(--text); }
+    .bib-award { color: var(--orange); font-weight: bold; }
+    .bib-me    { color: var(--green); font-weight: bold; }
+    .bib-indent { padding-left: 18px; display: block; }
+
+    /* ── env / contact ──────────────────────────────── */
+    .env-row   { font-size: 0.91em; line-height: 1.65; }
+    .env-k     { color: var(--cyan); font-weight: bold; }
+    .env-eq    { color: var(--dim); }
+    .env-v     { color: var(--green); }
+    .env-v a   { color: var(--green); text-decoration: none; }
+    .env-v a:hover { color: var(--yellow); }
+
+    /* ── Interactive terminal ───────────────────────── */
+    .interactive {
+      margin-top: 44px;
+      border-top: 1px solid var(--muted);
+      padding-top: 18px;
+    }
+    .int-hint { font-size: 0.82em; color: var(--dim); margin-bottom: 8px; }
+    .int-hint code {
+      color: var(--purple);
+      background: rgba(189,147,249,0.1);
+      padding: 1px 5px;
+      border-radius: 3px;
+    }
+    #int-output {
+      min-height: 20px;
+      margin-bottom: 4px;
+    }
+    .int-out-line {
+      font-size: 0.9em;
+      line-height: 1.6;
+      padding: 1px 0;
+    }
+    .int-echo {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      font-size: 0.9em;
+      margin-top: 10px;
+      color: var(--text);
+    }
+    .int-echo-arrow { color: var(--green); }
+    .int-input-line {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 4px;
+    }
+    .int-input {
+      background: none;
+      border: none;
+      outline: none;
+      color: var(--text);
+      font-family: inherit;
+      font-size: 0.96em;
+      flex: 1;
+      caret-color: var(--green);
+    }
+    .int-input::placeholder { color: var(--muted); }
+
+    /* ── Blinking cursor ────────────────────────────── */
+    .cursor {
+      display: inline-block;
+      width: 8px;
+      height: 1.1em;
+      background: var(--green);
+      vertical-align: text-bottom;
+      animation: blink 1s step-end infinite;
+      margin-left: 1px;
+    }
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50%       { opacity: 0; }
+    }
+
+    /* ── Misc helpers ───────────────────────────────── */
+    .comment { color: var(--dim); font-style: italic; font-size: 0.88em; }
+
+    a { color: var(--cyan); text-decoration: none; }
+    a:hover { color: var(--yellow); }
+
+    /* ── Section reveal ─────────────────────────────── */
+    .section {
+      opacity: 0;
+      transform: translateY(6px);
+      transition: opacity 0.45s ease, transform 0.35s ease;
+    }
+    .section.visible { opacity: 1; transform: none; }
+
+    /* ── Footer ─────────────────────────────────────── */
+    .footer {
+      text-align: center;
+      padding: 20px 0 0;
+      font-size: 0.8em;
+      color: var(--dim);
+      border-top: 1px solid var(--muted);
+      margin-top: 32px;
+      line-height: 1.8;
+    }
+
+    /* ── Responsive ─────────────────────────────────── */
+    @media (max-width: 700px) {
+      body { padding: 0; font-size: 12.5px; }
+      .win { border-radius: 0; }
+      .body { padding: 14px 14px 36px; }
+      .neo { grid-template-columns: 1fr; }
+      .neo-logo { display: none; }
+      .ls-perm { display: none; }
+      .log-det { padding-left: 0; }
+    }
+    @media (max-width: 480px) {
+      .log-ts, .log-co { min-width: 0; }
+      .ls-date { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="win">
+
+  <!-- ── Title bar ── -->
+  <div class="titlebar">
+    <span class="dot dot-r"></span>
+    <span class="dot dot-y"></span>
+    <span class="dot dot-g"></span>
+    <span class="tab-title">piero@fiadino.org — zsh — 120×45</span>
+  </div>
+
+  <!-- ── Terminal body ── -->
+  <div class="body">
+
+    <!-- MOTD -->
+    <div class="motd">
+      <div class="motd-login">Last login: Sun May 10 10:35:42 2026 from 83.48.xx.xx (Barcelona)</div>
+      <div class="motd-line"># Welcome to fiadino.org. Type <span class="hl">help</span> below to explore interactively.</div>
+      <div class="motd-line"># Powered by data, espresso, and questionable life decisions.</div>
+    </div>
+
+    <!-- Nav -->
+    <div class="nav">
+      <span class="nav-sep">jump to →</span>
+      <a href="#s-about">about</a><span class="nav-sep">·</span>
+      <a href="#s-expertise">expertise</a><span class="nav-sep">·</span>
+      <a href="#s-experience">experience</a><span class="nav-sep">·</span>
+      <a href="#s-education">education</a><span class="nav-sep">·</span>
+      <a href="#s-publications">publications</a><span class="nav-sep">·</span>
+      <a href="#s-contact">contact</a>
+    </div>
+
+
+    <!-- ╔══════════════ ABOUT / neofetch ══════════════╗ -->
+    <div id="s-about" class="section">
+      <div class="prompt">
+        <div class="p1">
+          <span class="sep">╭─</span><span class="seg seg-user"> piero@fiadino.org </span><span class="sep">──</span><span class="seg seg-dir"> ~/portfolio </span><span class="sep">──</span><span class="seg seg-git"> ⎇ main ✓ </span><span class="sep">──</span><span class="seg seg-time"> 2026-05-10 10:35 </span>
+        </div>
+        <div class="p2">
+          <span class="p2-arrow">╰─❯</span>
+          <span class="c-name">neofetch</span>
+        </div>
+      </div>
+
+      <div class="out">
+        <div class="neo">
+          <!-- ASCII "PF" logo, rainbow lines -->
+          <div class="neo-logo"><span class="nl1">█████  █████</span>
+<span class="nl2">█   █  █    </span>
+<span class="nl3">█████  ████ </span>
+<span class="nl4">█      █    </span>
+<span class="nl5">█      █    </span>
+<span class="nl6">            </span>
+<span class="nl7"> P      F   </span></div>
+
+          <div class="neo-info">
+            <div class="neo-head">piero<span class="at">@</span><span class="host">fiadino.org</span></div>
+            <div class="neo-sep">───────────────────────────────────────</div>
+            <div class="neo-row"><span class="neo-k">OS</span><span class="neo-v">Human v1.0 (Barcelona Edition)</span></div>
+            <div class="neo-row"><span class="neo-k">Shell</span><span class="neo-v">zsh 5.9 + powerlevel10k</span></div>
+            <div class="neo-row"><span class="neo-k">Role</span><span class="neo-v">Senior Director, Head of Data &amp; Insights</span></div>
+            <div class="neo-row"><span class="neo-k">Company</span><span class="neo-v">Moss (spend management, B2B SaaS)</span></div>
+            <div class="neo-row"><span class="neo-k">Location</span><span class="neo-v">Barcelona, Spain</span></div>
+            <div class="neo-row"><span class="neo-k">Experience</span><span class="neo-v">16 years (R&amp;D → SaaS → data leadership)</span></div>
+            <div class="neo-row"><span class="neo-k">PhD</span><span class="neo-v">TU Wien, 2015 — Data Mining &amp; ML</span></div>
+            <div class="neo-row"><span class="neo-k">Publications</span><span class="neo-v">30+ (IEEE, ACM SIGCOMM, ITC…)</span></div>
+            <div class="neo-row"><span class="neo-k">Uptime</span><span class="neo-v">~14209 days (since June 1987, Bari, Italy)</span></div>
+            <div class="neo-row"><span class="neo-k">Website</span><span class="neo-v"><a href="https://fiadino.org">fiadino.org</a></span></div>
+            <div class="color-swatch">
+              <div class="sw" style="background:var(--red)"></div>
+              <div class="sw" style="background:var(--orange)"></div>
+              <div class="sw" style="background:var(--yellow)"></div>
+              <div class="sw" style="background:var(--green)"></div>
+              <div class="sw" style="background:var(--cyan)"></div>
+              <div class="sw" style="background:var(--purple)"></div>
+              <div class="sw" style="background:var(--pink)"></div>
+              <div class="sw" style="background:var(--text)"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div><!-- /s-about -->
+
+
+    <!-- ╔══════════════ EXPERTISE ══════════════════╗ -->
+    <div id="s-expertise" class="section">
+      <div class="prompt">
+        <div class="p1">
+          <span class="sep">╭─</span><span class="seg seg-user"> piero@fiadino.org </span><span class="sep">──</span><span class="seg seg-dir"> ~/expertise </span><span class="sep">──</span><span class="seg seg-git"> ⎇ main ✓ </span>
+        </div>
+        <div class="p2">
+          <span class="p2-arrow">╰─❯</span>
+          <span class="c-name">ls</span>
+          <span class="c-flag">-la</span>
+          <span class="c-arg">./</span>
+        </div>
+      </div>
+
+      <div class="out">
+        <div class="comment">total 48K</div>
+        <div class="ls-row">
+          <span class="ls-perm">drwxr-xr-x</span><span class="ls-size">4.1K</span><span class="ls-date">Jan 2022</span>
+          <span class="ls-name">product-analytics/</span>
+          <span class="ls-tag">— A/B testing · metrics frameworks · funnel analysis · segmentation</span>
+        </div>
+        <div class="ls-row">
+          <span class="ls-perm">drwxr-xr-x</span><span class="ls-size">8.3K</span><span class="ls-date">Mar 2024</span>
+          <span class="ls-name">data-leadership/</span>
+          <span class="ls-tag">— 0→1 teams · 40+ person orgs · hiring · C-suite partnership</span>
+        </div>
+        <div class="ls-row">
+          <span class="ls-perm">drwxr-xr-x</span><span class="ls-size">6.7K</span><span class="ls-date">Jan 2023</span>
+          <span class="ls-name">analytics-engineering/</span>
+          <span class="ls-tag">— pipelines · data modeling · DWH architecture · instrumentation</span>
+        </div>
+        <div class="ls-row">
+          <span class="ls-perm">drwxr-xr-x</span><span class="ls-size">5.2K</span><span class="ls-date">Mar 2024</span>
+          <span class="ls-name">data-governance/</span>
+          <span class="ls-tag">— quality standards · KPI frameworks · event tracking governance</span>
+        </div>
+        <div class="ls-row">
+          <span class="ls-perm">drwxr-xr-x</span><span class="ls-size">3.8K</span><span class="ls-date">Feb 2018</span>
+          <span class="ls-name">business-intelligence/</span>
+          <span class="ls-tag">— dashboards · executive reporting · decision science · WBRs</span>
+        </div>
+        <div class="ls-row">
+          <span class="ls-perm">drwxr-xr-x</span><span class="ls-size">9.0K</span><span class="ls-date">Feb 2026</span>
+          <span class="ls-name">ai-ml-transformation/</span>
+          <span class="ls-tag">— AI strategy · LLMs · augmented analytics · RevOps automation</span>
+        </div>
+      </div>
+    </div><!-- /s-expertise -->
+
+
+    <!-- ╔══════════════ EXPERIENCE ═════════════════╗ -->
+    <div id="s-experience" class="section">
+      <div class="prompt">
+        <div class="p1">
+          <span class="sep">╭─</span><span class="seg seg-user"> piero@fiadino.org </span><span class="sep">──</span><span class="seg seg-dir"> ~/work </span><span class="sep">──</span><span class="seg seg-git"> ⎇ main ✓ </span>
+        </div>
+        <div class="p2">
+          <span class="p2-arrow">╰─❯</span>
+          <span class="c-name">btop</span>
+          <span class="c-flag">--filter</span>
+          <span class="c-arg">career</span>
+          <span class="c-flag">--sort-by</span>
+          <span class="c-arg">started</span>
+        </div>
+      </div>
+
+      <div class="out">
+        <div class="btop">
+
+          <!-- header -->
+          <div class="btop-hdr">
+            <span>Processes: <span style="color:var(--text)">9</span></span>
+            <span class="btop-hdr-sep">│</span>
+            <span style="color:var(--green)">Running: <b>1</b></span>
+            <span class="btop-hdr-sep">│</span>
+            <span>Sleeping: <span style="color:var(--text)">8</span></span>
+            <span class="btop-hdr-sep">│</span>
+            <span>Total experience: <span style="color:var(--yellow)">16y</span></span>
+            <span class="btop-hdr-sep">│</span>
+            <span>sorted by: <span style="color:var(--cyan)">started ↓</span></span>
+          </div>
+
+          <!-- column labels -->
+          <div class="btop-cols">
+            <span>PID</span>
+            <span>S</span>
+            <span>STARTED</span>
+            <span>ELAPSED</span>
+            <span>COMPANY</span>
+            <span>ROLE / COMMAND</span>
+            <span>SCOPE</span>
+          </div>
+
+          <!-- ▶ current job -->
+          <div class="btop-row running">
+            <span class="bc-pid-r">▶ 2026</span>
+            <span class="bc-s-r">[R]</span>
+            <span class="bc-date">Feb 2026–present</span>
+            <span class="bc-ela">3 months</span>
+            <span class="bc-co">moss</span>
+            <span class="bc-role">Sr Director, Head of Data &amp; Insights</span>
+            <span class="bc-bar">█████<span class="bar-empty">░</span></span>
+          </div>
+
+          <div class="btop-row">
+            <span class="bc-pid">  2024</span>
+            <span class="bc-s-s">[S]</span>
+            <span class="bc-date">Mar 2024–Feb 2026</span>
+            <span class="bc-ela">1y 11m</span>
+            <span class="bc-co">docplanner</span>
+            <span class="bc-role">Global VP of Data</span>
+            <span class="bc-bar">██████</span>
+          </div>
+
+          <div class="btop-row">
+            <span class="bc-pid">  2023</span>
+            <span class="bc-s-s">[S]</span>
+            <span class="bc-date">Jan 2023–Feb 2024</span>
+            <span class="bc-ela">13 months</span>
+            <span class="bc-co">bird.com</span>
+            <span class="bc-role">Head of Data</span>
+            <span class="bc-bar">████<span class="bar-empty">░░</span></span>
+          </div>
+
+          <div class="btop-row">
+            <span class="bc-pid">  2022</span>
+            <span class="bc-s-s">[S]</span>
+            <span class="bc-date">Jan 2022–Dec 2022</span>
+            <span class="bc-ela">12 months</span>
+            <span class="bc-co">bitpanda</span>
+            <span class="bc-role">Analytics Manager (Product)</span>
+            <span class="bc-bar">███<span class="bar-empty">░░░</span></span>
+          </div>
+
+          <div class="btop-row">
+            <span class="bc-pid">  2021</span>
+            <span class="bc-s-s">[S]</span>
+            <span class="bc-date">Jan 2021–Dec 2021</span>
+            <span class="bc-ela">12 months</span>
+            <span class="bc-co">typeform</span>
+            <span class="bc-role">Data Science &amp; Analytics Manager</span>
+            <span class="bc-bar">███<span class="bar-empty">░░░</span></span>
+          </div>
+
+          <div class="btop-row">
+            <span class="bc-pid">  2019</span>
+            <span class="bc-s-s">[S]</span>
+            <span class="bc-date">Nov 2019–Dec 2020</span>
+            <span class="bc-ela">13 months</span>
+            <span class="bc-co">typeform</span>
+            <span class="bc-role">Data Science Tech Lead</span>
+            <span class="bc-bar">███<span class="bar-empty">░░░</span></span>
+          </div>
+
+          <div class="btop-row">
+            <span class="bc-pid">  2018</span>
+            <span class="bc-s-s">[S]</span>
+            <span class="bc-date">Feb 2018–Oct 2019</span>
+            <span class="bc-ela">20 months</span>
+            <span class="bc-co">zeelo.co</span>
+            <span class="bc-role">Data Lead</span>
+            <span class="bc-bar">██<span class="bar-empty">░░░░</span></span>
+          </div>
+
+          <div class="btop-row">
+            <span class="bc-pid">  2016</span>
+            <span class="bc-s-s">[S]</span>
+            <span class="bc-date">Jan 2016–Feb 2018</span>
+            <span class="bc-ela">2y 1m</span>
+            <span class="bc-co">eurecat</span>
+            <span class="bc-role">Senior Data Scientist</span>
+            <span class="bc-bar">██<span class="bar-empty">░░░░</span></span>
+          </div>
+
+          <div class="btop-row">
+            <span class="bc-pid">  2010</span>
+            <span class="bc-s-s">[S]</span>
+            <span class="bc-date">Mar 2010–Dec 2015</span>
+            <span class="bc-ela">5y 9m</span>
+            <span class="bc-co">ftw.at</span>
+            <span class="bc-role">R&amp;D Engineer — Data Mining (PhD)</span>
+            <span class="bc-bar">████<span class="bar-empty">░░</span></span>
+          </div>
+
+          <!-- selected process detail -->
+          <div class="btop-selected">
+            <span style="color:var(--green)">▶ PID 2026</span>
+            <span style="color:var(--muted)"> │ </span>
+            <span style="color:var(--pink);font-weight:bold">moss</span>
+            <span style="color:var(--muted)"> │ </span>
+            <span style="color:var(--green)">Senior Director, Head of Data &amp; Insights</span>
+            <span style="color:var(--muted)"> ← Feb 2026</span><br>
+            <span style="color:var(--dim)">  Product Analytics · Commercial Analytics · Analytics Engineering · AI-first transformation · RevOps automation</span>
+          </div>
+
+          <!-- footer bar -->
+          <div class="btop-footer">
+            <span class="btop-footer-seg">F1 <span style="color:var(--text)">Help</span></span>
+            <span class="btop-footer-seg">F2 <span style="color:var(--text)">Setup</span></span>
+            <span class="btop-footer-seg">F3 <span style="color:var(--text)">Search</span></span>
+            <span class="btop-footer-seg">F5 <span style="color:var(--text)">Tree</span></span>
+            <span class="btop-footer-seg">F9 <span style="color:var(--text)">Kill</span></span>
+            <span class="btop-footer-seg" style="margin-left:auto">q <span style="color:var(--text)">Quit</span></span>
+          </div>
+
+        </div><!-- /btop -->
+      </div>
+    </div><!-- /s-experience -->
+
+
+    <!-- ╔══════════════ EDUCATION ══════════════════╗ -->
+    <div id="s-education" class="section">
+      <div class="prompt">
+        <div class="p1">
+          <span class="sep">╭─</span><span class="seg seg-user"> piero@fiadino.org </span><span class="sep">──</span><span class="seg seg-dir"> ~/education </span><span class="sep">──</span><span class="seg seg-git"> ⎇ main ✓ </span>
+        </div>
+        <div class="p2">
+          <span class="p2-arrow">╰─❯</span>
+          <span class="c-name">systemctl</span>
+          <span class="c-arg">status</span>
+          <span class="c-str">'education-*.service'</span>
+        </div>
+      </div>
+
+      <div class="out">
+
+        <!-- PhD -->
+        <div class="sysd">
+          <div class="sysd-head">
+            <span class="sysd-dot">●</span>
+            <span class="sysd-svc">phd-data-mining.service</span>
+            <span class="sysd-desc">- Data Analytics &amp; ML Research (TU Wien, 2010–2015)</span>
+          </div>
+          <div class="sysd-row"><span class="sysd-key">Loaded:</span><span class="sysd-val">loaded (<span class="arg">/etc/academia/tu-wien.conf</span>; enabled; preset: enabled)</span></div>
+          <div class="sysd-row"><span class="sysd-key">Active:</span><span class="sysd-val"><span class="dead">inactive (dead)</span> since Fri 2015-06-05 12:00:00 UTC; <span class="ago">10 years 11 months ago</span></span></div>
+          <div class="sysd-row"><span class="sysd-key">Process:</span><span class="sysd-val">2015 ExecStart=<span class="arg">/usr/bin/research</span> <span class="flag">--field</span>=<span class="arg">"EE &amp; IT"</span> <span class="flag">--topic</span>=<span class="arg">"anomaly-detection"</span> <span class="flag">--advisor</span>=<span class="arg">"Pedro Casas"</span> (code=exited, <span class="ok">status=0/SUCCESS</span>)</span></div>
+          <div class="sysd-row"><span class="sysd-key">Main PID:</span><span class="sysd-val">2015 (code=exited, <span class="ok">status=0/SUCCESS</span>)</span></div>
+          <div class="sysd-row"><span class="sysd-key">Thesis:</span><span class="sysd-val">"Data analytics in computer networks; ML for anomaly detection &amp; diagnosis"</span></div>
+          <div class="sysd-row"><span class="sysd-key">CPU:</span><span class="sysd-val">5y 9m</span></div>
+          <div class="sysd-log">
+            <div class="sysd-log-line"><span class="sysd-log-ts">Mar 01 2010 09:00:00</span><span class="sysd-log-src">systemd[1]:</span><span class="sysd-log-msg">Starting phd-data-mining.service — loading research environment…</span></div>
+            <div class="sysd-log-line"><span class="sysd-log-ts">Jun 05 2015 11:58:42</span><span class="sysd-log-src">research[2015]:</span><span class="sysd-log-msg">Dissertation defended. Committee: <span class="ok">satisfied</span>. Corrections: none.</span></div>
+            <div class="sysd-log-line"><span class="sysd-log-ts">Jun 05 2015 11:59:01</span><span class="sysd-log-src">research[2015]:</span><span class="sysd-log-msg">30+ publications flushed to career memory. <span class="dim"># permanent cache</span></span></div>
+            <div class="sysd-log-line"><span class="sysd-log-ts">Jun 05 2015 12:00:00</span><span class="sysd-log-src">systemd[1]:</span><span class="sysd-log-msg"><span class="ok">phd-data-mining.service: Succeeded.</span> Running as background daemon.</span></div>
+          </div>
+        </div>
+
+        <!-- MSc -->
+        <div class="sysd">
+          <div class="sysd-head">
+            <span class="sysd-dot">●</span>
+            <span class="sysd-svc">msc-computer-engineering.service</span>
+            <span class="sysd-desc">- Computer Engineering MSc (Sapienza University of Rome, 2008–2010)</span>
+          </div>
+          <div class="sysd-row"><span class="sysd-key">Loaded:</span><span class="sysd-val">loaded (<span class="arg">/etc/academia/sapienza.conf</span>; enabled; preset: enabled)</span></div>
+          <div class="sysd-row"><span class="sysd-key">Active:</span><span class="sysd-val"><span class="dead">inactive (dead)</span> since Thu 2010-10-14 12:00:00 UTC; <span class="ago">15 years 6 months ago</span></span></div>
+          <div class="sysd-row"><span class="sysd-key">Process:</span><span class="sysd-val">2010 ExecStart=<span class="arg">/usr/bin/study</span> <span class="flag">--field</span>=<span class="arg">"CompEng"</span> <span class="flag">--topic</span>=<span class="arg">"mobility-patterns"</span> <span class="flag">--advisor</span>=<span class="arg">"Danilo Valerio"</span> (code=exited, <span class="ok">status=0/SUCCESS</span>)</span></div>
+          <div class="sysd-row"><span class="sysd-key">Main PID:</span><span class="sysd-val">2010 (code=exited, <span class="ok">status=0/SUCCESS</span>)</span></div>
+          <div class="sysd-row"><span class="sysd-key">Thesis:</span><span class="sysd-val">"Extraction of mobility patterns from mobile networks using data mining"</span></div>
+          <div class="sysd-row"><span class="sysd-key">CPU:</span><span class="sysd-val">~2y</span></div>
+          <div class="sysd-log">
+            <div class="sysd-log-line"><span class="sysd-log-ts">Oct 14 2010 12:00:00</span><span class="sysd-log-src">study[2010]:</span><span class="sysd-log-msg">Thesis defended. Grade: <span class="ok">110/110 cum laude</span>.</span></div>
+            <div class="sysd-log-line"><span class="sysd-log-ts">Oct 14 2010 12:00:01</span><span class="sysd-log-src">systemd[1]:</span><span class="sysd-log-msg"><span class="ok">msc-computer-engineering.service: Succeeded.</span> Running as background daemon.</span></div>
+          </div>
+        </div>
+
+        <!-- BSc -->
+        <div class="sysd">
+          <div class="sysd-head">
+            <span class="sysd-dot">●</span>
+            <span class="sysd-svc">bsc-computer-engineering.service</span>
+            <span class="sysd-desc">- Computer Engineering BSc (Sapienza University of Rome, 2005–2008)</span>
+          </div>
+          <div class="sysd-row"><span class="sysd-key">Loaded:</span><span class="sysd-val">loaded (<span class="arg">/etc/academia/sapienza.conf</span>; enabled; preset: enabled)</span></div>
+          <div class="sysd-row"><span class="sysd-key">Active:</span><span class="sysd-val"><span class="dead">inactive (dead)</span> since Jul 2008 12:00:00 UTC; <span class="ago">17 years 10 months ago</span></span></div>
+          <div class="sysd-row"><span class="sysd-key">Process:</span><span class="sysd-val">2008 ExecStart=<span class="arg">/usr/bin/study</span> <span class="flag">--field</span>=<span class="arg">"CompEng"</span> <span class="flag">--topic</span>=<span class="arg">"p2p-file-sharing"</span> (code=exited, <span class="ok">status=0/SUCCESS</span>)</span></div>
+          <div class="sysd-row"><span class="sysd-key">Main PID:</span><span class="sysd-val">2008 (code=exited, <span class="ok">status=0/SUCCESS</span>)</span></div>
+          <div class="sysd-row"><span class="sysd-key">Thesis:</span><span class="sysd-val">"Java application for peer-to-peer file sharing" <span class="dead"># Napster was already dead. Filed a bug report with history.</span></span></div>
+          <div class="sysd-row"><span class="sysd-key">CPU:</span><span class="sysd-val">~3y</span></div>
+          <div class="sysd-log">
+            <div class="sysd-log-line"><span class="sysd-log-ts">Jul 15 2008 12:00:00</span><span class="sysd-log-src">study[2008]:</span><span class="sysd-log-msg">Thesis defended. Foundation modules <span class="ok">loaded</span>. <span class="dim"># see also: msc-computer-engineering.service</span></span></div>
+            <div class="sysd-log-line"><span class="sysd-log-ts">Jul 15 2008 12:00:01</span><span class="sysd-log-src">systemd[1]:</span><span class="sysd-log-msg"><span class="ok">bsc-computer-engineering.service: Succeeded.</span> Running as background daemon.</span></div>
+          </div>
+        </div>
+
+      </div>
+    </div><!-- /s-education -->
+
+
+    <!-- ╔══════════════ PUBLICATIONS ═══════════════╗ -->
+    <div id="s-publications" class="section">
+      <div class="prompt">
+        <div class="p1">
+          <span class="sep">╭─</span><span class="seg seg-user"> piero@fiadino.org </span><span class="sep">──</span><span class="seg seg-dir"> ~/papers </span><span class="sep">──</span><span class="seg seg-git"> ⎇ main ✓ </span>
+        </div>
+        <div class="p2">
+          <span class="p2-arrow">╰─❯</span>
+          <span class="c-name">grep</span>
+          <span class="c-flag">-rn</span>
+          <span class="c-str">"Fiadino"</span>
+          <span class="c-arg">publications/</span>
+          <span class="c-pipe">|</span>
+          <span class="c-name">head</span>
+          <span class="c-flag">-20</span>
+        </div>
+      </div>
+
+      <div class="out">
+        <div class="comment"># 30+ publications total — highlights below. Full list: researchgate · scholar</div>
+
+        <div class="pub-section-label" style="color:var(--orange)">── JOURNALS &amp; BOOK CHAPTERS ────────────────────────────</div>
+
+        <div class="bib">
+          <span class="bib-type">@incollection</span>{<span class="bib-key">fiadino2018bigdata</span>,<br>
+          <span class="bib-indent"><span class="bib-field">title</span>  = {<span class="bib-val">Big Data in Mobile Networks</span>},</span>
+          <span class="bib-indent"><span class="bib-field">author</span> = {<span class="bib-me">Fiadino, P.</span>, Torrent-Moreno, M.},</span>
+          <span class="bib-indent"><span class="bib-field">venue</span>  = {<span class="bib-val">Encyclopedia of Big Data Technologies, Springer</span>},</span>
+          <span class="bib-indent"><span class="bib-field">year</span>   = {<span class="bib-val">2018</span>}</span>
+        </div>
+
+        <div class="bib">
+          <span class="bib-type">@article</span>{<span class="bib-key">fiadino2016grasping</span>,<br>
+          <span class="bib-indent"><span class="bib-field">title</span>  = {<span class="bib-val">Grasping Popular Applications in Cellular Networks with Big Data Analytics Platforms</span>},</span>
+          <span class="bib-indent"><span class="bib-field">author</span> = {<span class="bib-me">Fiadino, P.</span>, Casas, P., D'Alconzo, A., Schiavone, M., Bär, A.},</span>
+          <span class="bib-indent"><span class="bib-field">venue</span>  = {<span class="bib-val">IEEE Transactions on Network and Service Management (TNSM)</span>},</span>
+          <span class="bib-indent"><span class="bib-field">year</span>   = {<span class="bib-val">2016</span>}</span>
+        </div>
+
+        <div class="pub-section-label" style="color:var(--cyan)">── CONFERENCES (selected highlights) ───────────────────</div>
+
+        <div class="bib">
+          <span class="bib-type">@inproceedings</span>{<span class="bib-key">fiadino2015challenging</span>,<br>
+          <span class="bib-indent"><span class="bib-field">title</span>  = {<span class="bib-val">Challenging Entropy-based Anomaly Detection and Diagnosis in Cellular Networks</span>},</span>
+          <span class="bib-indent"><span class="bib-field">author</span> = {<span class="bib-me">Fiadino, P.</span>, D'Alconzo, A., Schiavone, M., Casas, P.},</span>
+          <span class="bib-indent"><span class="bib-field">venue</span>  = {<span class="bib-val">ACM SIGCOMM, London</span>},</span>
+          <span class="bib-indent"><span class="bib-field">year</span>   = {<span class="bib-val">2015</span>},</span>
+          <span class="bib-indent"><span class="bib-field">award</span>  = {<span class="bib-award">🥈 Student Research Competition Runner Up</span>}</span>
+        </div>
+
+        <div class="bib">
+          <span class="bib-type">@inproceedings</span>{<span class="bib-key">casas2014youtube</span>,<br>
+          <span class="bib-indent"><span class="bib-field">title</span>  = {<span class="bib-val">YouTube in the Move: Understanding the Performance of YouTube in Cellular Networks</span>},</span>
+          <span class="bib-indent"><span class="bib-field">author</span> = {Casas, P., <span class="bib-me">Fiadino, P.</span>, Sackl, A., D'Alconzo, A.},</span>
+          <span class="bib-indent"><span class="bib-field">venue</span>  = {<span class="bib-val">Wireless Days 2014, Rio de Janeiro</span>},</span>
+          <span class="bib-indent"><span class="bib-field">year</span>   = {<span class="bib-val">2014</span>},</span>
+          <span class="bib-indent"><span class="bib-field">award</span>  = {<span class="bib-award">🥈 Best Paper Award Runner Up</span>}</span>
+        </div>
+
+        <div class="bib">
+          <span class="bib-type">@inproceedings</span>{<span class="bib-key">casas2013ipmining</span>,<br>
+          <span class="bib-indent"><span class="bib-field">title</span>  = {<span class="bib-val">IP Mining: Extracting Knowledge from the Dynamics of the Internet Addressing Space</span>},</span>
+          <span class="bib-indent"><span class="bib-field">author</span> = {Casas, P., <span class="bib-me">Fiadino, P.</span>, Bär, A.},</span>
+          <span class="bib-indent"><span class="bib-field">venue</span>  = {<span class="bib-val">ITC 25, Shanghai</span>},</span>
+          <span class="bib-indent"><span class="bib-field">year</span>   = {<span class="bib-val">2013</span>},</span>
+          <span class="bib-indent"><span class="bib-field">award</span>  = {<span class="bib-award">🏆 Best Paper Award</span>}</span>
+        </div>
+
+        <div class="bib">
+          <span class="bib-type">@inproceedings</span>{<span class="bib-key">fiadino2015facebook</span>,<br>
+          <span class="bib-indent"><span class="bib-field">title</span>  = {<span class="bib-val">Online Social Networks Anatomy: Analysis of Facebook &amp; WhatsApp in Cellular Networks</span>},</span>
+          <span class="bib-indent"><span class="bib-field">author</span> = {<span class="bib-me">Fiadino, P.</span>, Casas, P., Schiavone, M., D'Alconzo, A.},</span>
+          <span class="bib-indent"><span class="bib-field">venue</span>  = {<span class="bib-val">IFIP Networking 2015, Toulouse</span>},</span>
+          <span class="bib-indent"><span class="bib-field">year</span>   = {<span class="bib-val">2015</span>}</span>
+        </div>
+
+        <div class="comment" style="margin-top:10px;"># … and ~24 more. I was a very caffeinated PhD student.
+# Full list: <a href="https://www.researchgate.net/profile/Pierdomenico-Fiadino" target="_blank" rel="noopener">ResearchGate</a> &nbsp;·&nbsp; <a href="https://scholar.google.com/citations?user=Xp4MNSUAAAAJ&hl=en&oi=ao" target="_blank" rel="noopener">Google Scholar</a></div>
+      </div>
+    </div><!-- /s-publications -->
+
+
+    <!-- ╔══════════════ CONTACT ════════════════════╗ -->
+    <div id="s-contact" class="section">
+      <div class="prompt">
+        <div class="p1">
+          <span class="sep">╭─</span><span class="seg seg-user"> piero@fiadino.org </span><span class="sep">──</span><span class="seg seg-dir"> ~ </span><span class="sep">──</span><span class="seg seg-git"> ⎇ main ✓ </span>
+        </div>
+        <div class="p2">
+          <span class="p2-arrow">╰─❯</span>
+          <span class="c-name">env</span>
+          <span class="c-pipe">|</span>
+          <span class="c-name">grep</span>
+          <span class="c-flag">-E</span>
+          <span class="c-str">'EMAIL|LINKEDIN|GITHUB|LOCATION|CV'</span>
+        </div>
+      </div>
+
+      <div class="out">
+        <div class="env-row"><span class="env-k">EMAIL</span><span class="env-eq">=</span><span class="env-v"><a href="mailto:p@fiadino.org">p@fiadino.org</a></span></div>
+        <div class="env-row"><span class="env-k">LINKEDIN</span><span class="env-eq">=</span><span class="env-v"><a href="https://linkedin.com/in/fiadino" target="_blank" rel="noopener">linkedin.com/in/fiadino</a></span></div>
+        <div class="env-row"><span class="env-k">GITHUB</span><span class="env-eq">=</span><span class="env-v"><a href="https://github.com/pierdom" target="_blank" rel="noopener">github.com/pierdom</a></span></div>
+        <div class="env-row"><span class="env-k">LOCATION</span><span class="env-eq">=</span><span class="env-v">Barcelona, Spain</span></div>
+        <div class="env-row"><span class="env-k">CV</span><span class="env-eq">=</span><span class="env-v"><a href="https://fiadino.org/resume.pdf" target="_blank" rel="noopener">fiadino.org/resume.pdf</a></span></div>
+        <div class="env-row"><span class="env-k">MAIN_SITE</span><span class="env-eq">=</span><span class="env-v"><a href="https://fiadino.org" target="_blank" rel="noopener">fiadino.org</a></span></div>
+      </div>
+    </div><!-- /s-contact -->
+
+
+    <!-- ╔══════════════ INTERACTIVE PROMPT ═════════╗ -->
+    <div class="interactive section">
+      <div class="int-hint">
+        Try the terminal: <code>help</code> &nbsp;·&nbsp; <code>sudo hire piero</code> &nbsp;·&nbsp;
+        <code>fortune</code> &nbsp;·&nbsp; <code>uname -a</code> &nbsp;·&nbsp; <code>exit</code>
+      </div>
+
+      <div id="int-output"></div>
+
+      <div class="prompt" style="margin-top:6px; margin-bottom:0;">
+        <div class="p1">
+          <span class="sep">╭─</span><span class="seg seg-user"> you@fiadino.org </span><span class="sep">──</span><span class="seg seg-dir"> ~ </span>
+        </div>
+        <div class="p2 int-input-line">
+          <span class="p2-arrow">╰─❯</span>
+          <input id="int-input" class="int-input" type="text" autocomplete="off" spellcheck="false" placeholder="type a command…">
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Footer -->
+    <div class="footer section">
+      <div>© 1997–2026 Pierdomenico Fiadino &nbsp;·&nbsp;
+        <a href="https://fiadino.org">fiadino.org</a> &nbsp;·&nbsp;
+        <a href="https://fiadino.org/retro">retro edition</a>
+      </div>
+      <div style="margin-top:4px; font-size:0.88em;">
+        try <code style="color:var(--purple)">↑↑↓↓←→←→BA</code> &nbsp;if you know, you know.
+      </div>
+      <!--
+        If you're reading the source: hello! 👋
+        Built with: HTML5 · CSS animations · ES2024 · IntersectionObserver
+        No frameworks. No bundler. No node_modules. Just vibes.
+        Theme: Dracula on black. Prompt style: powerlevel10k.
+      -->
+    </div>
+
+  </div><!-- /body -->
+</div><!-- /win -->
+
+<script>
+/* ── Section reveal ─────────────────────────────────── */
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (!e.isIntersecting) return;
+    e.target.classList.add('visible');
+    io.unobserve(e.target);
+  });
+}, { threshold: 0.04 });
+document.querySelectorAll('.section').forEach(s => io.observe(s));
+
+/* ── Interactive terminal ───────────────────────────── */
+const inp = document.getElementById('int-input');
+const out = document.getElementById('int-output');
+
+const CMDS = {
+  help: () => [
+    '<b style="color:var(--yellow)">Available commands:</b>',
+    '  <span style="color:var(--cyan)">about</span>            — who is piero?',
+    '  <span style="color:var(--cyan)">ls</span>               — list expertise areas',
+    '  <span style="color:var(--cyan)">contact</span>          — get contact info',
+    '  <span style="color:var(--cyan)">cv</span>               — open the CV',
+    '  <span style="color:var(--cyan)">hire piero</span>       — start a conversation',
+    '  <span style="color:var(--cyan)">sudo hire piero</span>  — escalate priority',
+    '  <span style="color:var(--cyan)">fortune</span>          — random data wisdom',
+    '  <span style="color:var(--cyan)">uname -a</span>         — system info',
+    '  <span style="color:var(--cyan)">clear</span>            — nice try',
+    '  <span style="color:var(--cyan)">exit</span>             — you\'ll be back',
+  ],
+  about: () => [
+    '<span style="color:var(--green)">Pierdomenico Fiadino</span> — data leader, ex-researcher, chronic optimist.',
+    '16 years shipping data systems. PhD TU Wien 2015. 30+ papers. Currently <span style="color:var(--pink)">Head of Data @ Moss</span>.',
+    'Previously: Docplanner · Bird · Bitpanda · Typeform · Zeelo · Eurecat · FTW Vienna.',
+    'Hobbies: data, espresso, cycling around Barcelona, answering emails (eventually).',
+  ],
+  ls: () => [
+    '<span style="color:var(--cyan)">product-analytics/</span>      <span style="color:var(--cyan)">data-leadership/</span>',
+    '<span style="color:var(--cyan)">analytics-engineering/</span>  <span style="color:var(--cyan)">data-governance/</span>',
+    '<span style="color:var(--cyan)">business-intelligence/</span>  <span style="color:var(--cyan)">ai-ml-transformation/</span>',
+  ],
+  contact: () => [
+    '<span style="color:var(--cyan)">EMAIL</span>=<span style="color:var(--green)">p@fiadino.org</span>',
+    '<span style="color:var(--cyan)">LINKEDIN</span>=<a href="https://linkedin.com/in/fiadino" target="_blank" style="color:var(--green)">linkedin.com/in/fiadino</a>',
+    '<span style="color:var(--cyan)">GITHUB</span>=<a href="https://github.com/pierdom" target="_blank" style="color:var(--green)">github.com/pierdom</a>',
+  ],
+  cv: () => {
+    setTimeout(() => window.open('https://fiadino.org/resume.pdf', '_blank'), 100);
+    return ['<span style="color:var(--green)">Opening resume…</span> <span style="color:var(--dim)"># fiadino.org/resume.pdf</span>'];
+  },
+  'hire piero': () => [
+    '<span style="color:var(--yellow)">Initiating contact protocol…</span>',
+    'Drop a line at <a href="mailto:p@fiadino.org" style="color:var(--green)">p@fiadino.org</a> or connect on <a href="https://linkedin.com/in/fiadino" target="_blank" style="color:var(--green)">LinkedIn</a>.',
+    '<span style="color:var(--green)">[OK]</span> Request queued. Expected response time: &lt; 48h.',
+  ],
+  'sudo hire piero': () => [
+    '<span style="color:var(--purple)">[sudo]</span> password for you: ••••••••',
+    '',
+    '<span style="color:var(--green)">✓ Privilege escalation granted.</span> Queue skipped.',
+    'Direct line: <a href="mailto:p@fiadino.org" style="color:var(--green)">p@fiadino.org</a>',
+    '<span style="color:var(--dim)"># Seriously though — always happy to talk data. Reach out.</span>',
+  ],
+  fortune: () => {
+    const f = [
+      '"Without data you\'re just another person with an opinion." — W. Edwards Deming',
+      '"Torture the data, and it will confess to anything." — Ronald Coase',
+      '"In God we trust. All others must bring data." — W. Edwards Deming',
+      '"The goal is to turn data into information, and information into insight." — Carly Fiorina',
+      '"It is a capital mistake to theorize before one has data." — Sherlock Holmes',
+      '"Data is not information. Information is not knowledge. Knowledge is not wisdom." — Clifford Stoll',
+      '"The plural of anecdote is not data." — Roger Brinner (misattributed to everyone else)',
+    ];
+    return ['<span style="color:var(--purple)">🎱 ' + f[Math.floor(Math.random() * f.length)] + '</span>'];
+  },
+  'uname -a': () => [
+    '<span style="color:var(--green)">Human-OS</span> fiadino.org 5.15.0-piero-amd64 #1 SMP PREEMPT Sun May 10 2026',
+    'CPU: 1× Homo sapiens @ variable GHz  |  RAM: 16GB coffee  |  Storage: ∞ curiosity',
+    'Locale: en_US.UTF-8  |  TZ: Europe/Madrid  |  Shell: zsh 5.9',
+  ],
+  clear: () => [
+    '<span style="color:var(--orange)">Nice try.</span> This is a portfolio page, not a real terminal.',
+    '<span style="color:var(--dim)"># The content you tried to clear is kind of the whole point.</span>',
+  ],
+  exit: () => [
+    '<span style="color:var(--orange)">logout</span>',
+    '<span style="color:var(--dim)"># You can close the tab. But Piero will still be here.</span>',
+    '<span style="color:var(--dim)"># See you around the internet. 👋</span>',
+  ],
+};
+
+function addLine(html, cls = '') {
+  const d = document.createElement('div');
+  d.className = 'int-out-line' + (cls ? ' ' + cls : '');
+  d.innerHTML = html;
+  out.appendChild(d);
+}
+
+function echo(cmd) {
+  const d = document.createElement('div');
+  d.className = 'int-echo';
+  d.innerHTML = `<span class="int-echo-arrow">╰─❯</span> ${escHtml(cmd)}`;
+  out.appendChild(d);
+}
+
+function escHtml(s) {
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+inp.addEventListener('keydown', e => {
+  if (e.key !== 'Enter') return;
+  const cmd = inp.value.trim();
+  inp.value = '';
+  if (!cmd) return;
+
+  echo(cmd);
+
+  const handler = CMDS[cmd.toLowerCase()];
+  if (handler) {
+    handler().forEach(l => addLine(l));
+  } else if (cmd.toLowerCase() === 'rm -rf /') {
+    addLine('<span style="color:var(--red)">rm: /: Permission denied.  Nice try, chaos goblin.</span>');
+  } else if (/^sudo\s+/.test(cmd) && !CMDS[cmd.toLowerCase()]) {
+    addLine(`<span style="color:var(--orange)">sudo: ${escHtml(cmd.slice(5).trim())}: command not found</span>`);
+  } else {
+    addLine(`<span style="color:var(--red)">zsh: command not found: ${escHtml(cmd)}</span>  <span style="color:var(--dim)"># try \'help\'</span>`);
+  }
+
+  out.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+});
+
+/* focus input on click anywhere in the interactive zone */
+document.querySelector('.interactive').addEventListener('click', () => inp.focus());
+
+/* ── Konami code ────────────────────────────────────── */
+const KONAMI = [38,38,40,40,37,39,37,39,66,65];
+let kPos = 0;
+document.addEventListener('keydown', ev => {
+  kPos = ev.keyCode === KONAMI[kPos] ? kPos + 1 : 0;
+  if (kPos !== KONAMI.length) return;
+  kPos = 0;
+  document.querySelector('.interactive').scrollIntoView({ behavior: 'smooth' });
+  setTimeout(() => {
+    addLine('<span style="color:var(--yellow)">🎮  KONAMI CODE ACTIVATED</span>');
+    addLine('<span style="color:var(--purple)">Achievement unlocked: "Reads Source Code"  +30 lives  infinite coffee</span>');
+    addLine('<span style="color:var(--dim)"># Built with HTML5 · CSS animations · ES2024 · IntersectionObserver</span>');
+    addLine('<span style="color:var(--dim)"># No frameworks. No bundler. No node_modules. Designed like 2026. Feels like a terminal.</span>');
+    inp.focus();
+  }, 400);
+});
+</script>
+
+</body>
+</html>
