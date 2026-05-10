@@ -20,25 +20,25 @@
     name = "About me"
     pageRef = "page"
     weight = 10
-    url = "/about"
+    url = "/about/"
 
 [[main]]
     name = "Experience"
     pageRef = "page"
     weight = 20
-    url = "/jobs"
+    url = "/jobs/"
 
 [[main]]
     name = "Education"
     pageRef = "page"
     weight = 30
-    url = "/education"
+    url = "/education/"
 
 [[main]]
     name = "Publications"
     pageRef = "page"
     weight = 40
-    url = "/publications"
+    url = "/publications/"
 
 #[[main]]
 #  name = "Blog"

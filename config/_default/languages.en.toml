@@ -9,7 +9,7 @@ title = "Piero's home page"
   rtl = false
   dateFormat = "2 January 2006"
   logo = "img/r2d2_xs.png"
-  description = "Resume and contacts"
+  description = "Pierdomenico Fiadino — Data leader with 16 years of experience across R&D and SaaS. PhD in Data Mining, Head of Data @ Moss."
   copyright = "©2026 All Rights Reserved"
 
 [params.author]
@@ -20,7 +20,6 @@ title = "Piero's home page"
      { email = "mailto:p@fiadino.org" },
      { github = "https://github.com/pierdom" },
      { linkedin = "https://linkedin.com/in/fiadino" },
-     { mastodon = "https://hachiderm.io/@herr_dr" },
-     { researchgate = "https://www.researchgate.net/profile/Pierdomenico_Fiadino" },
+{ researchgate = "https://www.researchgate.net/profile/Pierdomenico_Fiadino" },
      { telegram = "https://t.me/pierdom" },
   ]
