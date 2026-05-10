@@ -1,0 +1,1237 @@
+<!DOCTYPE html>
+<!--
+  ╔═══════════════════════════════════════════════════════════════════╗
+  ║   PIERDOMENICO "PIERO" FIADINO — Personal Homepage v3.14         ║
+  ║   Last updated: sometime in the late 90s (jk, it's 2025)        ║
+  ║                                                                   ║
+  ║   HIDDEN MODERN LAYER (view source if you dare):                 ║
+  ║   • HTML5 semantic markup                                        ║
+  ║   • CSS Grid + Custom Properties + Animations                    ║
+  ║   • Canvas API (star background — no GIFs needed)               ║
+  ║   • localStorage (visitor counter)                               ║
+  ║   • ES2024 JavaScript                                            ║
+  ║   • No <blink>, no <marquee>, no <font>, no tables for layout   ║
+  ╚═══════════════════════════════════════════════════════════════════╝
+-->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>~~*~~ PIERO'S HOME PAGE ~~*~~ WELCOME!! ~~*~~</title>
+  <style>
+    /* ══════════════════════════════════════════════
+       MODERN CSS — hidden in plain sight
+       ══════════════════════════════════════════════ */
+    :root {
+      --bg:        #0c0a18;
+      --bg-card:   #16122a;
+      --bg-alt:    #0f0d20;
+      --bg-deep:   #08060f;
+
+      --text:      #ece6d4;   /* warm cream — main body copy    */
+      --text-dim:  #9a9088;   /* muted warm grey — secondary    */
+
+      --coral:     #f07060;   /* primary accent — coral/salmon  */
+      --teal:      #40c8b8;   /* secondary accent — aqua teal   */
+      --gold:      #e8b840;   /* tertiary accent — warm gold    */
+      --lavender:  #a890e0;   /* decorative — soft purple       */
+
+      --border:    #302850;   /* card borders                   */
+      --border-b:  #1e3048;   /* alternate border               */
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: "Courier New", Courier, monospace;
+      font-size: 17px;
+      line-height: 1.75;
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+    }
+
+    /* Subtle scanline overlay — pure CSS, no image */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: repeating-linear-gradient(
+        0deg,
+        transparent 0px, transparent 3px,
+        rgba(0, 0, 0, 0.06) 3px, rgba(0, 0, 0, 0.06) 4px
+      );
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    p { margin: 0 0 0.85em; }
+    p:last-child { margin-bottom: 0; }
+
+    a { color: var(--teal); }
+    a:visited { color: var(--lavender); }
+    a:hover { color: var(--gold); text-decoration: none; }
+
+    /* ── Starfield ─────────────────────────────────── */
+    #starfield {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    /* ── Page wrapper ──────────────────────────────── */
+    .wrap {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 8px 18px 50px;
+    }
+
+    /* ── Rainbow animated title ────────────────────── */
+    .rainbow-text {
+      background: linear-gradient(
+        90deg,
+        #f07060 0%, #e8b840 20%, #40c8b8 40%,
+        #a890e0 60%, #f07060 80%, #e8b840 100%
+      );
+      background-size: 300% 100%;
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: rainbow 4s linear infinite;
+    }
+    @keyframes rainbow {
+      from { background-position: 0% 50%; }
+      to   { background-position: 300% 50%; }
+    }
+
+    /* ── Blink — CSS, NOT <blink> ──────────────────── */
+    .blink { animation: blink 1s step-end infinite; }
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50%       { opacity: 0; }
+    }
+
+    /* ── Ticker — CSS, NOT <marquee> ──────────────── */
+    .ticker-wrap {
+      overflow: hidden;
+      background: var(--bg-deep);
+      border-top: 2px solid var(--teal);
+      border-bottom: 2px solid var(--teal);
+      padding: 6px 0;
+      margin: 6px 0;
+      white-space: nowrap;
+    }
+    .ticker {
+      display: inline-block;
+      animation: ticker 32s linear infinite;
+      color: var(--gold);
+      font-size: 0.9em;
+    }
+    @keyframes ticker {
+      from { transform: translateX(100vw); }
+      to   { transform: translateX(-100%); }
+    }
+
+    /* ── Under construction hazard ─────────────────── */
+    .hazard-wrap {
+      background: repeating-linear-gradient(
+        45deg,
+        #1a1200 0px, #1a1200 10px,
+        #3a2e00 10px, #3a2e00 20px
+      );
+      padding: 3px;
+      margin: 8px 0;
+    }
+    .hazard-inner {
+      background: #1a1500;
+      color: var(--gold);
+      text-align: center;
+      padding: 8px;
+      font-weight: bold;
+      letter-spacing: 2px;
+      font-size: 0.9em;
+    }
+
+    /* ── Visitor counter ───────────────────────────── */
+    .counter-wrap {
+      text-align: center;
+      padding: 8px;
+      font-size: 0.88em;
+      color: var(--teal);
+    }
+    .counter-digits {
+      display: inline-block;
+      background: #080604;
+      color: var(--coral);
+      border: 2px inset #3a1a10;
+      padding: 2px 12px;
+      font-size: 1.35em;
+      letter-spacing: 6px;
+    }
+
+    /* ── Decorative divider ────────────────────────── */
+    .div-line {
+      color: var(--border);
+      text-align: center;
+      overflow: hidden;
+      white-space: nowrap;
+      font-size: 0.75em;
+      margin: 4px 0;
+      opacity: 0.9;
+    }
+
+    /* ── Section header ────────────────────────────── */
+    .section-hdr {
+      color: var(--gold);
+      font-family: "Times New Roman", Times, serif;
+      font-size: 1.3em;
+      font-weight: bold;
+      text-align: center;
+      text-transform: uppercase;
+      background: var(--bg-deep);
+      border: 2px solid var(--coral);
+      padding: 8px;
+      margin: 24px 0 10px;
+      letter-spacing: 3px;
+    }
+
+    /* ── Content card ──────────────────────────────── */
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      padding: 20px 22px;
+      margin: 8px 0;
+    }
+    .card-teal  { border-color: var(--teal);    }
+    .card-coral { border-color: var(--coral);   }
+    .card-gold  { border-color: var(--gold);    }
+
+    /* ── Nav bar ────────────────────────────────────── */
+    .nav-bar {
+      text-align: center;
+      padding: 12px;
+      border: 2px dashed var(--lavender);
+      background: var(--bg-alt);
+      margin: 8px 0;
+    }
+
+    /* ── Retro button ───────────────────────────────── */
+    .btn {
+      display: inline-block;
+      background: var(--bg-deep);
+      color: var(--teal);
+      border: 2px outset #284858;
+      padding: 5px 13px;
+      text-decoration: none;
+      font-family: "Courier New", monospace;
+      font-size: 0.95em;
+      cursor: pointer;
+      margin: 3px 2px;
+      transition: all 0.1s;
+      user-select: none;
+    }
+    .btn:hover {
+      background: var(--teal);
+      color: var(--bg-deep);
+      border-style: inset;
+    }
+    .btn:active { opacity: 0.75; }
+
+    /* ── About two-column ──────────────────────────── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 180px 1fr;
+      gap: 22px;
+      align-items: start;
+    }
+    .photo-frame {
+      border: 3px ridge var(--teal);
+      padding: 5px;
+      background: var(--bg-deep);
+      text-align: center;
+    }
+    .photo-frame img {
+      display: block;
+      width: 100%;
+      filter: sepia(0.15) contrast(1.05);
+    }
+    .photo-caption {
+      font-size: 0.72em;
+      color: var(--text-dim);
+      margin-top: 5px;
+      font-style: italic;
+    }
+    @media (max-width: 520px) {
+      .about-grid { grid-template-columns: 1fr; }
+      .photo-frame { max-width: 180px; margin: 0 auto; }
+    }
+
+    /* ── Quick-info strip in About ─────────────────── */
+    .info-strip {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0;
+      border: 1px solid var(--border);
+      margin: 16px 0 10px;
+      font-size: 1em;
+    }
+    .info-cell {
+      flex: 1 1 160px;
+      padding: 8px 12px;
+      border-right: 1px solid var(--border);
+    }
+    .info-cell:last-child { border-right: none; }
+    .info-label {
+      color: var(--gold);
+      font-weight: bold;
+      font-size: 0.82em;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      display: block;
+      margin-bottom: 2px;
+    }
+    .info-value { color: var(--text); }
+
+    /* ── Skill bars ─────────────────────────────────── */
+    .skill-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 6px 0;
+      font-size: 1em;
+    }
+    .skill-label {
+      width: 155px;
+      flex-shrink: 0;
+      color: var(--text);
+    }
+    .skill-track {
+      flex: 1;
+      height: 10px;
+      background: var(--bg-deep);
+      border: 1px solid var(--border);
+      overflow: hidden;
+    }
+    .skill-fill {
+      height: 100%;
+      background: var(--teal);
+      box-shadow: 0 0 8px rgba(64, 200, 184, 0.5);
+      transition: width 1.2s cubic-bezier(.4,0,.2,1);
+    }
+    .skill-tag {
+      width: 68px;
+      flex-shrink: 0;
+      color: var(--gold);
+      font-size: 0.88em;
+    }
+
+    /* ── Expertise grid ────────────────────────────── */
+    .expertise-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 12px;
+      margin-top: 4px;
+    }
+    .expertise-card {
+      background: var(--bg-alt);
+      border: 1px solid var(--border);
+      border-top: 3px solid var(--teal);
+      padding: 14px 16px;
+    }
+    .expertise-card.coral { border-top-color: var(--coral); }
+    .expertise-card.gold  { border-top-color: var(--gold);  }
+    .expertise-card.lav   { border-top-color: var(--lavender); }
+    .expertise-title {
+      color: var(--gold);
+      font-weight: bold;
+      font-size: 1em;
+      margin-bottom: 6px;
+    }
+    .expertise-desc {
+      color: var(--text);
+      font-size: 0.92em;
+      line-height: 1.65;
+    }
+    .expertise-tags {
+      margin-top: 8px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+    }
+    .etag {
+      font-size: 0.75em;
+      padding: 2px 7px;
+      border: 1px solid var(--border);
+      color: var(--text-dim);
+      background: var(--bg-deep);
+      white-space: nowrap;
+    }
+
+    /* ── Timeline ───────────────────────────────────── */
+    .timeline {
+      border-left: 3px solid var(--teal);
+      padding: 10px 14px;
+      margin: 12px 0;
+      background: var(--bg-alt);
+    }
+    .tl-date    { color: var(--teal);   font-weight: bold; font-size: 0.92em; }
+    .tl-role    { color: var(--gold);   font-weight: bold; font-size: 1.1em; margin: 4px 0 2px; }
+    .tl-company { color: var(--coral);  margin-bottom: 4px; font-size: 1em; }
+    .tl-desc    { color: var(--text);   font-size: 1em; line-height: 1.7; margin-top: 6px; }
+
+    /* ── Education table ────────────────────────────── */
+    .edu-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .edu-table th {
+      background: var(--bg-deep);
+      color: var(--teal);
+      padding: 8px 10px;
+      border: 1px solid var(--border);
+      text-align: left;
+      font-size: 0.95em;
+      letter-spacing: 1px;
+    }
+    .edu-table td {
+      padding: 11px 10px;
+      border: 1px solid var(--border);
+      vertical-align: top;
+      color: var(--text);
+      font-size: 1em;
+      line-height: 1.7;
+    }
+    .edu-table tr:nth-child(even) td { background: rgba(255,255,255,0.02); }
+    .edu-table .yr  { color: var(--gold);     font-weight: bold; font-size: 1em; }
+    .edu-table .deg { color: var(--coral);    font-weight: bold; }
+    .edu-table .adv { color: var(--text-dim); font-style: italic; font-size: 0.9em; margin-top: 3px; display: block; }
+
+    /* ── Research table ─────────────────────────────── */
+    .res-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 1em;
+    }
+    .res-table th {
+      background: var(--bg-deep);
+      color: var(--coral);
+      padding: 8px 10px;
+      border: 1px solid var(--border);
+      text-align: left;
+      letter-spacing: 1px;
+    }
+    .res-table td {
+      padding: 10px 10px;
+      border: 1px solid var(--border);
+      vertical-align: top;
+      color: var(--text);
+      line-height: 1.65;
+    }
+    .res-table tr:nth-child(even) td { background: rgba(255,255,255,0.02); }
+    .res-table .area { color: var(--gold); font-weight: bold; }
+
+    /* ── Publication entry ──────────────────────────── */
+    .pub {
+      border-left: 3px solid var(--lavender);
+      padding: 7px 13px;
+      margin: 11px 0;
+      font-size: 1em;
+      line-height: 1.7;
+    }
+    .pub-title { color: var(--gold);     font-weight: bold; }
+    .pub-auth  { color: var(--text-dim); margin-top: 2px; }
+    .pub-venue { color: var(--teal);     font-style: italic; }
+    .pub-award { color: var(--coral);    font-weight: bold; margin-top: 2px; }
+
+    /* ── Contact grid ───────────────────────────────── */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 10px;
+      margin: 12px 0;
+    }
+    .contact-card {
+      border: 1px solid var(--border);
+      background: var(--bg-alt);
+      padding: 12px 10px;
+      text-align: center;
+      text-decoration: none;
+      color: var(--text);
+      display: block;
+      transition: all 0.15s;
+    }
+    .contact-card:hover {
+      border-color: var(--teal);
+      background: var(--bg-card);
+      color: var(--gold);
+    }
+    .contact-card .ico   { font-size: 1.5em; display: block; margin-bottom: 5px; }
+    .contact-card strong { color: var(--teal); }
+    .contact-card .label { font-size: 0.85em; color: var(--text-dim); display: block; margin-top: 2px; }
+
+    /* ── Guestbook ──────────────────────────────────── */
+    .gb-input, .gb-textarea {
+      background: var(--bg-deep);
+      color: var(--text);
+      border: 1px solid var(--border);
+      font-family: "Courier New", monospace;
+      font-size: 1em;
+      padding: 6px 8px;
+      width: 100%;
+      margin: 4px 0;
+    }
+    .gb-input:focus, .gb-textarea:focus {
+      outline: none;
+      border-color: var(--teal);
+    }
+    .gb-textarea { height: 75px; resize: vertical; }
+    .gb-entry {
+      border-left: 3px solid var(--teal);
+      padding: 8px 13px;
+      margin: 11px 0;
+      font-size: 1em;
+      color: var(--text);
+      line-height: 1.7;
+    }
+    .gb-who  { color: var(--teal);    font-weight: bold; }
+    .gb-when { color: var(--text-dim); font-size: 0.82em; }
+
+    /* ── 88×31 pixel buttons ────────────────────────── */
+    .pixel-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+      justify-content: center;
+      margin: 16px 0 6px;
+    }
+    .px-btn {
+      width: 88px;
+      height: 31px;
+      font-size: 9px;
+      font-family: monospace;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      border: 1px solid;
+      line-height: 1.2;
+    }
+
+    /* ── Footer ─────────────────────────────────────── */
+    .footer {
+      text-align: center;
+      font-size: 0.9em;
+      color: var(--text-dim);
+      padding: 22px 10px;
+      border-top: 1px dashed var(--border);
+      margin-top: 24px;
+    }
+
+    /* ── Responsive ─────────────────────────────────── */
+    @media (max-width: 560px) {
+      .info-strip { flex-direction: column; }
+      .info-cell  { border-right: none; border-bottom: 1px solid var(--border); }
+    }
+  </style>
+</head>
+<body>
+
+<canvas id="starfield"></canvas>
+
+<div class="wrap">
+
+  <!-- ╔══════════════════ HEADER ═══════════════════╗ -->
+  <div class="div-line">╔══════════════════════════════════════════════════════════════════════╗</div>
+
+  <div style="text-align:center; padding:18px 16px; border: 2px solid var(--border); background: var(--bg-card); margin: 2px 0;">
+    <div class="rainbow-text" style="font-size: 2.1em; font-family:'Times New Roman',serif; font-weight:bold; letter-spacing:2px;">
+      ✦ PIERDOMENICO FIADINO ✦
+    </div>
+    <div style="color:var(--text-dim); font-family:'Times New Roman',serif; font-size:1.1em; margin-top:6px;">
+      ~ Ph.D. &middot; Data Leader &middot; Head of Data &amp; Insights @ Moss &middot; Internet Veteran ~
+    </div>
+    <div class="blink" style="color:var(--coral); margin-top:8px; font-size:0.88em; letter-spacing:1px;">
+      ★ JAVA ENABLED ★ &nbsp; FRAMES SUPPORTED ★ &nbsp; 100% NETSCAPE COMPATIBLE ★
+    </div>
+  </div>
+
+  <div class="div-line">╚══════════════════════════════════════════════════════════════════════╝</div>
+
+  <!-- Under Construction -->
+  <div class="hazard-wrap">
+    <div class="hazard-inner">
+      ⚠ &nbsp; UNDER CONSTRUCTION &nbsp; ⚠ &nbsp;&nbsp;&nbsp; Pardon our electrons! &nbsp;&nbsp;&nbsp; Last updated: March 1997 (jk — actually May 2026)
+    </div>
+  </div>
+
+  <!-- Visitor Counter -->
+  <div class="counter-wrap">
+    You are visitor number: <span id="counter" class="counter-digits">000000</span><br>
+    <small style="color:var(--text-dim);">(Counter reset after the server crashed &mdash; thanks AOL)</small>
+  </div>
+
+  <!-- Ticker — CSS animation, NOT <marquee> -->
+  <div class="ticker-wrap" aria-hidden="true">
+    <span class="ticker">
+      ★ Welcome to my corner of the World Wide Web! ★ &nbsp;&nbsp;&nbsp;
+      PhD from TU Wien &middot; Head of Data &amp; Insights @ Moss &middot; 30+ publications &nbsp;&nbsp;&nbsp;
+      ★ Best viewed at 800×600 with Netscape Navigator 3.0 ★ &nbsp;&nbsp;&nbsp;
+      &bull; Please sign my guestbook! &bull; &nbsp;&nbsp;&nbsp;
+      Ciao from Bari / Rome / Vienna / Barcelona ★ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </span>
+  </div>
+
+  <!-- Navigation -->
+  <div class="nav-bar">
+    <strong style="color:var(--gold);">[ NAVIGATE MY SITE ]</strong><br><br>
+    <a href="#about"        class="btn">[ About Me ]</a>
+    <a href="#expertise"    class="btn">[ Expertise ]</a>
+    <a href="#experience"   class="btn">[ Experience ]</a>
+    <a href="#education"    class="btn">[ Education ]</a>
+    <a href="#research"     class="btn">[ Research ]</a>
+    <a href="#publications" class="btn">[ Publications ]</a>
+    <a href="#contact"      class="btn">[ Contact! ]</a>
+    <a href="#guestbook"    class="btn">[ Guestbook ]</a>
+  </div>
+
+
+  <!-- ╔══════════════════ ABOUT ME ══════════════════╗ -->
+  <div id="about"></div>
+  <div class="section-hdr">★ About Me ★</div>
+
+  <div class="card">
+    <div class="about-grid">
+
+      <div class="photo-frame">
+        <img src="https://www.fiadino.org/img/pf.jpg" alt="Pierdomenico Fiadino">
+        <div class="photo-caption">Piero, somewhere with good internet</div>
+      </div>
+
+      <div>
+        <p>Hey there, and <strong style="color:var(--gold)">WELCOME</strong> to my home page!
+        I'm <strong style="color:var(--coral)">Pierdomenico Fiadino</strong> &mdash; but my
+        friends call me <em>Piero</em>. Pull up a chair, grab a Java applet, and stay awhile! :-)</p>
+
+        <p>I'm <strong style="color:var(--teal)">Senior Director, Head of Data &amp; Insights</strong>
+        at <strong style="color:var(--coral)">Moss</strong>, where I lead product analytics,
+        commercial analytics, and analytics engineering while driving an AI-first data
+        transformation.</p>
+
+        <p>16 years in R&amp;D and SaaS &mdash; 8 of them in SaaS roles. I combine a hands-on,
+        pragmatic approach with a research background, focused on building data products that
+        actually drive business outcomes.</p>
+
+        <p>Before the industry world, I spent years in academic research &mdash; mining data from
+        3G/4G networks, training ML models to detect anomalies in real-time cellular traffic, and
+        publishing at IEEE Infocom, ACM SIGCOMM, and friends. 30+ papers total.</p>
+
+        <p>I hold a <strong style="color:var(--gold)">Ph.D.</strong> from <em>TU Wien</em> and
+        two degrees from <em>Sapienza University of Rome</em>. Grew up in <strong>Bari</strong>,
+        moved to <strong>Rome</strong> for university, then to <strong>Vienna</strong> for my PhD
+        and first job, and have been living in <strong>Barcelona</strong> since 2016.</p>
+      </div>
+
+    </div>
+
+    </div><!-- /about-grid -->
+
+    <div class="info-strip">
+      <div class="info-cell">
+        <span class="info-label">Currently</span>
+        <span class="info-value">Barcelona, Spain</span>
+      </div>
+      <div class="info-cell">
+        <span class="info-label">Role</span>
+        <span class="info-value">Head of Data &amp; Insights</span>
+      </div>
+      <div class="info-cell">
+        <span class="info-label">PhD</span>
+        <span class="info-value">TU Wien, 2015</span>
+      </div>
+      <div class="info-cell">
+        <span class="info-label">Publications</span>
+        <span class="info-value">30+ papers</span>
+      </div>
+      <div class="info-cell">
+        <span class="info-label">Online since</span>
+        <span class="info-value">The 56k era</span>
+      </div>
+    </div>
+
+    <div style="text-align:center; margin:4px 0 12px; font-size:0.8em; color:var(--border); letter-spacing:1px;">
+      ─────────────────── [ SKILL METER v2.0 ] ───────────────────
+    </div>
+
+    <div id="skills-container"></div>
+  </div>
+
+
+  <!-- ╔══════════════════ EXPERTISE ═════════════════╗ -->
+  <div id="expertise"></div>
+  <div class="section-hdr">★ Expertise ★</div>
+
+  <div class="card">
+    <div class="expertise-grid">
+
+      <div class="expertise-card">
+        <div class="expertise-title">Product &amp; Commercial Analytics</div>
+        <div class="expertise-desc">Building analytics functions from the ground up and scaling them across product squads. Metrics frameworks, funnel analysis, A/B testing infrastructure, and customer segmentation — across Typeform, Bitpanda, Docplanner, and Moss.</div>
+        <div class="expertise-tags">
+          <span class="etag">A/B testing</span>
+          <span class="etag">product metrics</span>
+          <span class="etag">segmentation</span>
+          <span class="etag">funnel analysis</span>
+        </div>
+      </div>
+
+      <div class="expertise-card coral">
+        <div class="expertise-title">Data Leadership &amp; Team Building</div>
+        <div class="expertise-desc">Led data teams from zero-to-one (Bitpanda) to 40+ person global functions (Docplanner). Cross-functional management spanning engineers, analysts, and scientists — with a track record of hiring, structuring, and growing high-performance data orgs.</div>
+        <div class="expertise-tags">
+          <span class="etag">team building</span>
+          <span class="etag">hiring</span>
+          <span class="etag">org design</span>
+          <span class="etag">C-suite partnership</span>
+        </div>
+      </div>
+
+      <div class="expertise-card gold">
+        <div class="expertise-title">Analytics Engineering &amp; Data Platform</div>
+        <div class="expertise-desc">End-to-end ownership of data infrastructure: ingestion pipelines, data modeling, software instrumentation, and event tracking governance. Hands-on experience at Bird, Docplanner, and Moss building the plumbing that makes analytics reliable.</div>
+        <div class="expertise-tags">
+          <span class="etag">data modeling</span>
+          <span class="etag">pipelines</span>
+          <span class="etag">instrumentation</span>
+          <span class="etag">event tracking</span>
+        </div>
+      </div>
+
+      <div class="expertise-card lav">
+        <div class="expertise-title">Data Governance &amp; Strategy</div>
+        <div class="expertise-desc">Establishing data governance frameworks, quality standards, and company-wide data practices in fast-moving SaaS environments. At Docplanner, led a full revamp of software instrumentation governance across a global platform.</div>
+        <div class="expertise-tags">
+          <span class="etag">governance</span>
+          <span class="etag">data quality</span>
+          <span class="etag">standards</span>
+          <span class="etag">SaaS</span>
+        </div>
+      </div>
+
+      <div class="expertise-card">
+        <div class="expertise-title">Business Intelligence &amp; Executive Reporting</div>
+        <div class="expertise-desc">Translating complex data into clear narratives for senior leadership. Weekly business reviews, C-suite dashboards, and board-level reporting — making data the common language for strategic decisions at Bird, Docplanner, and Moss.</div>
+        <div class="expertise-tags">
+          <span class="etag">BI</span>
+          <span class="etag">dashboards</span>
+          <span class="etag">executive reporting</span>
+          <span class="etag">decision science</span>
+        </div>
+      </div>
+
+      <div class="expertise-card coral">
+        <div class="expertise-title">AI-First Data Transformation</div>
+        <div class="expertise-desc">Currently driving an AI-first transformation of the data function at Moss. Applying a research background in ML — built over years of academic work — to modern SaaS contexts: smarter pipelines, augmented analytics, and AI-assisted decision-making.</div>
+        <div class="expertise-tags">
+          <span class="etag">AI strategy</span>
+          <span class="etag">ML</span>
+          <span class="etag">LLMs</span>
+          <span class="etag">automation</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- ╔══════════════════ EXPERIENCE ════════════════╗ -->
+  <div id="experience"></div>
+  <div class="section-hdr">★ Work Experience ★</div>
+
+  <div class="card card-teal">
+    <p style="text-align:center; color:var(--text-dim); font-size:0.88em; margin-top:0;">
+      [Click a job for details &mdash; just kidding, this is 1997, not a React SPA]
+    </p>
+
+    <div class="timeline">
+      <div class="tl-date">Feb 2026 &mdash; Present</div>
+      <div class="tl-role">Senior Director, Head of Data &amp; Insights</div>
+      <div class="tl-company">Moss</div>
+      <div class="tl-desc">Leading the data function covering product analytics, commercial
+      analytics, and analytics engineering. Driving an AI-first data transformation and
+      partnering strategically with leadership to make data a core business driver.</div>
+    </div>
+
+    <div class="timeline">
+      <div class="tl-date">Mar 2024 &mdash; Feb 2026</div>
+      <div class="tl-role">Global VP of Data</div>
+      <div class="tl-company">Docplanner.com &mdash; World's Largest Healthcare Platform</div>
+      <div class="tl-desc">Led the Global Data function across ~40 professionals, overseeing
+      data platform, BI, and product analytics. Managed data infrastructure serving internal
+      consumers and external customers. Drove governance initiatives and delivered analytics
+      solutions for senior leadership.</div>
+    </div>
+
+    <div class="timeline">
+      <div class="tl-date">Jan 2023 &mdash; Feb 2024</div>
+      <div class="tl-role">Head of Data</div>
+      <div class="tl-company">Bird.com (formerly MessageBird)</div>
+      <div class="tl-desc">Managed a cross-functional data team of engineers, analysts, and
+      scientists. Directed software instrumentation, data ingestion pipelines, data modeling,
+      and C-suite reporting.</div>
+    </div>
+
+    <div class="timeline">
+      <div class="tl-date">Jan 2022 &mdash; Dec 2022</div>
+      <div class="tl-role">Data Analytics Manager (Product)</div>
+      <div class="tl-company">Bitpanda.com &mdash; Vienna, Austria</div>
+      <div class="tl-desc">Established the product analytics function from scratch through
+      hiring. Implemented an A/B testing framework and developed product metrics and customer
+      segmentation strategies.</div>
+    </div>
+
+    <div class="timeline">
+      <div class="tl-date">Jan 2021 &mdash; Dec 2021</div>
+      <div class="tl-role">Data Science and Analytics Manager</div>
+      <div class="tl-company">Typeform.com</div>
+      <div class="tl-desc">Managed the product analytics team and coordinated data strategy
+      across multiple product squads, focusing on measurable goals aligned with company
+      objectives.</div>
+    </div>
+
+    <div class="timeline">
+      <div class="tl-date">Nov 2019 &mdash; Dec 2020</div>
+      <div class="tl-role">Data Science Tech Lead</div>
+      <div class="tl-company">Typeform.com</div>
+      <div class="tl-desc">Provided technical leadership across data science teams, established
+      quality standards and best practices, and coordinated internal tool development.</div>
+    </div>
+
+    <div class="timeline">
+      <div class="tl-date">Feb 2018 &mdash; Oct 2019</div>
+      <div class="tl-role">Data Lead</div>
+      <div class="tl-company">Zeelo.co</div>
+      <div class="tl-desc">Established company-wide data activities including platforms and
+      machine learning. Developed mobility prediction products and business intelligence for
+      operations and marketing.</div>
+    </div>
+
+    <div class="timeline">
+      <div class="tl-date">Jan 2016 &mdash; Feb 2018</div>
+      <div class="tl-role">Senior Data Scientist</div>
+      <div class="tl-company">Eurecat.org &mdash; Barcelona, Spain</div>
+      <div class="tl-desc">Led applied R&amp;D projects in intelligent transport systems and
+      smart cities. Provided data consultancy to SMEs and startups.</div>
+    </div>
+
+    <div class="timeline">
+      <div class="tl-date">Mar 2010 &mdash; Dec 2015</div>
+      <div class="tl-role">R&amp;D Engineer &mdash; Data Mining</div>
+      <div class="tl-company">FTW &mdash; Telecommunications Research Center Vienna</div>
+      <div class="tl-desc">Conducted commercial R&amp;D in network monitoring and analytics,
+      applying machine learning to large-scale telecom datasets. Led to PhD research at TU
+      Wien and 30+ publications.</div>
+    </div>
+
+    <div style="text-align:center; margin-top:14px; font-size:0.9em; color:var(--text-dim);">
+      [ Full career timeline on
+      <a href="https://linkedin.com/in/fiadino" target="_blank" rel="noopener">LinkedIn</a> ]
+    </div>
+  </div>
+
+
+  <!-- ╔══════════════════ EDUCATION ═════════════════╗ -->
+  <div id="education"></div>
+  <div class="section-hdr">★ Education ★</div>
+
+  <div class="card card-gold">
+    <table class="edu-table">
+      <thead>
+        <tr>
+          <th style="width:7%">Year</th>
+          <th style="width:16%">Degree</th>
+          <th style="width:22%">Institution</th>
+          <th>Topic &amp; Advisors</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="yr">2015</td>
+          <td><span class="deg">PhD</span><br><small>Electrical Eng. &amp; IT</small></td>
+          <td>TU Wien<br><small>Vienna, Austria</small></td>
+          <td>
+            Data analytics in computer networks; ML systems for anomaly detection &amp; diagnosis
+            <span class="adv">Dr Pedro Casas &middot; Prof Tanja Zseby</span>
+          </td>
+        </tr>
+        <tr>
+          <td class="yr">2010</td>
+          <td><span class="deg">MSc</span><br><small>Computer Engineering</small></td>
+          <td>Sapienza Univ. of Rome<br><small>Rome, Italy</small></td>
+          <td>
+            Mobility pattern extraction from mobile networks using data mining
+            <span class="adv">Dr Danilo Valerio &middot; Dr Fabio Ricciato &middot; Prof Francesca Cuomo</span>
+          </td>
+        </tr>
+        <tr>
+          <td class="yr">2008</td>
+          <td><span class="deg">BSc</span><br><small>Computer Engineering</small></td>
+          <td>Sapienza Univ. of Rome<br><small>Rome, Italy</small></td>
+          <td>
+            Java application for peer-to-peer file sharing
+            <span class="adv">(Napster was already dead. Filed a bug report with history.)</span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+
+  <!-- ╔══════════════════ RESEARCH ══════════════════╗ -->
+  <div id="research"></div>
+  <div class="section-hdr">★ Research Areas ★</div>
+
+  <div class="card card-teal">
+    <p style="margin-top:0;">My academic career covered the following dark arts of computer science:</p>
+
+    <table class="res-table">
+      <thead>
+        <tr>
+          <th style="width:28%">Area</th>
+          <th>What it actually means</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="area">Network Traffic Classification</td>
+          <td>Teaching machines to recognise which app is sending which data on a mobile network &mdash; without opening the packets. Like guessing what's in a box by shaking it, but with neural networks.</td>
+        </tr>
+        <tr>
+          <td class="area">Anomaly Detection in Cellular Networks</td>
+          <td>Finding the <em>"something is off today"</em> signal in live mobile networks before users start complaining. ML + statistics + industrial-grade coffee.</td>
+        </tr>
+        <tr>
+          <td class="area">QoE Analysis (YouTube, WhatsApp, CDNs)</td>
+          <td>Measuring whether video was actually loading well or just spinning a buffering wheel. Turns out there's a lot to say about this. Multiple IEEE papers worth of things.</td>
+        </tr>
+        <tr>
+          <td class="area">Mobile Mobility Patterns</td>
+          <td>Can you tell where people are going from cell-tower handovers alone? Yes. It's fascinating. Also slightly sci-fi. See: the MSc thesis.</td>
+        </tr>
+        <tr>
+          <td class="area">Big Data in Mobile Networks</td>
+          <td>Real-time processing of millions of network events per second &mdash; before "Big Data" became a LinkedIn buzzword. We called it "Tuesday".</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+
+  <!-- ╔═════════════════ PUBLICATIONS ═══════════════╗ -->
+  <div id="publications"></div>
+  <div class="section-hdr">★ Publications ★</div>
+
+  <div class="card">
+    <p style="margin-top:0;">
+      30+ papers published in major international venues.
+      Full list on <a href="https://researchgate.net/profile/Pierdomenico_Fiadino" target="_blank" rel="noopener">ResearchGate</a>.
+      Here are the greatest hits:
+    </p>
+
+    <p style="color:var(--gold); margin-bottom:6px; font-weight:bold;">★ Journal Papers &amp; Book Chapters</p>
+
+    <div class="pub">
+      <div class="pub-title">Big Data in Mobile Networks</div>
+      <div class="pub-auth">P. Fiadino, M. Torrent-Moreno</div>
+      <div class="pub-venue">Encyclopedia of Big Data Technologies, Springer &mdash; 2018</div>
+    </div>
+
+    <div class="pub">
+      <div class="pub-title">Grasping Popular Applications in Cellular Networks with Big Data Analytics Platforms</div>
+      <div class="pub-auth">P. Fiadino, P. Casas, A. D'Alconzo, M. Schiavone, A. Bär</div>
+      <div class="pub-venue">IEEE Transactions on Network and Service Management (TNSM) &mdash; 2016</div>
+    </div>
+
+    <p style="color:var(--gold); margin: 18px 0 6px; font-weight:bold;">★ Conference Highlights</p>
+
+    <div class="pub">
+      <div class="pub-title">Call Detail Records for Human Mobility Studies: Taking Stock of the Situation in the Always Connected Era</div>
+      <div class="pub-auth">P. Fiadino, V. Ponce-Lopez, J.A. Torrero-Gonzalez, M. Torrent-Moreno, A. D'Alconzo</div>
+      <div class="pub-venue">ACM SIGCOMM 2017 Workshop, Los Angeles</div>
+    </div>
+
+    <div class="pub">
+      <div class="pub-title">Challenging Entropy-based Anomaly Detection and Diagnosis in Cellular Networks</div>
+      <div class="pub-auth">P. Fiadino, A. D'Alconzo, M. Schiavone, P. Casas</div>
+      <div class="pub-venue">ACM SIGCOMM 2015, London</div>
+      <div class="pub-award">🥈 Runner Up</div>
+    </div>
+
+    <div class="pub">
+      <div class="pub-title">Online Social Networks Anatomy: on the Analysis of Facebook and WhatsApp in Cellular Networks</div>
+      <div class="pub-auth">P. Fiadino, P. Casas, M. Schiavone, A. D'Alconzo</div>
+      <div class="pub-venue">IFIP Networking 2015, Toulouse</div>
+    </div>
+
+    <div class="pub">
+      <div class="pub-title">Vivisecting WhatsApp through Large-Scale Measurements in Mobile Networks</div>
+      <div class="pub-auth">P. Fiadino, M. Schiavone, P. Casas</div>
+      <div class="pub-venue">ACM SIGCOMM 2014, Chicago</div>
+    </div>
+
+    <div class="pub">
+      <div class="pub-title">On the Detection of Network Traffic Anomalies in Content Delivery Network Services</div>
+      <div class="pub-auth">P. Fiadino, A. D'Alconzo, A. Bär, P. Casas, A. Finamore</div>
+      <div class="pub-venue">ITC 26, Karlskrona, Sweden &mdash; 2014</div>
+    </div>
+
+    <div class="pub">
+      <div class="pub-title">HTTPTag: A Flexible On-line HTTP Classification System for Operational 3G Networks</div>
+      <div class="pub-auth">P. Fiadino, A. Bär, P. Casas</div>
+      <div class="pub-venue">IEEE Infocom 2013, Turin</div>
+    </div>
+
+    <div style="text-align:center; margin-top:16px; font-size:0.9em; color:var(--text-dim);">
+      <em>&hellip;and ~20 more. I was a very caffeinated grad student.</em>
+    </div>
+  </div>
+
+
+  <!-- ╔════════════════════ CONTACT ════════════════════╗ -->
+  <div id="contact"></div>
+  <div class="section-hdr">★ Contact Me!! ★</div>
+
+  <div class="card card-coral">
+    <p style="text-align:center; margin-top:0;">
+      <strong class="blink" style="color:var(--gold)">★ REACH ME ON THE INFORMATION SUPERHIGHWAY ★</strong>
+    </p>
+
+    <div class="contact-grid">
+      <a href="mailto:p@fiadino.org" class="contact-card" target="_blank" rel="noopener">
+        <span class="ico">📧</span>
+        <strong>E-mail</strong>
+        <span class="label">p@fiadino.org</span>
+      </a>
+      <a href="https://linkedin.com/in/fiadino" class="contact-card" target="_blank" rel="noopener">
+        <span class="ico">💼</span>
+        <strong>LinkedIn</strong>
+        <span class="label">in/fiadino</span>
+      </a>
+      <a href="https://hachyderm.io/@herr_dr" class="contact-card" target="_blank" rel="noopener">
+        <span class="ico">🐘</span>
+        <strong>Mastodon</strong>
+        <span class="label">@herr_dr</span>
+      </a>
+      <a href="https://t.me/pierdom" class="contact-card" target="_blank" rel="noopener">
+        <span class="ico">✈️</span>
+        <strong>Telegram</strong>
+        <span class="label">@pierdom</span>
+      </a>
+      <a href="https://researchgate.net/profile/Pierdomenico_Fiadino" class="contact-card" target="_blank" rel="noopener">
+        <span class="ico">🔬</span>
+        <strong>ResearchGate</strong>
+        <span class="label">Academic profile</span>
+      </a>
+      <a href="https://fiadino.org" class="contact-card" target="_blank" rel="noopener">
+        <span class="ico">🌐</span>
+        <strong>Main Site</strong>
+        <span class="label">fiadino.org</span>
+      </a>
+      <a href="https://fiadino.org" class="contact-card" target="_blank" rel="noopener" style="border-top-color: var(--gold); border-top-width: 3px;">
+        <span class="ico">📄</span>
+        <strong style="color: var(--gold);">Download CV</strong>
+        <span class="label">fiadino.org</span>
+      </a>
+    </div>
+  </div>
+
+
+  <!-- ╔═════════════════== GUESTBOOK ═══════════════════╗ -->
+  <div id="guestbook"></div>
+  <div class="section-hdr">★ Sign My Guestbook!! ★</div>
+
+  <div class="card card-teal">
+    <p style="text-align:center; color:var(--text-dim); margin-top:0;">
+      Leave a message and I'll add it to the page!
+      <small>(within 6&ndash;8 weeks via dial-up)</small>
+    </p>
+
+    <input  class="gb-input"    id="gb-name" placeholder="Your name (AOL screenname welcome)" type="text"><br>
+    <input  class="gb-input"    id="gb-url"  placeholder="Your homepage (http://www...)" type="text"><br>
+    <textarea class="gb-textarea" id="gb-msg" placeholder="Your message..."></textarea><br>
+    <button class="btn" onclick="signGuestbook()">[ SIGN THE GUESTBOOK! ]</button>
+
+    <div id="gb-entries">
+      <div class="gb-entry">
+        <span class="gb-who">DataNerd_98</span>
+        <span class="gb-when"> &mdash; 14 Jan 1998</span><br>
+        "Cool page!! I love the scrolling text!! Bookmarked!! :-)"
+      </div>
+      <div class="gb-entry">
+        <span class="gb-who">NetSurfer2000</span>
+        <span class="gb-when"> &mdash; 3 Mar 1999</span><br>
+        "Amazing research! Read your HTTPTag paper. Very cool. Will you add a MIDI player to the site?"
+      </div>
+      <div class="gb-entry">
+        <span class="gb-who">IP_Miner_Fan</span>
+        <span class="gb-when"> &mdash; 22 Oct 2013</span><br>
+        "Best Paper Award at ITC!!! Congrats Piero!! Greets from Shanghai 🇨🇳"
+      </div>
+    </div>
+  </div>
+
+
+  <!-- 88×31 pixel buttons -->
+  <div class="pixel-row" aria-hidden="true">
+    <div class="px-btn" style="background:#001a10; color:#40c8b8; border-color:#40c8b8;">HTML&nbsp;3.2<br>VALID!</div>
+    <div class="px-btn" style="background:#0a0818; color:#a890e0; border-color:#a890e0;">NETSCAPE<br>NOW!</div>
+    <div class="px-btn" style="background:#200808; color:#f07060; border-color:#f07060;">NO<br>FRAMES!</div>
+    <div class="px-btn" style="background:#180f00; color:#e8b840; border-color:#e8b840;">BEST<br>800×600</div>
+    <div class="px-btn" style="background:#0a0818; color:#a890e0; border-color:#a890e0;">CSS<br>GRID!*</div>
+    <div class="px-btn" style="background:#001a10; color:#40c8b8; border-color:#40c8b8;">NO<br>FLASH!</div>
+    <div class="px-btn" style="background:#180f00; color:#e8b840; border-color:#e8b840;">DOCPLANNER<br>VP DATA</div>
+    <div class="px-btn" style="background:#200808; color:#f07060; border-color:#f07060; font-size:8px">KONAMI<br>CODE?👀</div>
+  </div>
+  <div style="text-align:center; font-size:0.65em; color:var(--border); margin-bottom:4px;">* (shh, it's modern)</div>
+
+
+  <!-- Footer -->
+  <div class="footer">
+    <div class="div-line" style="margin-bottom:12px;">
+      ╔══════════════════════════════════════════════════════════════════════╗
+    </div>
+    <strong>&copy; 1997&ndash;2025 Pierdomenico Fiadino &middot; All rights reserved</strong><br>
+    This page best viewed in <em>Netscape Navigator 3.0</em> at 800&times;600 resolution.<br>
+    <em>Internet Explorer users: condolences.</em><br><br>
+    <span style="font-size:0.9em; font-style:italic;">
+      "The WWW is like a city at night. Most lights are on but nobody's home."
+    </span>
+    <div class="div-line" style="margin-top:12px;">
+      ╚══════════════════════════════════════════════════════════════════════╝
+    </div>
+    <!--
+      If you're reading the source: hello! You found the modern layer.
+      HTML5 · CSS Grid · CSS Custom Properties · CSS Animations
+      Canvas API · IntersectionObserver · localStorage · ES2024
+      Designed to look like 1997. Built like it's 2025.
+      Try the Konami code: ↑↑↓↓←→←→BA
+    -->
+  </div>
+
+</div><!-- /wrap -->
+
+<script>
+// ╔══════════════════════════════════════════════════════════╗
+// ║  HIDDEN MODERN LAYER — ES2024                           ║
+// ║  Canvas API · localStorage · IntersectionObserver      ║
+// ╚══════════════════════════════════════════════════════════╝
+
+/* ── Starfield ─────────────────────────────────────────── */
+const canvas = document.getElementById('starfield');
+const ctx    = canvas.getContext('2d');
+
+function resize() {
+  canvas.width  = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+resize();
+window.addEventListener('resize', resize);
+
+const stars = Array.from({ length: 200 }, () => ({
+  x:     Math.random() * window.innerWidth,
+  y:     Math.random() * window.innerHeight,
+  r:     Math.random() * 1.2 + 0.2,
+  o:     Math.random(),
+  delta: (Math.random() - 0.5) * 0.016,
+}));
+
+(function draw() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  for (const s of stars) {
+    s.o = Math.max(0, Math.min(1, s.o + s.delta));
+    if (s.o <= 0 || s.o >= 1) s.delta *= -1;
+    ctx.beginPath();
+    ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+    /* warm white stars to match the new palette */
+    ctx.fillStyle = `rgba(240, 220, 180, ${s.o * 0.7})`;
+    ctx.fill();
+  }
+  requestAnimationFrame(draw);
+})();
+
+/* ── Visitor counter ───────────────────────────────────── */
+const KEY = 'piero_visitor_count';
+let n = parseInt(localStorage.getItem(KEY) ?? '0', 10);
+if (n === 0) n = 7000 + Math.floor(Math.random() * 3000);
+localStorage.setItem(KEY, ++n);
+document.getElementById('counter').textContent = String(n).padStart(6, '0');
+
+/* ── Skill bars ────────────────────────────────────────── */
+const SKILLS = [
+  { label: 'Data Analytics',   pct: 97, tag: 'EXPERT'   },
+  { label: 'Machine Learning', pct: 88, tag: 'ADVANCED' },
+  { label: 'Data Governance',  pct: 93, tag: 'EXPERT'   },
+  { label: 'Decision Science', pct: 90, tag: 'ADVANCED' },
+  { label: 'Team Leadership',  pct: 92, tag: 'EXPERT'   },
+];
+
+const container = document.getElementById('skills-container');
+SKILLS.forEach(({ label, pct, tag }) => {
+  const row = document.createElement('div');
+  row.className = 'skill-row';
+  row.innerHTML = `
+    <span class="skill-label">${label}</span>
+    <div class="skill-track"><div class="skill-fill" style="width:0%" data-pct="${pct}"></div></div>
+    <span class="skill-tag">${tag}</span>
+  `;
+  container.appendChild(row);
+});
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (!e.isIntersecting) return;
+    e.target.querySelectorAll('.skill-fill').forEach(b => b.style.width = b.dataset.pct + '%');
+    observer.unobserve(e.target);
+  });
+}, { threshold: 0.3 });
+observer.observe(container);
+
+/* ── Guestbook ─────────────────────────────────────────── */
+function signGuestbook() {
+  const name = document.getElementById('gb-name').value.trim() || 'Anonymous Netizen';
+  const msg  = document.getElementById('gb-msg').value.trim();
+  if (!msg) { alert('Please write a message! The internet needs your thoughts!!'); return; }
+
+  const esc     = s => s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  const dateStr = new Date().toLocaleDateString('en-US', { day:'numeric', month:'short', year:'numeric' });
+
+  const el = document.createElement('div');
+  el.className = 'gb-entry';
+  el.innerHTML = `<span class="gb-who">${esc(name)}</span> <span class="gb-when">&mdash; ${dateStr}</span><br>"${esc(msg).replace(/\n/g,'<br>')}"`;
+  document.getElementById('gb-entries').prepend(el);
+
+  document.getElementById('gb-name').value = '';
+  document.getElementById('gb-url').value  = '';
+  document.getElementById('gb-msg').value  = '';
+  alert('Thanks for signing!! Message received via the Information Superhighway!! 🚀');
+}
+
+/* ── Konami code easter egg ────────────────────────────── */
+const KONAMI = [38,38,40,40,37,39,37,39,66,65];
+let kPos = 0;
+document.addEventListener('keydown', e => {
+  kPos = e.keyCode === KONAMI[kPos] ? kPos + 1 : 0;
+  if (kPos === KONAMI.length) {
+    kPos = 0;
+    alert('🎮 KONAMI CODE!\n\nYou found the modern layer.\n\nBuilt with:\n• HTML5 · CSS Grid · Custom Properties\n• CSS Animations (no <blink> or <marquee>!)\n• Canvas API (the star background)\n• IntersectionObserver (skill bars)\n• localStorage (visitor counter)\n• ES2024 JavaScript\n\nDesigned to look like 1997.\nBuilt like it\'s 2025. ✨');
+  }
+});
+</script>
+
+</body>
+</html>
