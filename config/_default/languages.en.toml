@@ -8,14 +8,14 @@ rtl = false
 title = "Piero's home page"
 logo = "img/r2d2_xs.png"
 description = "Resume and contacts"
-copyright = "©2025 All Rights Reserved"
+copyright = "©2026 All Rights Reserved"
 
 dateFormat = "2 January 2006"
 
 [author]
   name = "Pierdomenico Fiadino, PhD"
   #image = "img/pf_square.png"
-  headline = "Global VP of Data @ Docplanner"
+  headline = "Senior Director, Head of Data @ Moss"
   bio = "data stuff since 2010"
   links = [
      { email = "mailto:p@fiadino.org" },
