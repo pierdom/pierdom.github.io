@@ -33,6 +33,31 @@ draft: false
   background: rgba(96,165,250,0.16);
   border-color: rgba(96,165,250,0.7);
 }
+.easter-egg-wrap {
+  position: relative;
+  min-height: clamp(200px, 38vh, 480px);
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.easter-egg {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+}
+@media (max-width: 767px) {
+  .easter-egg-wrap {
+    position: static;
+    min-height: unset;
+  }
+  .easter-egg {
+    position: static;
+    transform: none;
+    margin-top: 48px;
+  }
+}
 </style>
 
 <div class="mobile-nav">
@@ -42,7 +67,8 @@ draft: false
   <a href="/publications">Publications</a>
 </div>
 
-<div style="margin-top:64px; text-align:center; font-size:0.78em; opacity:0.18; transition:opacity 0.3s; font-family:monospace; letter-spacing:0.03em;" onmouseenter="this.style.opacity='0.65'" onmouseleave="this.style.opacity='0.18'">
+<div class="easter-egg-wrap">
+<div class="easter-egg" style="text-align:center; font-size:0.78em; opacity:0.18; transition:opacity 0.3s; font-family:monospace; letter-spacing:0.03em;" onmouseenter="this.style.opacity='0.65'" onmouseleave="this.style.opacity='0.18'">
   <div style="margin-bottom:10px;">I like to play — let's try something different</div>
   <div style="display:flex; justify-content:center; gap:20px; flex-wrap:wrap;">
     <a href="/terminal" style="display:inline-flex; align-items:center; gap:6px; color:inherit; text-decoration:none; border:1px solid currentColor; padding:4px 12px; border-radius:3px;" title="Terminal version">
@@ -52,4 +78,5 @@ draft: false
       <span style="font-size:1.05em;">📺</span> Retro
     </a>
   </div>
+</div>
 </div>
