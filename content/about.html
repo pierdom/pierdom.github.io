@@ -5,6 +5,16 @@ draft: false
 layout: simple_custom
 ---
 
+<style>
+.expertise-grid { grid-template-columns: repeat(3, 1fr); }
+@media (max-width: 720px) { .expertise-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 480px) { .expertise-grid { grid-template-columns: 1fr; } }
+.profile-card-name { font-size: 1.35em; }
+.profile-card-role { font-size: 1em; }
+.profile-card-bio p { font-size: 1em; }
+.profile-btn { font-size: 0.95em; }
+</style>
+
 <div class="profile-card not-prose">
   <div class="profile-card-photo-wrap">
     <img class="nozoom" src="/img/pf.jpg" alt="Pierdomenico Fiadino" style="width:100%;height:100%;object-fit:cover;object-position:center 12%;display:block;" />
@@ -13,9 +23,9 @@ layout: simple_custom
     <div class="profile-card-name">Pierdomenico Fiadino, PhD</div>
     <div class="profile-card-role">Senior Director, Head of Data @ Moss</div>
     <div class="profile-card-bio">
-      <p>Data leader with 16 years of experience across R&amp;D and B2B/B2C SaaS, focused on shipping data products that move business metrics.</p>
-      <p>Currently Senior Director, Head of Data at Moss, where I lead Product Analytics, Commercial Analytics, and Analytics Engineering, and am driving an AI-first transformation that puts data at the core of decision making and RevOps automation.</p>
-      <p>Across my 8 years in SaaS, my work has spanned data analytics, decision science, and data governance, combining a hands-on, pragmatic approach with a research background from a PhD in Data Mining and Machine Learning at TU Wien and several years in R&amp;D centres. I have authored over 30 publications in major international conferences and journals.</p>
+      <p><strong>Data leader</strong> with <strong>16 years of experience</strong> across R&amp;D and B2B/B2C SaaS, focused on shipping <strong>data products</strong> that move business metrics.</p>
+      <p>Currently <strong>Senior Director, Head of Data</strong> at <strong>Moss</strong>, where I lead <strong>Product Analytics</strong>, <strong>Commercial Analytics</strong>, and <strong>Analytics Engineering</strong>, and am driving an <strong>AI-first transformation</strong> that puts data at the core of decision making and RevOps automation.</p>
+      <p>Across my <strong>8 years in SaaS</strong>, my work has spanned <strong>data analytics</strong>, <strong>decision science</strong>, and <strong>data governance</strong>, combining a hands-on, pragmatic approach with a research background from a <strong>PhD in Data Mining and Machine Learning</strong> at TU Wien and several years in R&amp;D centres. I have authored <strong>over 30 publications</strong> in major international conferences and journals.</p>
     </div>
     <div class="profile-card-actions">
       <a class="profile-btn" href="/resume.pdf">
@@ -27,8 +37,8 @@ layout: simple_custom
       <a class="profile-btn" href="mailto:p@fiadino.org">
         <i class="fas fa-envelope"></i> Send me an email
       </a>
-      <a class="profile-btn" rel="me" href="https://hachyderm.io/@herr_dr" target="_blank">
-        <i class="fab fa-mastodon"></i> Mastodon
+      <a class="profile-btn" href="https://github.com/pierdom" target="_blank" rel="noopener noreferrer">
+        <i class="fab fa-github"></i> GitHub
       </a>
     </div>
   </div>
