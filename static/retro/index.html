@@ -261,6 +261,43 @@
       width: 100%;
       filter: sepia(0.15) contrast(1.05);
     }
+
+    /* ── 56k modem photo load effect ───────────────── */
+    .modem-wrap { position: relative; line-height: 0; min-height: 200px; }
+
+    .modem-img {
+      clip-path: inset(0 0 100% 0);
+      filter: sepia(0.15) contrast(1.05);
+      display: block;
+      width: 100%;
+    }
+
+    .modem-scan {
+      position: absolute;
+      left: 0; right: 0;
+      height: 2px;
+      background: var(--teal);
+      box-shadow: 0 0 6px var(--teal), 0 0 14px rgba(64,200,184,0.6);
+      pointer-events: none;
+      display: none;
+    }
+
+    .modem-overlay {
+      position: absolute;
+      inset: 0;
+      background: var(--bg-deep);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      font-size: 0.75em;
+      color: var(--teal);
+      padding: 14px;
+      text-align: center;
+      transition: opacity 0.5s;
+    }
+    .modem-overlay.done { opacity: 0; pointer-events: none; }
     .photo-caption {
       font-size: 0.72em;
       color: var(--text-dim);
@@ -656,7 +693,16 @@
     <div class="about-grid">
 
       <div class="photo-frame">
-        <img src="https://www.fiadino.org/img/pf.jpg" alt="Pierdomenico Fiadino">
+        <div class="modem-wrap" id="modem-wrap">
+          <img id="retro-photo" class="modem-img"
+               src="https://www.fiadino.org/img/pf.jpg"
+               alt="Pierdomenico Fiadino">
+          <div class="modem-scan" id="modem-scan"></div>
+          <div class="modem-overlay" id="modem-overlay">
+            <div>📷 Receiving...</div>
+            <div id="modem-bar" style="font-family:'Courier New',monospace;margin-top:14px;">[░░░░░░░░░░░░]</div>
+          </div>
+        </div>
         <div class="photo-caption">Piero, somewhere with good internet</div>
       </div>
 
@@ -1272,6 +1318,80 @@ function signGuestbook() {
 
 /* ── Konami code easter egg ────────────────────────────── */
 const KONAMI = [38,38,40,40,37,39,37,39,66,65];
+// ── 56k modem photo simulation ───────────────────────
+(function initModemPhoto() {
+  const img     = document.getElementById('retro-photo');
+  const overlay = document.getElementById('modem-overlay');
+  const bar     = document.getElementById('modem-bar');
+  const scan    = document.getElementById('modem-scan');
+  const wrap    = document.getElementById('modem-wrap');
+  if (!img) return;
+
+  const BARS = 12;
+  function renderBar(pct) {
+    const n = Math.round((pct / 100) * BARS);
+    return '[' + '█'.repeat(n) + '░'.repeat(BARS - n) + ']';
+  }
+
+  // [targetPct, durationMs] — mimics 56k stalls and bursts
+  const steps = [
+    [3,   900],
+    [11,  500],
+    [13, 1400],  // first stall
+    [28,  380],
+    [34,  950],  // pause
+    [50,  340],
+    [51, 1800],  // agonising stall at 51%
+    [64,  320],
+    [72,  580],
+    [86,  260],
+    [93,  700],
+    [100, 280],
+  ];
+
+  let pct = 0, stepIdx = 0;
+
+  function runStep() {
+    if (stepIdx >= steps.length) {
+      img.style.clipPath = 'none';
+      scan.style.display = 'none';
+      overlay.classList.add('done');
+      setTimeout(() => { overlay.style.display = 'none'; }, 600);
+      return;
+    }
+    const [target, dur] = steps[stepIdx++];
+    const startPct = pct;
+    const t0 = performance.now();
+
+    function tick(now) {
+      const t = Math.min((now - t0) / dur, 1);
+      pct = startPct + (target - startPct) * t;
+
+      const revealBottom = 100 - pct;
+      img.style.clipPath = `inset(0 0 ${revealBottom.toFixed(2)}% 0)`;
+
+      // scan line sits at the reveal boundary
+      scan.style.display = 'block';
+      scan.style.top = pct.toFixed(2) + '%';
+
+      bar.textContent = renderBar(pct);
+
+      if (t < 1) { requestAnimationFrame(tick); }
+      else        { pct = target; runStep(); }
+    }
+    requestAnimationFrame(tick);
+  }
+
+  // Trigger once the photo frame scrolls into view
+  const obs = new IntersectionObserver(entries => {
+    if (entries[0].isIntersecting) {
+      obs.disconnect();
+      setTimeout(runStep, 600);
+    }
+  }, { threshold: 0.25 });
+  obs.observe(wrap);
+}());
+
 let kPos = 0;
 document.addEventListener('keydown', e => {
   kPos = e.keyCode === KONAMI[kPos] ? kPos + 1 : 0;
