@@ -5,160 +5,344 @@ draft: false
 layout: simple_custom
 ---
 
-<hr>
+<style>
+.pub-intro { font-size:.93em; line-height:1.65; opacity:.85; margin-bottom:16px; }
+.pub-links { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:32px; }
+.pub-section-label {
+  font-size:.74em; font-weight:bold; letter-spacing:.09em; text-transform:uppercase;
+  padding-bottom:8px; margin:32px 0 12px; border-bottom:2px solid rgba(0,0,0,.12);
+  display:block;
+}
+.dark .pub-section-label { border-bottom-color:rgba(255,255,255,.12); }
+.pub-label-journal { border-bottom-color:#d97706; }
+.dark .pub-label-journal { border-bottom-color:#fbbf24; }
+.pub-label-conf { border-bottom-color:#3b82f6; }
+.dark .pub-label-conf { border-bottom-color:#60a5fa; }
+.pub-card {
+  border-left:3px solid rgba(0,0,0,.1); padding:10px 14px; margin-bottom:6px; display:block;
+}
+.dark .pub-card { border-left-color:rgba(255,255,255,.15); }
+.pub-journal { border-left-color:#d97706; }
+.dark .pub-journal { border-left-color:#fbbf24; }
+.pub-conf { border-left-color:rgba(59,130,246,.6); }
+.dark .pub-conf { border-left-color:#60a5fa; }
+.pub-card-title { font-size:.94em; font-weight:600; line-height:1.45; margin:0 0 4px; display:block; }
+.pub-card-authors { font-size:.83em; font-style:italic; opacity:.58; margin:0 0 5px; display:block; line-height:1.4; }
+.pub-card-bottom { display:flex; align-items:baseline; flex-wrap:wrap; gap:4px 10px; }
+.pub-card-venue { font-size:.81em; opacity:.48; flex:1; min-width:120px; line-height:1.4; }
+.pub-card-year { font-size:.78em; font-weight:bold; opacity:.38; white-space:nowrap; flex-shrink:0; }
+.pub-award { display:inline-flex; align-items:center; gap:5px; font-size:.78em; font-weight:bold; color:#d97706; margin-top:5px; }
+.dark .pub-award { color:#fbbf24; }
+.pub-me { font-style:normal; font-weight:700; }
+</style>
 
-<p>
-I have been active publishing my work as author and co-author during my PhD years and a bit beyond that.
-This page contains my publication record. Feel free to write me to get access to the papers.
-</p>
+<div class="not-prose">
 
-<div style="text-align:center">
-        <button onclick="location.href='https://www.researchgate.net/profile/Pierdomenico-Fiadino'">
-                <i class="fab fa-researchgate"></i> ResearchGate profile
-        </button>
-        &nbsp; &nbsp;
-        <button onclick="location.href='https://scholar.google.com/citations?user=Xp4MNSUAAAAJ&hl=en&oi=ao'">
-                <i class="fas fa-book"></i> Google Scholar page
-        </button>
+<p class="pub-intro">Active publisher during my PhD years and beyond, with work spanning network traffic analysis, mobile networks, anomaly detection, and data mining. Feel free to reach out for access to any paper.</p>
+
+<div class="pub-links">
+  <a class="profile-btn" href="https://www.researchgate.net/profile/Pierdomenico-Fiadino" target="_blank" rel="noopener noreferrer">
+    <i class="fab fa-researchgate"></i> ResearchGate profile
+  </a>
+  <a class="profile-btn" href="https://scholar.google.com/citations?user=Xp4MNSUAAAAJ&hl=en&oi=ao" target="_blank" rel="noopener noreferrer">
+    <i class="fas fa-book"></i> Google Scholar
+  </a>
 </div>
 
-<hr>
+<div class="pub-section-label pub-label-journal">Journal Papers &amp; Book Chapters</div>
 
-        <h2>Journal papers and book chapters</h2>
+<div class="pub-card pub-journal">
+  <div class="pub-card-title">"Big Data in Mobile Networks"</div>
+  <div class="pub-card-authors"><span class="pub-me">P. Fiadino</span>, M. Torrent-Moreno</div>
+  <div class="pub-card-bottom">
+    <span class="pub-card-venue">Encyclopedia of Big Data Technologies, Springer, Cham</span>
+    <span class="pub-card-year">2018</span>
+  </div>
+</div>
 
-        <div class="pub_authors">P. Fiadino, M. Torrent-Moreno</div>
-        <div class="pub_title">"Big Data in Mobile Networks"</div>
-        <div class="pub_venue">Encyclopedia of Big Data Technologies. Springer, Cham (2018)</div>
-        <div>&nbsp;</div>
+<div class="pub-card pub-journal">
+  <div class="pub-card-title">"Grasping Popular Applications in Cellular Networks with Big Data Analytics Platforms"</div>
+  <div class="pub-card-authors"><span class="pub-me">P. Fiadino</span>, P. Casas, A. D'Alconzo, M. Schiavone, A. Bär</div>
+  <div class="pub-card-bottom">
+    <span class="pub-card-venue">IEEE Transactions on Network and Service Management (TNSM)</span>
+    <span class="pub-card-year">2016</span>
+  </div>
+</div>
 
-        <div class="pub_authors">P. Fiadino, P. Casas, A. D'Alconzo, M. Schiavone, A. Bär</div>
-        <div class="pub_title">"Grasping Popular Applications in Cellular Networks with Big Data Analytics Platforms"</div>
-        <div class="pub_venue">IEEE Transactions of Network and Service Management (TNSM), 2016</div>
-        <div>&nbsp;</div>
+<div class="pub-card pub-journal">
+  <div class="pub-card-title">"DBStream: A Holistic Approach to Large-Scale Network Traffic Monitoring and Analysis"</div>
+  <div class="pub-card-authors">A. Bär, P. Casas, A. D'Alconzo, <span class="pub-me">P. Fiadino</span>, L. Golab, M. Mellia, E. Schikuta</div>
+  <div class="pub-card-bottom">
+    <span class="pub-card-venue">Computer Networks, S.I. on ML &amp; Big Data Frameworks for Network Monitoring</span>
+    <span class="pub-card-year">2016</span>
+  </div>
+</div>
 
-        <div class="pub_authors">A. Bär, P. Casas, A. D'Alconzo, P. Fiadino, L. Golab, M. Mellia, E. Schikuta</div>
-        <div class="pub_title">"DBStream: A Holistic Approach to Large-Scale Network Traffic Monitoring and Analysis"</div>
-        <div class="pub_venue">Computer Networks (S.I. on Machine learning, Data Mining and BigData Frameworks for Network Monitoring and Troubleshooting), 2016</div>
-        <div>&nbsp;</div>
+<div class="pub-card pub-journal">
+  <div class="pub-card-title">"Unveiling Network and Service Performance Degradation in the Wild with mPlane"</div>
+  <div class="pub-card-authors">P. Casas, <span class="pub-me">P. Fiadino</span>, S. Wassermann, S. Traverso, A. D'Alconzo, E. Tego, F. Matera, M. Mellia</div>
+  <div class="pub-card-bottom">
+    <span class="pub-card-venue">IEEE Communications Magazine, Network Testing and Analytics Series</span>
+    <span class="pub-card-year">2016</span>
+  </div>
+</div>
 
-        <div class="pub_authors">P. Casas, P. Fiadino, S. Wassermann, S. Traverso, A. D'Alconzo, E. Tego, F. Matera, M. Mellia</div>
-        <div class="pub_title">"Unveiling Network and Service Performance Degradation in the Wild with mPlane"</div>
-        <div class="pub_venue">IEEE Communication Magazine, Network Testing and Analytics Series, 2016</div>
-        <div>&nbsp;</div>
-
-        <div class="pub_authors">P. Casas, A. D'Alconzo, P. Fiadino, A. Bär, A. Finamore, T. Zseby,</div>
-        <div class="pub_title">"When YouTube doesn't Work -- Analysis of QoE-relevant Degradation in Google CDN Traffic"</div>
-        <div class="pub_venue">IEEE Transactions on Network and Service Management (TNSM), vol. 11, no. 4, 2014</div>
-
-        <hr>
-        <h2>Conference papers</h2>
-
-        <div class="pub_authors">P.Fiadino, V. Ponce-Lopez, J.A. Torrero-Gonzalez, M. Torrent-Moreno, A. D’Alconzo</div>
-        <div class="pub_title">“Call Detail Records for Human Mobility Studies: Taking Stock of the Situation in the Always Connected Era”</div>
-        <div class="pub_venue">ACM SIGCOMM 2017 Workshop on Big Data Analytics and Machine Learning for Data Communication Networks, Los Angeles, USA, 2017</div>
-        <div>&nbsp;</div>
-        <div class="pub_authors">P. Casas, A. D'Alconzo, G. Settanni, P. Fiadino, F. Skopik</div>
-        <div class="pub_title">“(Semi-)Supervised Machine Learning Approaches for Network Security in High-Dimensional Network Data”</div>
-        <div class="pub_venue">ACM Conference on Computer and Communications Security (ACM CCM 2016), Vienna, Austria, 2016</div>
-        <div>&nbsp;</div>
-        <div class="pub_authors">P. Casas, P. Fiadino, A. D'Alconzo</div>
-        <div class="pub_title">“Machine-Learning Based Approaches for Anomaly Detection and Classification in Cellular Networks”</div>
-        <div class="pub_venue">6th ACM MOBICOM Workshop on All Things Cellular: Operations, Applications and Challenges (ATC), New York, 2016</div>
-        <div>&nbsp;</div>
-        <div class="pub_authors">P. Casas, P. Fiadino, A. D'Alconzo</div>
-        <div class="pub_title">“When Smartphones become the Enemy: Unveiling Mobile Apps Anomalies through Clustering Techniques”</div>
-        <div class="pub_venue">Traffic Monitoring and Analysis (TMA2016), Louvain La Neuve, Belgium, 2016</div>
-        <div>&nbsp;</div>
-        <div class="pub_authors">P. Casas, A. D’Alconzo, P. Fiadino, C. Callegari</div>
-        <div class="pub_title">“Detecting and Diagnosing Anomalies in Cellular Networks using Random Neural Networks”</div>
-        <div class="pub_venue">The 7th International Workshop on Traffic Analysis and Characterization (TRAC2016), Paphos, Cyprus, 2016</div>
-        <div>&nbsp;</div>
-        <div class="pub_authors">P. Fiadino, A. D'Alconzo, M. Schiavone, P. Casas</div>
-        <div class="pub_title">"Challenging Entropy-based Anomaly Detection and Diagnosis in Cellular Networks"</div>
-        <div class="pub_venue">(Student Research Competition Runner Up), ACM SIGCOMM2015 Demo/Poster session, London, UK, 2015</div>
-        <div>&nbsp;</div>
-        <div class="pub_authors">P. Fiadino, A. D'Alconzo, M. Schiavone, P. Casas</div>
-        <div class="pub_title">“RCATool – A Framework for Detection and Diagnosis Anomalies in Cellular Networks”</div>
-        <div class="pub_venue">27th International Teletraffic Conference (ITC 27), Ghent, Belgium, 2015</div>
-        <div>&nbsp;</div>
-        <div class="pub_authors">P. Fiadino, M. Schiavone, A. D'Alconzo, P. Casas</div>
-        <div class="pub_title">“Towards Automatic Detection and Diagnosis of Internet Service Anomalies via DNS Traffic Analysis”</div>
-        <div class="pub_venue">International Wireless Communications & Mobile Computing Conference, (IWCMC 2015), Dubrovnik, Croatia</div>
-        <div>&nbsp;</div>
-        <div class="pub_authors">P. Casas, M. Varela, P. Fiadino, M. Schiavone, H. Rivas, R. Schatz,</div>
-        <div class="pub_title">“On the Analysis of QoE in Cellular Networks: from Subjective Tests to Large-scale Traffic Measurements”</div>
-        <div class="pub_venue">International Wireless Communications & Mobile Computing Conference, (IWCMC 2015), Dubrovnik, Croatia</div>
-        <div>&nbsp;</div>
-        <div class="pub_authors">P. Casas, P. Fiadino, M. Schiavone</div>
-        <div class="pub_title">“QoMOSN - On the Analysis of Traffic and Quality of Experience in Mobile Online Social Networks”</div>
-        <div class="pub_venue">European Conference on Networks and Communications (EuCNC 2015), Paris, France, 2015</div>
-        <div>&nbsp;</div>
-        <div class="pub_authors">P. Fiadino, P. Casas, M. Schiavone, A. D'Alconzo</div>
-        <div class="pub_title">“Online Social Networks Anatomy: on the Analysis of Facebook and WhatsApp in Cellular Networks”</div>
-        <div class="pub_venue">IFIP Networking 2015, Toulouse, France, 2015</div>
-        <div>&nbsp;</div>
-        <div class="pub_authors">P. Fiadino, M. Schiavone, P. Casas</div>
-        <div class="pub_title">“Vivisecting WhatsApp in Cellular Networks: Servers, Flows, and Quality of Experience”</div>
-        <div class="pub_venue">Traffic Monitoring and Analysis (TMA 2015), Barcelona, Spain, 2015</div>
-        <div>&nbsp;</div>
-        <div class="pub_authors">M. Schiavone, P. Romirer, P. Fiadino, P. Casas</div>
-        <div class="pub_title">"Diagnosing Device-Specific Anomalies in Cellular Networks"</div>
-        <div class="pub_venue">ACM CoNEXT 2014 Student Workshop, Sydney, Australia, 2014</div>
-        <div>&nbsp;</div>
-        <div class="pub_authors">P. Casas, P. Fiadino, A. Sackl, A. D'Alconzo</div>
-        <div class="pub_title">"YouTube in the Move: Understanding the Performance of YouTube in Cellular Networks" </div>
-        <div class="pub_venue">(Best Paper Award Runner Up), Wireless Days 2014 Conference (WD2014), Rio de Janeiro, Brazil, 2014</div>
-        <div>&nbsp;</div>
-        <div class="pub_authors">P. Casas, A. D'Alconzo, P. Fiadino, A. Bär, A. Finamore</div>
-        <div class="pub_title">"On the Analysis of QoE-based Performance Degradation in YouTube Traffic"</div>
-        <div class="pub_venue">10th International Conference on Network and Service Management (CNSM2014), Rio de Janeiro, in Brazil, 2014</div>
-        <div>&nbsp;</div>
-        <div class="pub_authors">P. Fiadino, A. D'Alconzo, A. Bär, P. Casas, A. Finamore</div>
-        <div class="pub_title">"On the Detection of Network Traffic Anomalies in Content Delivery Network Services"</div>
-        <div class="pub_venue">26th International Teletraffic Conference (ITC26), Karlskrona, Sweden, 2014</div>
-        <div>&nbsp;</div>
-        <div class="pub_authors">P. Fiadino, M. Schiavone, P. Casas</div>
-        <div class="pub_title">"Vivisecting WhatsApp through Large-Scale Measurements in Mobile Networks"</div>
-        <div class="pub_venue">ACM SIGCOMM2014 Demo/Poster session, Chicago, USA, 2014</div>
-        <div>&nbsp;</div>
-        <div class="pub_authors">P. Casas, P. Fiadino, A. Bär, A. D'Alconzo, A. Finamore, M. Mellia,</div>
-        <div class="pub_title">“YouTube All Around: Characterizing YouTube from Mobile and Fixed-line Network Vantage Points”</div>
-        <div class="pub_venue">The European Conference on Networks and Communications (EuCNC2014), Bologna, Italy, 2014</div>
-        <div>&nbsp;</div>
-        <div class="pub_authors">P. Fiadino, A. D'Alconzo, P. Casas</div>
-        <div class="pub_title">"Characterizing Web Services Provisioning via CDNs: The Case of Facebook"</div>
-        <div class="pub_venue">The 5th International Workshop on Traffic Analysis and Characterization (TRAC2014), Nicosia, Cyprus, 2014</div>
-        <div>&nbsp;</div>
-        <div class="pub_authors">A. D'Alconzo, P. Casas, P. Fiadino, A. Bär, A. Finamore</div>
-        <div class="pub_title">"Who to Blame when YouTube is not Working? Detecting Anomalies in CDN-Provisioned Services"</div>
-        <div class="pub_venue">The 5th International Workshop on Traffic Analysis and Characterization (TRAC2014), Nicosia, Cyprus, 2014</div>
-        <div>&nbsp;</div>
-        <div class="pub_authors">P. Casas, P. Fiadino, A. Bär</div>
-        <div class="pub_title">"Understanding HTTP Traffic and CDN Behavior from the Eyes of a Mobile ISP"</div>
-        <div class="pub_venue">Passive and Active Measurements Conference (PAM2014), Los Angeles, USA, 2014</div>
-        <div>&nbsp;</div>
-        <div class="pub_authors">P. Casas, P. Fiadino, A. Bär</div>
-        <div class="pub_title">"IP Mining: Extracting Knowledge from the Dynamics of the Internet Addressing Space" </div>
-        <div class="pub_venue">(Best Paper Award), The 25th International Teletraffic Congress (ITC2013), Shanghai, China, 2013</div>
-        <div>&nbsp;</div>
-        <div class="pub_authors">P. Casas, P. Fiadino</div>
-        <div class="pub_title">"Mini-IPC: A Minimalist Approach for HTTP Traffic Classification using IP Addresses"</div>
-        <div class="pub_venue">The 4th International Workshop on Traffic Analysis and Classification (IWCMC2013), Cagliari, Italy, 2013</div>
-        <div>&nbsp;</div>
-        <div class="pub_authors">P. Fiadino, A. Bär, P. Casas</div>
-        <div class="pub_title">"HTTPTag: A Flexible On-line HTTP Classification System for Operational 3G Networks"</div>
-        <div class="pub_venue">IEEE Infocom Demo/Poster Session, Turin, Italy, 2013</div>
-        <div>&nbsp;</div>
-        <div class="pub_authors">S. Ruehrup, D. Valerio, P. Fiadino, F. Ricciato, D. Elias, B. Rainer, and W. Wiedermann</div>
-        <div class="pub_title">"Macro-mobility patterns from cellular network data"</div>
-        <div class="pub_venue">The 19th ITS World Congress (ITS 2012), Vienna, Austria, 2012</div>
-        <div>&nbsp;</div>
-        <div class="pub_authors">D. Elias, F. Nadler, D. Valerio, P. Fiadino</div>
-        <div class="pub_title">"Acquisition of Traffic and Mobility Data Based on Cellular Network Signaling"</div>
-        <div class="pub_venue">The 19th ITS World Congress (ITS 2012), Vienna, Austria, 2012</div>
-        <div>&nbsp;</div>
-        <div class="pub_authors">P. Fiadino, D. Valerio, F. Ricciato, and K. A. Hummel</div>
-        <div class="pub_title">"Steps towards the Extraction of Vehicular Mobility Patterns from 3G Signaling Data"</div>
-        <div class="pub_venue">Traffic Monitoring and Analysis (TMA 2012), Vienna, Austria, 2012</div>
+<div class="pub-card pub-journal">
+  <div class="pub-card-title">"When YouTube doesn't Work — Analysis of QoE-relevant Degradation in Google CDN Traffic"</div>
+  <div class="pub-card-authors">P. Casas, A. D'Alconzo, <span class="pub-me">P. Fiadino</span>, A. Bär, A. Finamore, T. Zseby</div>
+  <div class="pub-card-bottom">
+    <span class="pub-card-venue">IEEE Transactions on Network and Service Management (TNSM), vol. 11, no. 4</span>
+    <span class="pub-card-year">2014</span>
+  </div>
+</div>
 
 
+<div class="pub-section-label pub-label-conf">Conference Papers</div>
+
+<div class="pub-card pub-conf">
+  <div class="pub-card-title">"Call Detail Records for Human Mobility Studies: Taking Stock of the Situation in the Always Connected Era"</div>
+  <div class="pub-card-authors"><span class="pub-me">P. Fiadino</span>, V. Ponce-Lopez, J.A. Torrero-Gonzalez, M. Torrent-Moreno, A. D'Alconzo</div>
+  <div class="pub-card-bottom">
+    <span class="pub-card-venue">ACM SIGCOMM Workshop on Big-Data ML for Data Communication Networks, Los Angeles, USA</span>
+    <span class="pub-card-year">2017</span>
+  </div>
+</div>
+
+<div class="pub-card pub-conf">
+  <div class="pub-card-title">"(Semi-)Supervised Machine Learning Approaches for Network Security in High-Dimensional Network Data"</div>
+  <div class="pub-card-authors">P. Casas, A. D'Alconzo, G. Settanni, <span class="pub-me">P. Fiadino</span>, F. Skopik</div>
+  <div class="pub-card-bottom">
+    <span class="pub-card-venue">ACM Conference on Computer and Communications Security (CCS), Vienna, Austria</span>
+    <span class="pub-card-year">2016</span>
+  </div>
+</div>
+
+<div class="pub-card pub-conf">
+  <div class="pub-card-title">"Machine-Learning Based Approaches for Anomaly Detection and Classification in Cellular Networks"</div>
+  <div class="pub-card-authors">P. Casas, <span class="pub-me">P. Fiadino</span>, A. D'Alconzo</div>
+  <div class="pub-card-bottom">
+    <span class="pub-card-venue">ACM MOBICOM Workshop on All Things Cellular (ATC), New York, USA</span>
+    <span class="pub-card-year">2016</span>
+  </div>
+</div>
+
+<div class="pub-card pub-conf">
+  <div class="pub-card-title">"When Smartphones become the Enemy: Unveiling Mobile Apps Anomalies through Clustering Techniques"</div>
+  <div class="pub-card-authors">P. Casas, <span class="pub-me">P. Fiadino</span>, A. D'Alconzo</div>
+  <div class="pub-card-bottom">
+    <span class="pub-card-venue">Traffic Monitoring and Analysis (TMA 2016), Louvain-la-Neuve, Belgium</span>
+    <span class="pub-card-year">2016</span>
+  </div>
+</div>
+
+<div class="pub-card pub-conf">
+  <div class="pub-card-title">"Detecting and Diagnosing Anomalies in Cellular Networks using Random Neural Networks"</div>
+  <div class="pub-card-authors">P. Casas, A. D'Alconzo, <span class="pub-me">P. Fiadino</span>, C. Callegari</div>
+  <div class="pub-card-bottom">
+    <span class="pub-card-venue">International Workshop on Traffic Analysis and Characterization (TRAC 2016), Paphos, Cyprus</span>
+    <span class="pub-card-year">2016</span>
+  </div>
+</div>
+
+<div class="pub-card pub-conf">
+  <div class="pub-card-title">"Challenging Entropy-based Anomaly Detection and Diagnosis in Cellular Networks"</div>
+  <div class="pub-card-authors"><span class="pub-me">P. Fiadino</span>, A. D'Alconzo, M. Schiavone, P. Casas</div>
+  <div class="pub-card-bottom">
+    <span class="pub-card-venue">ACM SIGCOMM Demo/Poster Session, London, UK</span>
+    <span class="pub-card-year">2015</span>
+  </div>
+  <div class="pub-award"><i class="fas fa-award"></i> Student Research Competition Runner Up</div>
+</div>
+
+<div class="pub-card pub-conf">
+  <div class="pub-card-title">"RCATool – A Framework for Detection and Diagnosis of Anomalies in Cellular Networks"</div>
+  <div class="pub-card-authors"><span class="pub-me">P. Fiadino</span>, A. D'Alconzo, M. Schiavone, P. Casas</div>
+  <div class="pub-card-bottom">
+    <span class="pub-card-venue">International Teletraffic Conference (ITC 27), Ghent, Belgium</span>
+    <span class="pub-card-year">2015</span>
+  </div>
+</div>
+
+<div class="pub-card pub-conf">
+  <div class="pub-card-title">"Towards Automatic Detection and Diagnosis of Internet Service Anomalies via DNS Traffic Analysis"</div>
+  <div class="pub-card-authors"><span class="pub-me">P. Fiadino</span>, M. Schiavone, A. D'Alconzo, P. Casas</div>
+  <div class="pub-card-bottom">
+    <span class="pub-card-venue">International Wireless Communications &amp; Mobile Computing Conference (IWCMC 2015), Dubrovnik, Croatia</span>
+    <span class="pub-card-year">2015</span>
+  </div>
+</div>
+
+<div class="pub-card pub-conf">
+  <div class="pub-card-title">"On the Analysis of QoE in Cellular Networks: from Subjective Tests to Large-scale Traffic Measurements"</div>
+  <div class="pub-card-authors">P. Casas, M. Varela, <span class="pub-me">P. Fiadino</span>, M. Schiavone, H. Rivas, R. Schatz</div>
+  <div class="pub-card-bottom">
+    <span class="pub-card-venue">International Wireless Communications &amp; Mobile Computing Conference (IWCMC 2015), Dubrovnik, Croatia</span>
+    <span class="pub-card-year">2015</span>
+  </div>
+</div>
+
+<div class="pub-card pub-conf">
+  <div class="pub-card-title">"QoMOSN — On the Analysis of Traffic and Quality of Experience in Mobile Online Social Networks"</div>
+  <div class="pub-card-authors">P. Casas, <span class="pub-me">P. Fiadino</span>, M. Schiavone</div>
+  <div class="pub-card-bottom">
+    <span class="pub-card-venue">European Conference on Networks and Communications (EuCNC 2015), Paris, France</span>
+    <span class="pub-card-year">2015</span>
+  </div>
+</div>
+
+<div class="pub-card pub-conf">
+  <div class="pub-card-title">"Online Social Networks Anatomy: on the Analysis of Facebook and WhatsApp in Cellular Networks"</div>
+  <div class="pub-card-authors"><span class="pub-me">P. Fiadino</span>, P. Casas, M. Schiavone, A. D'Alconzo</div>
+  <div class="pub-card-bottom">
+    <span class="pub-card-venue">IFIP Networking 2015, Toulouse, France</span>
+    <span class="pub-card-year">2015</span>
+  </div>
+</div>
+
+<div class="pub-card pub-conf">
+  <div class="pub-card-title">"Vivisecting WhatsApp in Cellular Networks: Servers, Flows, and Quality of Experience"</div>
+  <div class="pub-card-authors"><span class="pub-me">P. Fiadino</span>, M. Schiavone, P. Casas</div>
+  <div class="pub-card-bottom">
+    <span class="pub-card-venue">Traffic Monitoring and Analysis (TMA 2015), Barcelona, Spain</span>
+    <span class="pub-card-year">2015</span>
+  </div>
+</div>
+
+<div class="pub-card pub-conf">
+  <div class="pub-card-title">"Diagnosing Device-Specific Anomalies in Cellular Networks"</div>
+  <div class="pub-card-authors">M. Schiavone, P. Romirer, <span class="pub-me">P. Fiadino</span>, P. Casas</div>
+  <div class="pub-card-bottom">
+    <span class="pub-card-venue">ACM CoNEXT Student Workshop, Sydney, Australia</span>
+    <span class="pub-card-year">2014</span>
+  </div>
+</div>
+
+<div class="pub-card pub-conf">
+  <div class="pub-card-title">"YouTube in the Move: Understanding the Performance of YouTube in Cellular Networks"</div>
+  <div class="pub-card-authors">P. Casas, <span class="pub-me">P. Fiadino</span>, A. Sackl, A. D'Alconzo</div>
+  <div class="pub-card-bottom">
+    <span class="pub-card-venue">Wireless Days Conference (WD 2014), Rio de Janeiro, Brazil</span>
+    <span class="pub-card-year">2014</span>
+  </div>
+  <div class="pub-award"><i class="fas fa-award"></i> Best Paper Award Runner Up</div>
+</div>
+
+<div class="pub-card pub-conf">
+  <div class="pub-card-title">"On the Analysis of QoE-based Performance Degradation in YouTube Traffic"</div>
+  <div class="pub-card-authors">P. Casas, A. D'Alconzo, <span class="pub-me">P. Fiadino</span>, A. Bär, A. Finamore</div>
+  <div class="pub-card-bottom">
+    <span class="pub-card-venue">International Conference on Network and Service Management (CNSM 2014), Rio de Janeiro, Brazil</span>
+    <span class="pub-card-year">2014</span>
+  </div>
+</div>
+
+<div class="pub-card pub-conf">
+  <div class="pub-card-title">"On the Detection of Network Traffic Anomalies in Content Delivery Network Services"</div>
+  <div class="pub-card-authors"><span class="pub-me">P. Fiadino</span>, A. D'Alconzo, A. Bär, P. Casas, A. Finamore</div>
+  <div class="pub-card-bottom">
+    <span class="pub-card-venue">International Teletraffic Conference (ITC 26), Karlskrona, Sweden</span>
+    <span class="pub-card-year">2014</span>
+  </div>
+</div>
+
+<div class="pub-card pub-conf">
+  <div class="pub-card-title">"Vivisecting WhatsApp through Large-Scale Measurements in Mobile Networks"</div>
+  <div class="pub-card-authors"><span class="pub-me">P. Fiadino</span>, M. Schiavone, P. Casas</div>
+  <div class="pub-card-bottom">
+    <span class="pub-card-venue">ACM SIGCOMM Demo/Poster Session, Chicago, USA</span>
+    <span class="pub-card-year">2014</span>
+  </div>
+</div>
+
+<div class="pub-card pub-conf">
+  <div class="pub-card-title">"YouTube All Around: Characterizing YouTube from Mobile and Fixed-line Network Vantage Points"</div>
+  <div class="pub-card-authors">P. Casas, <span class="pub-me">P. Fiadino</span>, A. Bär, A. D'Alconzo, A. Finamore, M. Mellia</div>
+  <div class="pub-card-bottom">
+    <span class="pub-card-venue">European Conference on Networks and Communications (EuCNC 2014), Bologna, Italy</span>
+    <span class="pub-card-year">2014</span>
+  </div>
+</div>
+
+<div class="pub-card pub-conf">
+  <div class="pub-card-title">"Characterizing Web Services Provisioning via CDNs: The Case of Facebook"</div>
+  <div class="pub-card-authors"><span class="pub-me">P. Fiadino</span>, A. D'Alconzo, P. Casas</div>
+  <div class="pub-card-bottom">
+    <span class="pub-card-venue">International Workshop on Traffic Analysis and Characterization (TRAC 2014), Nicosia, Cyprus</span>
+    <span class="pub-card-year">2014</span>
+  </div>
+</div>
+
+<div class="pub-card pub-conf">
+  <div class="pub-card-title">"Who to Blame when YouTube is not Working? Detecting Anomalies in CDN-Provisioned Services"</div>
+  <div class="pub-card-authors">A. D'Alconzo, P. Casas, <span class="pub-me">P. Fiadino</span>, A. Bär, A. Finamore</div>
+  <div class="pub-card-bottom">
+    <span class="pub-card-venue">International Workshop on Traffic Analysis and Characterization (TRAC 2014), Nicosia, Cyprus</span>
+    <span class="pub-card-year">2014</span>
+  </div>
+</div>
+
+<div class="pub-card pub-conf">
+  <div class="pub-card-title">"Understanding HTTP Traffic and CDN Behavior from the Eyes of a Mobile ISP"</div>
+  <div class="pub-card-authors">P. Casas, <span class="pub-me">P. Fiadino</span>, A. Bär</div>
+  <div class="pub-card-bottom">
+    <span class="pub-card-venue">Passive and Active Measurements Conference (PAM 2014), Los Angeles, USA</span>
+    <span class="pub-card-year">2014</span>
+  </div>
+</div>
+
+<div class="pub-card pub-conf">
+  <div class="pub-card-title">"IP Mining: Extracting Knowledge from the Dynamics of the Internet Addressing Space"</div>
+  <div class="pub-card-authors">P. Casas, <span class="pub-me">P. Fiadino</span>, A. Bär</div>
+  <div class="pub-card-bottom">
+    <span class="pub-card-venue">International Teletraffic Congress (ITC 25), Shanghai, China</span>
+    <span class="pub-card-year">2013</span>
+  </div>
+  <div class="pub-award"><i class="fas fa-award"></i> Best Paper Award</div>
+</div>
+
+<div class="pub-card pub-conf">
+  <div class="pub-card-title">"Mini-IPC: A Minimalist Approach for HTTP Traffic Classification using IP Addresses"</div>
+  <div class="pub-card-authors">P. Casas, <span class="pub-me">P. Fiadino</span></div>
+  <div class="pub-card-bottom">
+    <span class="pub-card-venue">International Workshop on Traffic Analysis and Classification (IWCMC 2013), Cagliari, Italy</span>
+    <span class="pub-card-year">2013</span>
+  </div>
+</div>
+
+<div class="pub-card pub-conf">
+  <div class="pub-card-title">"HTTPTag: A Flexible On-line HTTP Classification System for Operational 3G Networks"</div>
+  <div class="pub-card-authors"><span class="pub-me">P. Fiadino</span>, A. Bär, P. Casas</div>
+  <div class="pub-card-bottom">
+    <span class="pub-card-venue">IEEE Infocom Demo/Poster Session, Turin, Italy</span>
+    <span class="pub-card-year">2013</span>
+  </div>
+</div>
+
+<div class="pub-card pub-conf">
+  <div class="pub-card-title">"Macro-mobility Patterns from Cellular Network Data"</div>
+  <div class="pub-card-authors">S. Ruehrup, D. Valerio, <span class="pub-me">P. Fiadino</span>, F. Ricciato, D. Elias, B. Rainer, W. Wiedermann</div>
+  <div class="pub-card-bottom">
+    <span class="pub-card-venue">ITS World Congress (ITS 2012), Vienna, Austria</span>
+    <span class="pub-card-year">2012</span>
+  </div>
+</div>
+
+<div class="pub-card pub-conf">
+  <div class="pub-card-title">"Acquisition of Traffic and Mobility Data Based on Cellular Network Signaling"</div>
+  <div class="pub-card-authors">D. Elias, F. Nadler, D. Valerio, <span class="pub-me">P. Fiadino</span></div>
+  <div class="pub-card-bottom">
+    <span class="pub-card-venue">ITS World Congress (ITS 2012), Vienna, Austria</span>
+    <span class="pub-card-year">2012</span>
+  </div>
+</div>
+
+<div class="pub-card pub-conf">
+  <div class="pub-card-title">"Steps towards the Extraction of Vehicular Mobility Patterns from 3G Signaling Data"</div>
+  <div class="pub-card-authors"><span class="pub-me">P. Fiadino</span>, D. Valerio, F. Ricciato, K. A. Hummel</div>
+  <div class="pub-card-bottom">
+    <span class="pub-card-venue">Traffic Monitoring and Analysis (TMA 2012), Vienna, Austria</span>
+    <span class="pub-card-year">2012</span>
+  </div>
+</div>
+
+</div>

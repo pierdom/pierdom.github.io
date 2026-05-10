@@ -238,6 +238,162 @@ html {
   .job-card-date   { width: 100%; padding-top: 0; }
 }
 
+/* ── Publications ──────────────────────────────────── */
+.pub-intro {
+  font-size: 0.95em;
+  line-height: 1.65;
+  margin: 0 0 16px;
+  opacity: 0.85;
+}
+
+.pub-section-label {
+  font-size: 0.76em;
+  font-weight: bold;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  padding-bottom: 8px;
+  margin: 32px 0 12px;
+  border-bottom: 2px solid rgba(0,0,0,0.1);
+}
+.dark .pub-section-label  { border-bottom-color: rgba(255,255,255,0.1); }
+.pub-label-journal        { border-bottom-color: #d97706; }
+.dark .pub-label-journal  { border-bottom-color: #fbbf24; }
+.pub-label-conf           { border-bottom-color: #3b82f6; }
+.dark .pub-label-conf     { border-bottom-color: #60a5fa; }
+
+.pub-card {
+  border-left: 3px solid rgba(0,0,0,0.1);
+  padding: 10px 14px;
+  margin-bottom: 6px;
+}
+.dark .pub-card     { border-left-color: rgba(255,255,255,0.12); }
+.pub-journal        { border-left-color: #d97706; }
+.dark .pub-journal  { border-left-color: #fbbf24; }
+.pub-conf           { border-left-color: rgba(59,130,246,0.55); }
+.dark .pub-conf     { border-left-color: rgba(96,165,250,0.7); }
+
+.pub-card-title {
+  font-size: 0.95em;
+  font-weight: 600;
+  line-height: 1.45;
+  margin: 0 0 4px;
+}
+
+.pub-card-authors {
+  font-size: 0.83em;
+  font-style: italic;
+  opacity: 0.58;
+  margin: 0 0 5px;
+  line-height: 1.4;
+}
+
+.pub-card-venue {
+  font-size: 0.81em;
+  opacity: 0.48;
+  flex: 1;
+  min-width: 120px;
+  line-height: 1.4;
+}
+
+.pub-card-year {
+  font-size: 0.78em;
+  font-weight: bold;
+  opacity: 0.38;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.pub-award {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.78em;
+  font-weight: bold;
+  color: #d97706;
+  margin-top: 5px;
+}
+.dark .pub-award { color: #fbbf24; }
+
+/* ── Education cards ───────────────────────────────── */
+.edu-card {
+  background: rgba(0,0,0,0.03);
+  border: 1px solid rgba(0,0,0,0.1);
+  border-left: 4px solid rgba(0,0,0,0.15);
+  padding: 20px 24px;
+  margin-bottom: 12px;
+}
+.dark .edu-card {
+  background: rgba(255,255,255,0.03);
+  border-color: rgba(255,255,255,0.1);
+  border-left-color: rgba(255,255,255,0.15);
+}
+
+.edu-phd { border-left-color: #fbbf24; background: rgba(251,191,36,0.05); }
+.edu-msc { border-left-color: #60a5fa; background: rgba(96,165,250,0.04); }
+.edu-bsc { border-left-color: #34d399; background: rgba(52,211,153,0.03); }
+.dark .edu-phd { background: rgba(251,191,36,0.04); border-left-color: #fbbf24; }
+.dark .edu-msc { background: rgba(96,165,250,0.04); border-left-color: #60a5fa; }
+.dark .edu-bsc { background: rgba(52,211,153,0.02); border-left-color: #34d399; }
+
+.edu-card-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.edu-card-logo {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+  flex-shrink: 0;
+  opacity: 0.85;
+}
+
+.edu-card-degree {
+  font-size: 1.05em;
+  font-weight: bold;
+  margin: 0 0 2px;
+  line-height: 1.3;
+}
+
+.edu-card-year {
+  font-size: 0.8em;
+  opacity: 0.45;
+}
+
+.edu-fields {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 6px 20px;
+  align-items: baseline;
+}
+
+.edu-field-label {
+  font-size: 0.74em;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  opacity: 0.4;
+  white-space: nowrap;
+  padding-top: 1px;
+}
+
+.edu-field-value {
+  font-size: 0.9em;
+  line-height: 1.5;
+}
+
+.edu-dissertation {
+  font-style: italic;
+  opacity: 0.75;
+}
+
+@media (max-width: 560px) {
+  .edu-fields { grid-template-columns: 1fr; gap: 2px; }
+  .edu-field-label { margin-top: 8px; }
+}
+
 /* ── Expertise cards ───────────────────────────────── */
 .expertise-grid {
   display: grid;
