@@ -52,3 +52,48 @@ button {
 .flex-container ul {
   list-style: none;
 }
+
+/* ── Expertise cards ───────────────────────────────── */
+.expertise-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 14px;
+  margin: 16px 0 8px;
+}
+
+.expertise-card {
+  border: 1px solid rgba(255,255,255,0.08);
+  border-top: 3px solid #60a5fa;
+  padding: 16px 18px;
+}
+
+.expertise-card.ec-red  { border-top-color: #f87171; }
+.expertise-card.ec-amber { border-top-color: #fbbf24; }
+.expertise-card.ec-purple { border-top-color: #a78bfa; }
+.expertise-card.ec-teal { border-top-color: #34d399; }
+
+.expertise-card-title {
+  font-weight: bold;
+  font-size: 1em;
+  margin: 0 0 8px;
+}
+
+.expertise-card-desc {
+  font-size: 0.88em;
+  line-height: 1.65;
+  margin: 0 0 10px;
+  opacity: 0.8;
+}
+
+.expertise-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.expertise-tag {
+  font-size: 0.72em;
+  padding: 2px 7px;
+  border: 1px solid rgba(255,255,255,0.15);
+  opacity: 0.7;
+}
