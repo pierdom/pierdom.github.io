@@ -560,9 +560,34 @@
       .about-grid  { grid-template-columns: 1fr; }
       .photo-frame { max-width: 180px; margin: 0 auto; }
     }
+
+    /* ── Back to main site bar ──────────────────────── */
+    .back-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 9999;
+      background: var(--bg-deep);
+      border-bottom: 2px solid var(--coral);
+      text-align: center;
+      padding: 7px 12px;
+      font-size: 0.88em;
+      letter-spacing: 0.5px;
+    }
+    .back-bar a {
+      color: var(--coral);
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.15s;
+    }
+    .back-bar a:hover { color: var(--gold); }
+    body { padding-top: 36px; }
   </style>
 </head>
 <body>
+
+<div class="back-bar">[ ← <a href="https://fiadino.org">BACK TO THE MAIN SITE</a> ]</div>
 
 <canvas id="starfield"></canvas>
 

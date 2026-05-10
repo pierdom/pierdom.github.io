@@ -84,6 +84,19 @@
       color: #707070;
       letter-spacing: 0.2px;
     }
+    .tb-back {
+      font-size: 0.78em;
+      color: var(--green);
+      text-decoration: none;
+      border: 1px solid rgba(80,250,123,0.45);
+      padding: 3px 10px;
+      border-radius: 4px;
+      opacity: 0.7;
+      transition: opacity 0.15s, border-color 0.15s;
+      flex-shrink: 0;
+      white-space: nowrap;
+    }
+    .tb-back:hover { opacity: 1; border-color: var(--green); }
 
     .body {
       background: var(--term);
@@ -456,6 +469,7 @@
     <span class="dot dot-y"></span>
     <span class="dot dot-g"></span>
     <span class="tab-title">piero@fiadino.org — zsh — 120×45</span>
+    <a class="tb-back" href="https://fiadino.org">← fiadino.org</a>
   </div>
 
   <!-- ── Terminal body ── -->
