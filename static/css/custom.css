@@ -1,6 +1,10 @@
 html {
     font-size: 13pt;
   }
+
+.logo-dark { display: none; }
+.dark .logo-dark { display: inline; }
+.dark .logo-light { display: none; }
   
 .pub_authors {
     font-style: italic;
@@ -135,22 +139,22 @@ html {
 .job-card-left {
   display: flex;
   align-items: flex-start;
-  gap: 12px;
+  gap: 18px;
   flex: 1;
   min-width: 0;
 }
 
 .job-card-logo {
-  height: 24px;
+  height: 28px;
   width: auto;
-  max-width: 80px;
+  max-width: 96px;
   object-fit: contain;
   flex-shrink: 0;
-  margin-top: 3px;
+  margin-top: -4px;
 }
 
 .job-card-title {
-  font-size: 1em;
+  font-size: 1.08em;
   font-weight: bold;
   margin: 0 0 3px;
   line-height: 1.4;
@@ -273,7 +277,7 @@ html {
 .dark .pub-conf     { border-left-color: rgba(96,165,250,0.7); }
 
 .pub-card-title {
-  font-size: 0.95em;
+  font-size: 1.02em;
   font-weight: 600;
   line-height: 1.45;
   margin: 0 0 4px;
@@ -351,7 +355,7 @@ html {
 }
 
 .edu-card-degree {
-  font-size: 1.05em;
+  font-size: 1.15em;
   font-weight: bold;
   margin: 0 0 2px;
   line-height: 1.3;
