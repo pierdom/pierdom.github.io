@@ -255,7 +255,9 @@ html {
 }
 .dark .expertise-card {
   background: rgba(255,255,255,0.04);
-  border: 1px solid rgba(255,255,255,0.15);
+  border-right-color: rgba(255,255,255,0.15);
+  border-bottom-color: rgba(255,255,255,0.15);
+  border-left-color: rgba(255,255,255,0.15);
 }
 
 .expertise-card.ec-red    { border-top-color: #f87171; }
