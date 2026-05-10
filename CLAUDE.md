@@ -37,3 +37,16 @@ Deployment is fully automated: push to `master` triggers GitHub Actions (`.githu
 **Theme** is a git submodule at `themes/blowfish/`. After cloning, run `git submodule update --init` if the theme directory is empty.
 
 **Static assets**: papers (PDFs) in `static/papers/`, profile images in `static/img/` and `assets/img/` (the latter go through Hugo's asset pipeline for optimization).
+
+## Retro page
+
+`static/retro/index.html` is a self-contained 90s-style alternate version of the site, served at `fiadino.org/retro`. Hugo copies it verbatim — no templating or theme processing applies.
+
+It is a **single HTML file** with all CSS and JavaScript inline. It contains a parallel copy of the career history, bio, skills, education, and publications. **It must be updated manually** whenever the main content pages change — it is not generated from the Hugo content files.
+
+Things to keep in sync with the main site when updating:
+- Current role title and company (appears in the header tagline, About section, Experience timeline, and the 88×31 pixel badge row)
+- Employment dates and job descriptions (Experience timeline)
+- Bio text (About section)
+- Copyright year (footer `© 1997–YYYY`)
+- The header comment and Konami easter egg alert both reference the current year — update those too
