@@ -70,7 +70,8 @@ button {
 .expertise-card.ec-red  { border-top-color: #f87171; }
 .expertise-card.ec-amber { border-top-color: #fbbf24; }
 .expertise-card.ec-purple { border-top-color: #a78bfa; }
-.expertise-card.ec-teal { border-top-color: #34d399; }
+.expertise-card.ec-teal   { border-top-color: #34d399; }
+.expertise-card.ec-orange { border-top-color: #fb923c; }
 
 .expertise-card-title {
   font-weight: bold;
