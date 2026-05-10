@@ -16,8 +16,8 @@ html {
   display: flex;
   gap: 28px;
   align-items: flex-start;
-  background: rgba(96,165,250,0.06);
-  border: 1px solid rgba(96,165,250,0.3);
+  background: rgba(96,165,250,0.07);
+  border: 1px solid rgba(96,165,250,0.35);
   border-left: 4px solid #60a5fa;
   padding: 28px;
   margin-bottom: 32px;
@@ -104,15 +104,23 @@ html {
 }
 
 .job-card {
+  background: rgba(0,0,0,0.03);
+  border: 1px solid rgba(0,0,0,0.1);
+  border-left: 3px solid rgba(0,0,0,0.15);
+  padding: 18px 20px;
+  margin-bottom: 10px;
+}
+.dark .job-card {
   background: rgba(255,255,255,0.03);
   border: 1px solid rgba(255,255,255,0.1);
   border-left: 3px solid rgba(255,255,255,0.12);
-  padding: 18px 20px;
-  margin-bottom: 10px;
 }
 
 .job-card.current {
   border-left-color: #60a5fa;
+  background: rgba(96,165,250,0.06);
+}
+.dark .job-card.current {
   background: rgba(96,165,250,0.04);
 }
 
@@ -188,8 +196,13 @@ html {
   display: inline-block;
   font-size: 0.72em;
   padding: 2px 8px;
+  border: 1px solid rgba(0,0,0,0.15);
+  background: rgba(0,0,0,0.06);
+  opacity: 0.8;
+}
+.dark .job-card-tag {
   border: 1px solid rgba(255,255,255,0.18);
-  opacity: 0.75;
+  background: rgba(255,255,255,0.07);
 }
 
 .job-card-company-desc {
@@ -234,11 +247,15 @@ html {
 }
 
 .expertise-card {
-  background: rgba(255,255,255,0.04);
-  border: 1px solid rgba(255,255,255,0.15);
+  background: rgba(0,0,0,0.03);
+  border: 1px solid rgba(0,0,0,0.1);
   border-top: 3px solid #60a5fa;
   padding: 16px 18px;
   margin: 0;
+}
+.dark .expertise-card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.15);
 }
 
 .expertise-card.ec-red    { border-top-color: #f87171; }
@@ -274,6 +291,11 @@ html {
   display: inline-block;
   font-size: 0.72em;
   padding: 2px 7px;
+  border: 1px solid rgba(0,0,0,0.15);
+  background: rgba(0,0,0,0.06);
+  opacity: 0.8;
+}
+.dark .expertise-tag {
   border: 1px solid rgba(255,255,255,0.2);
-  opacity: 0.75;
+  background: rgba(255,255,255,0.07);
 }
