@@ -31,7 +31,7 @@ Deployment is fully automated: push to `master` triggers GitHub Actions (`.githu
 
 **Customizations** over the base Blowfish theme:
 - `layouts/_default/simple_custom.html` — custom article layout with hero image, breadcrumbs, TOC, and sharing links
-- `layouts/partials/extend-head.html` — injects LinkedIn badge script, FontAwesome v5.12.1, and custom CSS
+- `layouts/partials/extend-head.html` — injects FontAwesome v5.12.1, custom CSS, and SEO meta keywords
 - `layouts/partials/extend-footer.html` — currently empty; reserved for site-wide footer injections
 - `static/css/custom.css` — site-specific styles
 
@@ -39,7 +39,11 @@ Deployment is fully automated: push to `master` triggers GitHub Actions (`.githu
 
 **Theme** is a git submodule at `themes/blowfish/`. After cloning, run `git submodule update --init` if the theme directory is empty.
 
-**Static assets**: papers (PDFs) in `static/papers/`, profile images in `static/img/` and `assets/img/` (the latter go through Hugo's asset pipeline for optimization).
+**Static assets**: papers (PDFs) in `static/papers/`, talk slides in `static/talks/`, downloadable CV at `static/resume.pdf`, profile images in `static/img/` and `assets/img/` (the latter go through Hugo's asset pipeline for optimization).
+
+**Custom RSS/Sitemap**: `layouts/_default/rss.xml` and `layouts/_default/sitemap.xml` override the Blowfish defaults.
+
+**Mastodon/ActivityPub verification**: `static/.well-known/webfinger` — serves the WebFinger JSON for Mastodon identity verification (`@herr_dr@hachyderm.io`). Do not delete or move this file.
 
 ## Alternate pages (retro & terminal)
 
