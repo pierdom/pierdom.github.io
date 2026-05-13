@@ -32,7 +32,7 @@ Deployment is fully automated: push to `master` triggers GitHub Actions (`.githu
 **Customizations** over the base Blowfish theme:
 - `layouts/_default/simple_custom.html` — custom article layout with hero image, breadcrumbs, TOC, and sharing links
 - `layouts/partials/extend-head.html` — injects FontAwesome v5.12.1, custom CSS, and SEO meta keywords
-- `layouts/partials/extend-footer.html` — currently empty; reserved for site-wide footer injections
+- `layouts/partials/extend-footer.html` — injects the [Rybbit](https://rybbit.io/) analytics script (`data-site-id="f25f9e1f5d82"`) wrapped in `{{ if not hugo.IsServer }}` so it only fires in production. The same script tag is also hardcoded in `static/retro/index.html` and `static/terminal/index.html` (those files bypass Hugo templating entirely).
 - `layouts/partials/home/background.html` — overrides the Blowfish homepage hero partial; adds `padding-top: 28vh` (inline style) to push the name/headline to mid-page. Inline style is required because Blowfish's Tailwind CSS purges arbitrary utility classes not present at theme build time.
 - `static/css/custom.css` — site-specific styles
 
