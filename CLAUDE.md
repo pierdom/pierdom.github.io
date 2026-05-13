@@ -33,6 +33,7 @@ Deployment is fully automated: push to `master` triggers GitHub Actions (`.githu
 - `layouts/_default/simple_custom.html` — custom article layout with hero image, breadcrumbs, TOC, and sharing links
 - `layouts/partials/extend-head.html` — injects FontAwesome v5.12.1, custom CSS, and SEO meta keywords
 - `layouts/partials/extend-footer.html` — currently empty; reserved for site-wide footer injections
+- `layouts/partials/home/background.html` — overrides the Blowfish homepage hero partial; adds `padding-top: 28vh` (inline style) to push the name/headline to mid-page. Inline style is required because Blowfish's Tailwind CSS purges arbitrary utility classes not present at theme build time.
 - `static/css/custom.css` — site-specific styles
 
 **CSS caching caveat**: `custom.css` is served with aggressive browser caching in local dev. When adding new CSS rules, embed them in an inline `<style>` block directly in the relevant content HTML file as well — this ensures they take effect immediately without a cache-bust.
