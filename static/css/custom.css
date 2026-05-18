@@ -146,6 +146,17 @@ html {
   min-width: 0;
 }
 
+.job-card-logo-link {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  opacity: 1;
+  transition: opacity 0.15s;
+}
+.job-card-logo-link:hover {
+  opacity: 0.72;
+}
+
 .job-card-logo {
   height: 28px;
   width: auto;
