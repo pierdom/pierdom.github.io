@@ -13,6 +13,18 @@ description: "Career history of Pierdomenico Fiadino — data leadership roles a
 .job-card-left { gap: 18px; }
 .job-card-logo { height: 28px; max-width: 96px; margin-top: 2px; }
 .job-card-title { font-size: 1.08em; }
+.dark .job-card { background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.14); border-left-color: rgba(255,255,255,0.18); }
+.job-card { transition: box-shadow 0.15s ease; }
+.job-card:hover { box-shadow: 0 3px 16px rgba(0,0,0,0.08); }
+.dark .job-card:hover { box-shadow: 0 3px 16px rgba(0,0,0,0.38); }
+.dark .logo-single { filter: brightness(0) invert(0.82); }
+.timeline-track { position: relative; padding-left: 28px; }
+.timeline-track::before { content: ''; position: absolute; left: 6px; top: 12px; bottom: 8px; width: 1px; background: linear-gradient(to bottom, rgba(96,165,250,0.5) 0%, rgba(96,165,250,0.06) 100%); }
+.timeline-track .job-card { position: relative; }
+.timeline-track .job-card::before { content: ''; position: absolute; left: -25px; top: 21px; width: 7px; height: 7px; border-radius: 50%; background: #f8fafc; border: 1.5px solid rgba(96,165,250,0.55); }
+.dark .timeline-track .job-card::before { background: #1e293b; }
+.timeline-era { font-size: 0.68em; font-weight: bold; text-transform: uppercase; letter-spacing: 0.09em; opacity: 0.32; margin: 20px 0 8px; display: flex; align-items: center; gap: 10px; white-space: nowrap; }
+.timeline-era::after { content: ''; flex: 1; height: 1px; background: currentColor; opacity: 0.3; }
 </style>
 
 <div class="not-prose">
@@ -22,8 +34,8 @@ description: "Career history of Pierdomenico Fiadino — data leadership roles a
 <div class="job-card current">
   <div class="job-card-header">
     <div class="job-card-left">
-      <img class="job-card-logo logo-light" src="https://cdn.brandfetch.io/idUta0Ndqw/theme/dark/logo.svg?c=1bxid64Mup7aczewSAYMX&t=1669212645963" alt="Moss" />
-      <img class="job-card-logo logo-dark" src="https://cdn.brandfetch.io/idUta0Ndqw/theme/light/logo.svg?c=1bxid64Mup7aczewSAYMX&t=1669212646730" alt="Moss" />
+      <img class="job-card-logo logo-light" src="/img/logos/moss-light.svg" alt="Moss" />
+      <img class="job-card-logo logo-dark" src="/img/logos/moss-dark.svg" alt="Moss" />
       <div>
         <div class="job-card-title">Senior Director, Head of Data &amp; Insights @ <a href="https://getmoss.com">Moss</a></div>
       </div>
@@ -47,11 +59,15 @@ description: "Career history of Pierdomenico Fiadino — data leadership roles a
 
 <div class="job-section-label">Previous roles</div>
 
+<div class="timeline-track">
+
+<div class="timeline-era">Senior Leadership · 2023 – 2026</div>
+
 <div class="job-card">
   <div class="job-card-header">
     <div class="job-card-left">
-      <img class="job-card-logo logo-light" src="https://cdn.brandfetch.io/idzhDUhS2h/theme/dark/idL-CEUyKD.svg?c=1bxid64Mup7aczewSAYMX&t=1695042644230" alt="Docplanner" />
-      <img class="job-card-logo logo-dark" src="https://cdn.brandfetch.io/idzhDUhS2h/theme/light/idJOGBOCQ-.svg?c=1bxid64Mup7aczewSAYMX&t=1695042644905" alt="Docplanner" />
+      <img class="job-card-logo logo-light" src="/img/logos/docplanner-light.svg" alt="Docplanner" />
+      <img class="job-card-logo logo-dark" src="/img/logos/docplanner-dark.svg" alt="Docplanner" />
       <div>
         <div class="job-card-title">Global VP of Data @ <a href="https://docplanner.com">Docplanner</a></div>
       </div>
@@ -77,8 +93,8 @@ description: "Career history of Pierdomenico Fiadino — data leadership roles a
 <div class="job-card">
   <div class="job-card-header">
     <div class="job-card-left">
-      <img class="job-card-logo logo-light" src="https://cdn.brandfetch.io/idTnNve4SY/w/580/h/158/theme/dark/logo.png?c=1bxid64Mup7aczewSAYMX&t=1719468660969" alt="Bird" />
-      <img class="job-card-logo logo-dark" src="https://cdn.brandfetch.io/idTnNve4SY/theme/light/logo.svg?c=1bxid64Mup7aczewSAYMX&t=1719468661223" alt="Bird" />
+      <img class="job-card-logo logo-light" src="/img/logos/bird-light.png" alt="Bird" />
+      <img class="job-card-logo logo-dark" src="/img/logos/bird-dark.svg" alt="Bird" />
       <div>
         <div class="job-card-title">Head of Data @ <a href="https://bird.com">Bird</a> <span style="font-weight:normal; opacity:0.6; font-size:0.9em;">formerly MessageBird</span></div>
       </div>
@@ -99,11 +115,13 @@ description: "Career history of Pierdomenico Fiadino — data leadership roles a
   </ul>
 </div>
 
+<div class="timeline-era">Early SaaS · 2018 – 2022</div>
+
 <div class="job-card">
   <div class="job-card-header">
     <div class="job-card-left">
-      <img class="job-card-logo logo-light" src="https://cdn.brandfetch.io/idsltBPwry/theme/dark/logo.svg?c=1bxid64Mup7aczewSAYMX&t=1700859042506" alt="Bitpanda" />
-      <img class="job-card-logo logo-dark" src="https://cdn.brandfetch.io/idsltBPwry/theme/light/logo.svg?c=1bxid64Mup7aczewSAYMX&t=1700859043340" alt="Bitpanda" />
+      <img class="job-card-logo logo-light" src="/img/logos/bitpanda-light.svg" alt="Bitpanda" />
+      <img class="job-card-logo logo-dark" src="/img/logos/bitpanda-dark.svg" alt="Bitpanda" />
       <div>
         <div class="job-card-title">Data Analytics Manager (Product) @ <a href="https://bitpanda.com">Bitpanda</a></div>
       </div>
@@ -126,8 +144,8 @@ description: "Career history of Pierdomenico Fiadino — data leadership roles a
 <div class="job-card">
   <div class="job-card-header">
     <div class="job-card-left">
-      <img class="job-card-logo logo-light" src="https://cdn.brandfetch.io/idPkJ70vyb/theme/dark/logo.svg?c=1bxid64Mup7aczewSAYMX&t=1699355442358" alt="Typeform" />
-      <img class="job-card-logo logo-dark" src="https://cdn.brandfetch.io/idPkJ70vyb/theme/light/logo.svg?c=1bxid64Mup7aczewSAYMX&t=1699355443318" alt="Typeform" />
+      <img class="job-card-logo logo-light" src="/img/logos/typeform-light.svg" alt="Typeform" />
+      <img class="job-card-logo logo-dark" src="/img/logos/typeform-dark.svg" alt="Typeform" />
       <div>
         <div class="job-card-title">Data Science and Analytics Manager @ <a href="https://typeform.com">Typeform</a></div>
       </div>
@@ -150,8 +168,8 @@ description: "Career history of Pierdomenico Fiadino — data leadership roles a
 <div class="job-card">
   <div class="job-card-header">
     <div class="job-card-left">
-      <img class="job-card-logo logo-light" src="https://cdn.brandfetch.io/idPkJ70vyb/theme/dark/logo.svg?c=1bxid64Mup7aczewSAYMX&t=1699355442358" alt="Typeform" />
-      <img class="job-card-logo logo-dark" src="https://cdn.brandfetch.io/idPkJ70vyb/theme/light/logo.svg?c=1bxid64Mup7aczewSAYMX&t=1699355443318" alt="Typeform" />
+      <img class="job-card-logo logo-light" src="/img/logos/typeform-light.svg" alt="Typeform" />
+      <img class="job-card-logo logo-dark" src="/img/logos/typeform-dark.svg" alt="Typeform" />
       <div>
         <div class="job-card-title">Data Science Tech Lead @ <a href="https://typeform.com">Typeform</a></div>
       </div>
@@ -172,7 +190,7 @@ description: "Career history of Pierdomenico Fiadino — data leadership roles a
 <div class="job-card">
   <div class="job-card-header">
     <div class="job-card-left">
-      <img class="job-card-logo" src="https://assets.website-files.com/6266aac81321b47a195b9dd0/6266b2b92b3f1ac779eedf16_Main.svg" alt="Zeelo" />
+      <img class="job-card-logo logo-single" src="/img/logos/zeelo.svg" alt="Zeelo" />
       <div>
         <div class="job-card-title">Data Lead @ <a href="https://zeelo.co">Zeelo</a></div>
       </div>
@@ -193,10 +211,12 @@ description: "Career history of Pierdomenico Fiadino — data leadership roles a
   </ul>
 </div>
 
+<div class="timeline-era">Research &amp; Data Science · 2010 – 2018</div>
+
 <div class="job-card">
   <div class="job-card-header">
     <div class="job-card-left">
-      <img class="job-card-logo" src="https://eurecat.org/wp-content/uploads/2016/04/eurecat_logo.png" alt="Eurecat" />
+      <img class="job-card-logo logo-single" src="/img/logos/eurecat.png" alt="Eurecat" />
       <div>
         <div class="job-card-title">Senior Data Scientist @ <a href="https://eurecat.org">Eurecat</a></div>
       </div>
@@ -218,7 +238,6 @@ description: "Career history of Pierdomenico Fiadino — data leadership roles a
 <div class="job-card">
   <div class="job-card-header">
     <div class="job-card-left">
-      <img class="job-card-logo" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEiUFDas0IuUPlRyXnhSXzKF3609lwkeAT6Q&s" alt="FTW" />
       <div>
         <div class="job-card-title">R&amp;D Engineer (Data Mining) @ Telecommunications Research Center Vienna</div>
       </div>
@@ -236,5 +255,7 @@ description: "Career history of Pierdomenico Fiadino — data leadership roles a
     <li><strong>Machine Learning and Data Mining</strong> applied to massive network datasets: exploratory analysis, <strong>human mobility characterisation</strong>, <strong>user profiling</strong>, <strong>detection and classification of network anomalies</strong></li>
   </ul>
 </div>
+
+</div><!-- /.timeline-track -->
 
 </div>

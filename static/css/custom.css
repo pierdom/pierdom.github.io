@@ -29,12 +29,13 @@ html {
 
 .profile-card-photo-wrap {
   flex-shrink: 0;
-  width: 120px;
-  height: 120px;
-  min-width: 120px;
+  width: 152px;
+  height: 152px;
+  min-width: 152px;
   border-radius: 50%;
   overflow: hidden;
-  border: 2px solid rgba(96,165,250,0.35);
+  border: 3px solid rgba(96,165,250,0.45);
+  box-shadow: 0 0 0 6px rgba(96,165,250,0.09);
 }
 
 .profile-card-body {
@@ -113,11 +114,12 @@ html {
   border-left: 3px solid rgba(0,0,0,0.15);
   padding: 18px 20px;
   margin-bottom: 10px;
+  transition: box-shadow 0.15s ease;
 }
 .dark .job-card {
-  background: rgba(255,255,255,0.03);
-  border: 1px solid rgba(255,255,255,0.1);
-  border-left: 3px solid rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.14);
+  border-left: 3px solid rgba(255,255,255,0.18);
 }
 
 .job-card.current {
@@ -327,9 +329,9 @@ html {
   margin-bottom: 12px;
 }
 .dark .edu-card {
-  background: rgba(255,255,255,0.03);
-  border-color: rgba(255,255,255,0.1);
-  border-left-color: rgba(255,255,255,0.15);
+  background: rgba(255,255,255,0.05);
+  border-color: rgba(255,255,255,0.12);
+  border-left-color: rgba(255,255,255,0.18);
 }
 
 .edu-phd { border-left-color: #fbbf24; background: rgba(251,191,36,0.05); }
@@ -418,6 +420,7 @@ html {
   border-top: 3px solid #60a5fa;
   padding: 16px 18px;
   margin: 0;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
 }
 .dark .expertise-card {
   background: rgba(255,255,255,0.04);
@@ -466,4 +469,157 @@ html {
 .dark .expertise-tag {
   border: 1px solid rgba(255,255,255,0.2);
   background: rgba(255,255,255,0.07);
+}
+
+/* ── Hover effects ────────────────────────────────────── */
+.expertise-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 28px rgba(0,0,0,0.1);
+}
+.dark .expertise-card:hover {
+  box-shadow: 0 8px 28px rgba(0,0,0,0.45);
+}
+
+.job-card:hover {
+  box-shadow: 0 3px 16px rgba(0,0,0,0.08);
+}
+.dark .job-card:hover {
+  box-shadow: 0 3px 16px rgba(0,0,0,0.38);
+}
+
+.pub-card {
+  transition: background 0.15s;
+}
+.pub-card:hover {
+  background: rgba(0,0,0,0.03);
+}
+.dark .pub-card:hover {
+  background: rgba(255,255,255,0.04);
+}
+
+/* ── Timeline (jobs page) ─────────────────────────────── */
+.timeline-track {
+  position: relative;
+  padding-left: 28px;
+}
+.timeline-track::before {
+  content: '';
+  position: absolute;
+  left: 6px;
+  top: 12px;
+  bottom: 8px;
+  width: 1px;
+  background: linear-gradient(to bottom, rgba(96,165,250,0.5) 0%, rgba(96,165,250,0.06) 100%);
+}
+.timeline-track .job-card {
+  position: relative;
+}
+.timeline-track .job-card::before {
+  content: '';
+  position: absolute;
+  left: -25px;
+  top: 21px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #f8fafc;
+  border: 1.5px solid rgba(96,165,250,0.55);
+}
+.dark .timeline-track .job-card::before {
+  background: #1e293b;
+}
+.timeline-era {
+  font-size: 0.68em;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  opacity: 0.32;
+  margin: 20px 0 8px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  white-space: nowrap;
+}
+.timeline-era::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.3;
+  white-space: normal;
+}
+
+/* ── Single-variant logo (dark mode filter) ───────────── */
+.dark .logo-single {
+  filter: brightness(0) invert(0.82);
+}
+
+/* ── Selected publications highlights ────────────────── */
+.pub-highlights {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  margin: 0 0 8px;
+}
+@media (max-width: 640px) {
+  .pub-highlights { grid-template-columns: 1fr; }
+}
+.pub-hl-card {
+  background: rgba(0,0,0,0.03);
+  border: 1px solid rgba(0,0,0,0.1);
+  border-top: 3px solid rgba(96,165,250,0.7);
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+}
+.dark .pub-hl-card {
+  background: rgba(255,255,255,0.05);
+  border-color: rgba(255,255,255,0.12);
+}
+.pub-hl-card.hl-award {
+  border-top-color: #d97706;
+}
+.dark .pub-hl-card.hl-award {
+  border-top-color: #fbbf24;
+}
+.pub-hl-badge {
+  font-size: 0.7em;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: #3b82f6;
+  margin-bottom: 7px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.dark .pub-hl-badge { color: #60a5fa; }
+.pub-hl-card.hl-award .pub-hl-badge { color: #d97706; }
+.dark .pub-hl-card.hl-award .pub-hl-badge { color: #fbbf24; }
+.pub-hl-title {
+  font-size: 0.9em;
+  font-weight: 600;
+  line-height: 1.42;
+  margin: 0 0 6px;
+  flex: 1;
+}
+.pub-hl-meta {
+  font-size: 0.77em;
+  opacity: 0.5;
+  line-height: 1.4;
+  margin-bottom: 8px;
+}
+.pub-hl-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.75em;
+  color: inherit;
+  opacity: 0.55;
+  text-decoration: none;
+  margin-top: auto;
+}
+.pub-hl-link:hover {
+  opacity: 1;
+  text-decoration: underline;
 }
