@@ -60,6 +60,8 @@ draft: false
 }
 </style>
 
+<p style="text-align:center; font-size:0.92em; opacity:0.6; margin:0 auto 28px; max-width:480px; line-height:1.6;">Building data functions and AI products<br>that move business metrics</p>
+
 <div class="mobile-nav">
   <a href="/about">About me</a>
   <a href="/jobs">Experience</a>

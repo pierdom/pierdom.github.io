@@ -14,17 +14,19 @@ description: "Career history of Pierdomenico Fiadino — data leadership roles a
 .job-card-logo { height: 28px; max-width: 96px; margin-top: 2px; }
 .job-card-title { font-size: 1.08em; }
 .dark .job-card { background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.14); border-left-color: rgba(255,255,255,0.18); }
+.job-card.current { border-left-color: #60a5fa; border-left-width: 4px; background: rgba(96,165,250,0.1); box-shadow: 0 4px 28px rgba(96,165,250,0.1); }
+.dark .job-card.current { background: rgba(96,165,250,0.08); box-shadow: 0 4px 28px rgba(96,165,250,0.1); }
 .job-card { transition: box-shadow 0.15s ease; }
 .job-card:hover { box-shadow: 0 3px 16px rgba(0,0,0,0.08); }
 .dark .job-card:hover { box-shadow: 0 3px 16px rgba(0,0,0,0.38); }
 .dark .logo-single { filter: brightness(0) invert(0.82); }
 .timeline-track { position: relative; padding-left: 28px; }
-.timeline-track::before { content: ''; position: absolute; left: 6px; top: 12px; bottom: 8px; width: 1px; background: linear-gradient(to bottom, rgba(96,165,250,0.5) 0%, rgba(96,165,250,0.06) 100%); }
+.timeline-track::before { content: ''; position: absolute; left: 6px; top: 12px; bottom: 8px; width: 2px; background: linear-gradient(to bottom, rgba(96,165,250,0.55) 0%, rgba(96,165,250,0.06) 100%); }
 .timeline-track .job-card { position: relative; }
-.timeline-track .job-card::before { content: ''; position: absolute; left: -25px; top: 21px; width: 7px; height: 7px; border-radius: 50%; background: #f8fafc; border: 1.5px solid rgba(96,165,250,0.55); }
-.dark .timeline-track .job-card::before { background: #1e293b; }
-.timeline-era { font-size: 0.68em; font-weight: bold; text-transform: uppercase; letter-spacing: 0.09em; opacity: 0.32; margin: 20px 0 8px; display: flex; align-items: center; gap: 10px; white-space: nowrap; }
-.timeline-era::after { content: ''; flex: 1; height: 1px; background: currentColor; opacity: 0.3; }
+.timeline-track .job-card::before { content: ''; position: absolute; left: -29px; top: 22px; width: 10px; height: 10px; border-radius: 50%; background: rgba(96,165,250,0.85); border: none; }
+.dark .timeline-track .job-card::before { background: rgba(96,165,250,0.9); }
+.timeline-era { font-size: 0.68em; font-weight: bold; text-transform: uppercase; letter-spacing: 0.09em; opacity: 0.55; margin: 20px 0 8px; display: flex; align-items: center; gap: 10px; white-space: nowrap; }
+.timeline-era::after { content: ''; flex: 1; height: 1px; background: currentColor; opacity: 0.4; }
 .job-card-logo-link { display:inline-flex; align-items:center; flex-shrink:0; opacity:1; transition:opacity 0.15s; }
 .job-card-logo-link:hover { opacity:0.72; }
 </style>

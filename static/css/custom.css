@@ -2,6 +2,23 @@ html {
     font-size: 13pt;
   }
 
+/* ── Typography ─────────────────────────────────────── */
+h1, h2, h3 {
+  font-family: 'DM Serif Display', Georgia, serif;
+}
+
+.job-section-label,
+.pub-section-label,
+.timeline-era,
+.edu-field-label,
+.job-card-date,
+.job-card-tag,
+.expertise-tag,
+.pub-card-year,
+.pub-hl-badge {
+  font-family: 'IBM Plex Mono', 'Courier New', monospace;
+}
+
 .logo-dark { display: none; }
 .dark .logo-dark { display: inline; }
 .dark .logo-light { display: none; }
@@ -34,8 +51,7 @@ html {
   min-width: 152px;
   border-radius: 50%;
   overflow: hidden;
-  border: 3px solid rgba(96,165,250,0.45);
-  box-shadow: 0 0 0 6px rgba(96,165,250,0.09);
+  border: 3px solid rgba(96,165,250,0.7);
 }
 
 .profile-card-body {
@@ -104,8 +120,10 @@ html {
   font-weight: bold;
   letter-spacing: 0.09em;
   text-transform: uppercase;
-  opacity: 0.4;
+  opacity: 0.6;
   margin: 28px 0 8px;
+  border-left: 3px solid rgba(96,165,250,0.5);
+  padding-left: 8px;
 }
 
 .job-card {
@@ -124,10 +142,13 @@ html {
 
 .job-card.current {
   border-left-color: #60a5fa;
-  background: rgba(96,165,250,0.06);
+  border-left-width: 4px;
+  background: rgba(96,165,250,0.1);
+  box-shadow: 0 4px 28px rgba(96,165,250,0.1);
 }
 .dark .job-card.current {
-  background: rgba(96,165,250,0.04);
+  background: rgba(96,165,250,0.08);
+  box-shadow: 0 4px 28px rgba(96,165,250,0.1);
 }
 
 .job-card-header {
@@ -306,7 +327,7 @@ html {
 
 .pub-card-venue {
   font-size: 0.81em;
-  opacity: 0.48;
+  opacity: 0.65;
   flex: 1;
   min-width: 120px;
   line-height: 1.4;
@@ -315,7 +336,7 @@ html {
 .pub-card-year {
   font-size: 0.78em;
   font-weight: bold;
-  opacity: 0.38;
+  opacity: 0.5;
   white-space: nowrap;
   flex-shrink: 0;
 }
@@ -519,8 +540,8 @@ html {
   left: 6px;
   top: 12px;
   bottom: 8px;
-  width: 1px;
-  background: linear-gradient(to bottom, rgba(96,165,250,0.5) 0%, rgba(96,165,250,0.06) 100%);
+  width: 2px;
+  background: linear-gradient(to bottom, rgba(96,165,250,0.55) 0%, rgba(96,165,250,0.06) 100%);
 }
 .timeline-track .job-card {
   position: relative;
@@ -528,23 +549,23 @@ html {
 .timeline-track .job-card::before {
   content: '';
   position: absolute;
-  left: -25px;
-  top: 21px;
-  width: 7px;
-  height: 7px;
+  left: -29px;
+  top: 22px;
+  width: 10px;
+  height: 10px;
   border-radius: 50%;
-  background: #f8fafc;
-  border: 1.5px solid rgba(96,165,250,0.55);
+  background: rgba(96,165,250,0.85);
+  border: none;
 }
 .dark .timeline-track .job-card::before {
-  background: #1e293b;
+  background: rgba(96,165,250,0.9);
 }
 .timeline-era {
   font-size: 0.68em;
   font-weight: bold;
   text-transform: uppercase;
   letter-spacing: 0.09em;
-  opacity: 0.32;
+  opacity: 0.55;
   margin: 20px 0 8px;
   display: flex;
   align-items: center;
@@ -556,7 +577,7 @@ html {
   flex: 1;
   height: 1px;
   background: currentColor;
-  opacity: 0.3;
+  opacity: 0.4;
   white-space: normal;
 }
 

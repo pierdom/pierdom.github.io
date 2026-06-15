@@ -16,8 +16,7 @@ description: "Data leader with 16 years of experience across R&D and SaaS. PhD i
 .profile-btn { font-size: 0.95em; }
 .profile-card-photo-wrap {
   width: 152px; height: 152px; min-width: 152px;
-  border: 3px solid rgba(96,165,250,0.45);
-  box-shadow: 0 0 0 6px rgba(96,165,250,0.09);
+  border: 3px solid rgba(96,165,250,0.7);
 }
 .expertise-card {
   transition: transform 0.18s ease, box-shadow 0.18s ease;
@@ -25,6 +24,14 @@ description: "Data leader with 16 years of experience across R&D and SaaS. PhD i
 .expertise-card:hover {
   transform: translateY(-3px);
   box-shadow: 0 8px 28px rgba(0,0,0,0.1);
+}
+.profile-btn.profile-btn-primary {
+  background: rgba(96,165,250,0.15);
+  border-color: rgba(96,165,250,0.7);
+}
+.profile-btn.profile-btn-primary:hover {
+  background: rgba(96,165,250,0.25);
+  border-color: rgba(96,165,250,1);
 }
 </style>
 
@@ -41,7 +48,7 @@ description: "Data leader with 16 years of experience across R&D and SaaS. PhD i
       <p>Across my <strong>8 years in SaaS</strong>, my work has spanned <strong>data analytics</strong>, <strong>decision science</strong>, and <strong>data governance</strong>, combining a hands-on, pragmatic approach with a research background from a <strong>PhD in Data Mining and Machine Learning</strong> at TU Wien and several years in R&amp;D centres. I have authored <strong>over 30 publications</strong> in major international conferences and journals.</p>
     </div>
     <div class="profile-card-actions">
-      <a class="profile-btn" href="/resume.pdf">
+      <a class="profile-btn profile-btn-primary" href="/resume.pdf">
         <i class="fas fa-file-pdf"></i> Download my CV
       </a>
       <a class="profile-btn" href="https://linkedin.com/in/fiadino" target="_blank" rel="noopener noreferrer">
