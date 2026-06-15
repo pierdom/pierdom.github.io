@@ -60,7 +60,7 @@ draft: false
 }
 </style>
 
-<p style="text-align:center; font-size:0.92em; opacity:0.6; margin:0 auto 28px; max-width:480px; line-height:1.6;">Building data functions and AI products<br>that move business metrics</p>
+<p style="text-align:center; font-size:0.92em; margin:0 auto 28px; max-width:480px; line-height:1.6; font-family:'IBM Plex Mono','Courier New',monospace;"><span style="opacity:0.55;">Building data functions and AI products</span><br><span style="font-size:1.25em; font-weight:700; opacity:0.75;">that move business metrics</span></p>
 
 <div class="mobile-nav">
   <a href="/about">About me</a>

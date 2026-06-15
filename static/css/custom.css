@@ -3,10 +3,6 @@ html {
   }
 
 /* ── Typography ─────────────────────────────────────── */
-h1, h2, h3 {
-  font-family: 'DM Serif Display', Georgia, serif;
-}
-
 .job-section-label,
 .pub-section-label,
 .timeline-era,
