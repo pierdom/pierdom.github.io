@@ -79,6 +79,9 @@ draft: false
     <a href="/retro" style="display:inline-flex; align-items:center; gap:6px; color:inherit; text-decoration:none; border:1px solid currentColor; padding:4px 12px; border-radius:3px;" title="Retro 90s version">
       <span style="font-size:1.05em;">📺</span> Retro
     </a>
+    <a href="/notebook" style="display:inline-flex; align-items:center; gap:6px; color:inherit; text-decoration:none; border:1px solid currentColor; padding:4px 12px; border-radius:3px;" title="Jupyter notebook version">
+      <span style="font-size:1.05em;">📊</span> Notebook
+    </a>
   </div>
 </div>
 </div>

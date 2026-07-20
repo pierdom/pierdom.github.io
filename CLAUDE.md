@@ -32,7 +32,7 @@ Deployment is fully automated: push to `master` triggers GitHub Actions (`.githu
 **Customizations** over the base Blowfish theme:
 - `layouts/_default/simple_custom.html` — custom article layout with hero image, breadcrumbs, TOC, and sharing links
 - `layouts/partials/extend-head.html` — injects FontAwesome v5.12.1, custom CSS, and SEO meta keywords
-- `layouts/partials/extend-footer.html` — injects the [Rybbit](https://rybbit.io/) analytics script (`data-site-id="f25f9e1f5d82"`) wrapped in `{{ if not hugo.IsServer }}` so it only fires in production. The same script tag is also hardcoded in `static/retro/index.html` and `static/terminal/index.html` (those files bypass Hugo templating entirely).
+- `layouts/partials/extend-footer.html` — injects the [Rybbit](https://rybbit.io/) analytics script (`data-site-id="f25f9e1f5d82"`) wrapped in `{{ if not hugo.IsServer }}` so it only fires in production. The same script tag is also hardcoded in `static/retro/index.html`, `static/terminal/index.html`, and `static/notebook/index.html` (those files bypass Hugo templating entirely).
 - `layouts/partials/home/background.html` — overrides the Blowfish homepage hero partial; adds `padding-top: 28vh` (inline style) to push the name/headline to mid-page. Inline style is required because Blowfish's Tailwind CSS purges arbitrary utility classes not present at theme build time.
 - `static/css/custom.css` — site-specific styles
 
@@ -46,9 +46,9 @@ Deployment is fully automated: push to `master` triggers GitHub Actions (`.githu
 
 **Mastodon/ActivityPub verification**: `static/.well-known/webfinger` — serves the WebFinger JSON for Mastodon identity verification (`@herr_dr@hachyderm.io`). Do not delete or move this file.
 
-## Alternate pages (retro & terminal)
+## Alternate pages (retro, terminal & notebook)
 
-Both pages follow the same pattern: self-contained single HTML files under `static/`, served verbatim by Hugo at their respective paths. No templating or theme processing applies. All CSS and JavaScript are inline.
+All three follow the same pattern: self-contained single HTML files under `static/`, served verbatim by Hugo at their respective paths. No templating or theme processing applies. All CSS and JavaScript are inline. They are discoverable via the hidden easter-egg link row on the homepage (`content/_index.md`) and cross-link to each other in their footers. All carry `<meta name="robots" content="noindex, nofollow">`.
 
 ### `static/retro/index.html` → `fiadino.org/retro`
 90s-style alternate version with a dark cosmic palette. Contains a parallel copy of the career history, bio, skills, education, and publications. **Must be updated manually** when main content changes.
@@ -73,6 +73,19 @@ Things to keep in sync with the main site:
 - Publications (BibTeX-style listing)
 
 Notable features: macOS-style title bar with a `← fiadino.org` back link, powerlevel10k two-line prompt (`╭─`/`╰─❯`), neofetch block with rainbow ASCII logo, btop-style experience table (`grid-template-columns: 54px 36px 172px 82px 112px 1fr 80px`), systemd education blocks, interactive JS terminal (commands: `help`, `about`, `ls`, `contact`, `cv`, `hire piero`, `fortune`, `uname -a`, `clear`, `exit`), Konami code easter egg.
+
+### `static/notebook/index.html` → `fiadino.org/notebook`
+JupyterLab-themed version (authentic nbconvert light theme) rendering the career as a computational notebook: `pierdomenico_fiadino.ipynb`. This is the only **light-themed** alternate (a deliberate contrast to the two dark ones). Career/education data live as pandas-style DataFrame tables; the four charts are hand-rolled matplotlib-look inline SVGs drawn by a small JS renderer (`drawBarh`/`drawBar`/`drawStep`) from data arrays at the bottom of the `<script>`.
+
+Things to keep in sync with the main site:
+- Current role (In[1] print output, `pf.whoami()` output, jobs DataFrame row 0)
+- Employment history (jobs DataFrame In[3] — one row per company; also the `chart-seniority` data array)
+- Education (education DataFrame In[8])
+- Bio / stats (`pf.whoami()` dict, the markdown cells)
+- Copyright year (footer `© 1997–YYYY`)
+- Publications count and per-year distribution (`chart-pubs` data — illustrative, ~30+)
+
+Notable features: JupyterLab menu/toolbar/tab chrome with a live kernel dot, Pygments-style syntax highlighting via hand-written token spans, canonical striped/hover pandas DataFrame styling, an interactive `In [ ]:` REPL cell (Shift+Enter runs; commands: `pf.help`, `pf.hire`, `pf.contact`, `pf.cv`, `pf.skills`, `pf.retro/terminal/home`, `clear`; unknown input renders a red Python traceback), a restart-kernel button, and a Konami code easter egg that runs `import this` (the Zen of Piero) with confetti. Uses JetBrains Mono from Google Fonts.
 
 ### Theme-aware logos (jobs page)
 Company logos in `content/jobs.html` use a two-`<img>` pattern toggled by CSS:

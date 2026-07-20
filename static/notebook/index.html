@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<!--
+  ╔══════════════════════════════════════════════════════════════╗
+  ║  pierdomenico_fiadino.ipynb — Notebook Edition                ║
+  ║  Kernel: Python 3 (piero-env)  ·  Theme: JupyterLab (light)   ║
+  ║                                                                ║
+  ║  # A reproducible analysis of one data career.                ║
+  ║  # No frameworks, no build step — just a very committed bit.  ║
+  ║                                                                ║
+  ║  Run the last cell.  Try the Konami code.  Restart the kernel ║
+  ║  if you dare (it comes back).                                  ║
+  ╚══════════════════════════════════════════════════════════════╝
+-->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>pierdomenico_fiadino.ipynb — JupyterLab</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    /* ── JupyterLab light palette ─────────────────────────────── */
+    :root {
+      --app-bar:      #f7f7f7;
+      --app-border:   #e0e0e0;
+      --toolbar:      #ffffff;
+      --sheet:        #ffffff;
+      --sheet-edge:   #e8e8e8;
+      --page:         #eeeeee;
+
+      --ink:          #212121;
+      --ink-soft:     #545454;
+      --ink-faint:    #9e9e9e;
+
+      --jp-orange:    #f37726;   /* Jupyter brand */
+      --jp-grey:      #767677;
+      --sel:          #1976d2;   /* selected cell bar */
+      --sel-edit:     #4caf50;   /* edit-mode bar */
+
+      --in-bg:        #f7f7f7;
+      --in-border:    #cfcfcf;
+      --prompt-in:    #303f9f;   /* In [ ]: navy */
+      --prompt-out:   #d84315;   /* Out[ ]: rust */
+
+      /* pygments-ish (nbconvert default) */
+      --pk:  #008000;  /* keyword   */
+      --ps:  #ba2121;  /* string    */
+      --pc:  #408080;  /* comment   */
+      --pm:  #666666;  /* number/op */
+      --pf:  #0000ff;  /* function  */
+      --pnn: #0000ff;  /* namespace */
+      --pnb: #008000;  /* builtin   */
+
+      --mono: 'JetBrains Mono', 'SFMono-Regular', 'Menlo', 'Consolas', monospace;
+      --sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      --mpl:  'DejaVu Sans', Verdana, Geneva, sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--page);
+      color: var(--ink);
+      font-family: var(--sans);
+      font-size: 15px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: var(--sel); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* ── App chrome ───────────────────────────────────────────── */
+    .app-bar {
+      position: sticky; top: 0; z-index: 30;
+      background: var(--app-bar);
+      border-bottom: 1px solid var(--app-border);
+      display: flex; align-items: center; gap: 14px;
+      padding: 0 14px; height: 40px;
+      font-size: 13px;
+    }
+    .logo { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+    .logo svg { display: block; }
+    .logo-word { font-weight: 300; font-size: 20px; color: var(--jp-grey); letter-spacing: .2px; }
+    .logo-word b { font-weight: 300; }
+    .menu { display: flex; gap: 15px; color: var(--ink-soft); }
+    .menu span { cursor: default; padding: 2px 0; }
+    .menu span:hover { color: var(--ink); }
+    .app-spacer { flex: 1; }
+    .back {
+      display: inline-flex; align-items: center; gap: 6px;
+      color: var(--ink-soft); font-family: var(--mono); font-size: 12px;
+      border: 1px solid var(--app-border); border-radius: 4px;
+      padding: 4px 10px; background: #fff;
+    }
+    .back:hover { text-decoration: none; border-color: var(--jp-orange); color: var(--jp-orange); }
+
+    /* tab strip */
+    .tab-strip {
+      background: var(--app-bar);
+      border-bottom: 1px solid var(--app-border);
+      padding: 0 10px; height: 34px;
+      display: flex; align-items: flex-end;
+    }
+    .tab {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--sheet); border: 1px solid var(--app-border);
+      border-bottom: none; border-radius: 5px 5px 0 0;
+      padding: 6px 14px; font-size: 12.5px; color: var(--ink);
+      position: relative; top: 1px;
+    }
+    .tab .nb-ico { color: var(--jp-orange); font-weight: 700; }
+    .tab .dirty { width: 8px; height: 8px; border-radius: 50%; background: var(--ink-soft); }
+
+    /* toolbar */
+    .toolbar {
+      position: sticky; top: 40px; z-index: 20;
+      background: var(--toolbar);
+      border-bottom: 1px solid var(--app-border);
+      display: flex; align-items: center; gap: 4px;
+      padding: 5px 12px; height: 38px;
+      font-size: 13px; color: var(--ink-soft);
+    }
+    .tb-btn {
+      width: 30px; height: 26px; border-radius: 4px;
+      display: inline-flex; align-items: center; justify-content: center;
+      cursor: pointer; user-select: none; font-size: 14px;
+    }
+    .tb-btn:hover { background: #eee; color: var(--ink); }
+    .tb-run { color: #2e7d32; }
+    .tb-sep { width: 1px; height: 20px; background: var(--app-border); margin: 0 6px; }
+    .tb-cellsel {
+      border: 1px solid var(--app-border); border-radius: 4px;
+      padding: 3px 10px; font-size: 12.5px; background: #fff; color: var(--ink);
+    }
+    .kernel {
+      margin-left: auto; display: flex; align-items: center; gap: 8px;
+      font-size: 12.5px; color: var(--ink-soft);
+    }
+    .kdot { width: 9px; height: 9px; border-radius: 50%; background: #43a047; box-shadow: 0 0 0 3px rgba(67,160,71,.15); transition: background .2s; }
+    .kdot.busy { background: var(--jp-orange); box-shadow: 0 0 0 3px rgba(243,119,38,.18); }
+
+    /* ── Notebook sheet ───────────────────────────────────────── */
+    .sheet {
+      max-width: 960px; margin: 22px auto 60px;
+      background: var(--sheet);
+      border: 1px solid var(--sheet-edge);
+      border-radius: 3px;
+      box-shadow: 0 1px 3px rgba(0,0,0,.06), 0 14px 40px rgba(0,0,0,.06);
+      padding: 14px 6px 40px;
+    }
+
+    /* cell */
+    .cell { position: relative; padding: 5px 16px 5px 12px; margin: 2px 0; border-left: 4px solid transparent; }
+    .cell.selected { border-left-color: var(--sel); background: rgba(25,118,210,.015); }
+    .cell.selected.editing { border-left-color: var(--sel-edit); }
+    .cell:hover:not(.selected) { border-left-color: #e0e0e0; }
+
+    .io { display: flex; align-items: flex-start; gap: 8px; }
+    .prompt {
+      flex: 0 0 76px; text-align: right;
+      font-family: var(--mono); font-size: 13px; line-height: 1.5;
+      padding-top: 5px; user-select: none; white-space: nowrap;
+    }
+    .prompt.pin  { color: var(--prompt-in); }
+    .prompt.pout { color: var(--prompt-out); }
+    .body { flex: 1 1 auto; min-width: 0; }
+
+    /* code input */
+    .input-area {
+      background: var(--in-bg); border: 1px solid var(--in-border);
+      border-radius: 2px; overflow-x: auto;
+    }
+    pre.src {
+      margin: 0; padding: 8px 12px;
+      font-family: var(--mono); font-size: 13px; line-height: 1.55;
+      color: var(--ink); white-space: pre; tab-size: 4;
+    }
+    /* pygments-ish tokens */
+    .k  { color: var(--pk);  font-weight: 700; }
+    .kn { color: var(--pk);  font-weight: 700; }
+    .s  { color: var(--ps); }
+    .c  { color: var(--pc);  font-style: italic; }
+    .mi { color: var(--pm); }
+    .o  { color: var(--pm); }
+    .nf { color: var(--pf); }
+    .nn { color: var(--pnn); }
+    .nb { color: var(--pnb); }
+    .nd { color: #aa22ff; }
+
+    /* output */
+    .output-area {
+      padding: 6px 4px; font-family: var(--mono); font-size: 13px;
+      overflow-x: auto; color: var(--ink);
+    }
+    pre.out-text { margin: 0; white-space: pre; line-height: 1.5; }
+    .out-repr { color: var(--ink-soft); }
+    .out-stream { color: var(--ink); }
+
+    /* pandas dataframe (nbconvert canonical) */
+    .df-wrap { overflow-x: auto; padding: 4px 0 8px; }
+    table.dataframe {
+      border: none; border-collapse: collapse; border-spacing: 0;
+      color: #000; font-family: var(--mono); font-size: 12.5px; margin: 0;
+    }
+    table.dataframe thead { border-bottom: 1px solid #000; vertical-align: bottom; }
+    table.dataframe th, table.dataframe td {
+      text-align: right; vertical-align: middle;
+      padding: .42em .7em; line-height: 1.3; border: none; white-space: nowrap;
+    }
+    table.dataframe th { font-weight: 700; }
+    table.dataframe td.txt, table.dataframe th.txt { text-align: left; }
+    table.dataframe tbody tr:nth-child(odd)  { background: #f5f5f5; }
+    table.dataframe tbody tr:hover { background: rgba(66,165,245,.18); }
+    table.dataframe .idx { color: #000; }
+
+    /* matplotlib figure */
+    .mpl-out { padding: 4px 0 6px; }
+    svg.mpl { display: block; width: 100%; max-width: 560px; height: auto; }
+
+    /* error traceback */
+    .output-area.err {
+      background: #fdf2f2; border: 1px solid #f3c6c6; border-radius: 2px;
+      padding: 8px 12px; color: #b71c1c;
+    }
+    .output-area.err .ename { color: #b71c1c; font-weight: 700; }
+    .output-area.err .esep  { color: #d84315; }
+
+    /* markdown cells */
+    .md { padding: 4px 20px 4px 92px; }
+    .md h1 { font-size: 1.9em; font-weight: 600; margin: .3em 0 .35em; line-height: 1.2; letter-spacing: -.4px; }
+    .md h2 {
+      font-size: 1.32em; font-weight: 600; margin: 1.1em 0 .3em;
+      padding-bottom: .25em; border-bottom: 1px solid #eee;
+    }
+    .md h2 .sec { color: var(--jp-orange); font-family: var(--mono); font-size: .82em; margin-right: .35em; }
+    .md p { margin: .5em 0; color: #303030; }
+    .md .lead { font-size: 1.03em; }
+    .md strong { font-weight: 600; color: #1a1a1a; }
+    .md code {
+      font-family: var(--mono); font-size: .86em;
+      background: #f2f3f5; border: 1px solid #e6e8eb; border-radius: 3px;
+      padding: .08em .38em; color: #b5326b;
+    }
+    .md .kbd {
+      font-family: var(--mono); font-size: .82em; background: #fff;
+      border: 1px solid #cfcfcf; border-bottom-width: 2px; border-radius: 4px;
+      padding: .05em .4em; color: #333;
+    }
+    .md .hint { color: var(--ink-faint); font-size: .88em; }
+    .md ul { margin: .4em 0; padding-left: 1.3em; }
+    .md li { margin: .18em 0; color: #303030; }
+    .link-row { display: flex; flex-wrap: wrap; gap: 8px; margin: .6em 0 .2em; }
+    .link-row a {
+      display: inline-flex; align-items: center; gap: 7px;
+      font-family: var(--mono); font-size: 12.5px;
+      border: 1px solid var(--app-border); border-radius: 5px;
+      padding: 6px 12px; background: #fafafa; color: #333;
+    }
+    .link-row a:hover { text-decoration: none; border-color: var(--jp-orange); background: #fff; }
+
+    /* editable REPL input */
+    .code-edit {
+      font-family: var(--mono); font-size: 13px; line-height: 1.55;
+      color: var(--ink); white-space: pre-wrap; word-break: break-word;
+      padding: 8px 12px; outline: none; min-height: 1.55em; caret-color: var(--sel);
+    }
+    .code-edit:empty::before {
+      content: attr(data-ph); color: var(--ink-faint); pointer-events: none;
+    }
+    .run-tip { font-size: 11.5px; color: var(--ink-faint); padding: 3px 0 0 4px; font-family: var(--mono); }
+
+    /* footer */
+    .nb-footer {
+      max-width: 960px; margin: 0 auto 60px; padding: 0 18px;
+      color: var(--ink-faint); font-size: 12.5px; font-family: var(--mono);
+      display: flex; flex-wrap: wrap; align-items: center; gap: 14px; justify-content: center;
+      text-align: center;
+    }
+    .nb-footer a { color: var(--ink-soft); }
+    .nb-footer .alt {
+      display: inline-flex; align-items: center; gap: 6px;
+      border: 1px solid var(--app-border); border-radius: 4px; padding: 4px 10px; background: #fff;
+    }
+    .nb-footer .alt:hover { text-decoration: none; border-color: var(--jp-orange); color: var(--jp-orange); }
+
+    /* konami confetti */
+    .confetti { position: fixed; top: -12px; width: 9px; height: 14px; z-index: 999; pointer-events: none; border-radius: 1px; }
+
+    @media (max-width: 720px) {
+      body { font-size: 14px; }
+      .menu { display: none; }
+      .md { padding-left: 20px; padding-right: 16px; }
+      .prompt { flex-basis: 54px; font-size: 11.5px; }
+      .sheet { margin: 12px 6px 48px; border-radius: 0; }
+      .tb-cellsel, .tb-hide-sm { display: none; }
+      .logo-word { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── menu bar ─────────────────────────────────────────────── -->
+  <div class="app-bar">
+    <div class="logo" title="Project Jupyter">
+      <svg width="26" height="30" viewBox="0 0 44 51" aria-hidden="true">
+        <circle cx="22" cy="8"  r="6.2" fill="#f37726"/>
+        <path d="M6 24c0 9.9 7.2 16.2 16 16.2S38 33.9 38 24c-3 6-8.9 9.6-16 9.6S9 30 6 24z" fill="#f37726"/>
+        <path d="M38 39c0 9.9-7.2 6.6-16 6.6S6 48.9 6 39c3 3.2 8.9 4.4 16 4.4S35 42.2 38 39z" fill="#9e9e9e" opacity=".0"/>
+        <circle cx="6"  cy="45" r="4.4" fill="#f37726"/>
+        <circle cx="38" cy="45" r="3.1" fill="#f37726"/>
+      </svg>
+      <span class="logo-word">Jupyter<b>Lab</b></span>
+    </div>
+    <div class="menu">
+      <span>File</span><span>Edit</span><span>View</span><span>Run</span>
+      <span>Kernel</span><span>Settings</span><span>Help</span>
+    </div>
+    <div class="app-spacer"></div>
+    <a class="back" href="https://www.fiadino.org">&#8592; fiadino.org</a>
+  </div>
+
+  <!-- ── tab strip ────────────────────────────────────────────── -->
+  <div class="tab-strip">
+    <div class="tab">
+      <span class="nb-ico">&#9632;</span>
+      <span>pierdomenico_fiadino.ipynb</span>
+      <span class="dirty" title="unsaved changes"></span>
+    </div>
+  </div>
+
+  <!-- ── toolbar ──────────────────────────────────────────────── -->
+  <div class="toolbar">
+    <span class="tb-btn tb-hide-sm" title="Save">&#128190;</span>
+    <span class="tb-btn tb-hide-sm" title="Insert cell below">&#43;</span>
+    <span class="tb-sep tb-hide-sm"></span>
+    <span class="tb-btn tb-hide-sm" title="Cut">&#9986;</span>
+    <span class="tb-btn tb-hide-sm" title="Copy">&#10697;</span>
+    <span class="tb-sep tb-hide-sm"></span>
+    <span class="tb-btn tb-run" id="tb-run" title="Run the focused cell (Shift+Enter)">&#9654;</span>
+    <span class="tb-btn tb-hide-sm" title="Interrupt the kernel">&#9632;</span>
+    <span class="tb-btn tb-hide-sm" id="tb-restart" title="Restart the kernel">&#8635;</span>
+    <span class="tb-btn tb-hide-sm" title="Restart and run all">&#9197;</span>
+    <span class="tb-sep"></span>
+    <span class="tb-cellsel">Code &#9662;</span>
+    <div class="kernel">
+      <span class="tb-hide-sm" id="kname">Python 3 (piero-env)</span>
+      <span class="kdot" id="kdot"></span>
+    </div>
+  </div>
+
+  <!-- ── the notebook ─────────────────────────────────────────── -->
+  <div class="sheet" id="sheet">
+
+    <!-- md: title -->
+    <div class="cell md-cell">
+      <div class="md">
+        <h1>&#128202; pierdomenico_fiadino.ipynb</h1>
+        <p class="lead">A reproducible analysis of one data career &mdash; <strong>16 years</strong> from a
+        telecom research lab in Vienna to leading data at a European fintech. Everything below is
+        computed from the same source that renders the <a href="https://www.fiadino.org">main site</a>.</p>
+        <p class="hint">You found the hidden notebook edition. The last cell is a live kernel &mdash; go on, run it.</p>
+      </div>
+    </div>
+
+    <!-- code[1]: imports -->
+    <div class="cell code-cell">
+      <div class="io">
+        <div class="prompt pin">In&nbsp;[1]:</div>
+        <div class="body">
+          <div class="input-area"><pre class="src"><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">piero</span> <span class="k">as</span> <span class="nn">pf</span>
+
+<span class="nb">print</span>(<span class="s">f"piero v{pf.__version__}  &middot;  {pf.role} @ {pf.company}"</span>)</pre></div>
+        </div>
+      </div>
+      <div class="io">
+        <div class="prompt"></div>
+        <div class="body"><div class="output-area"><pre class="out-text out-stream">piero v16.0.0  &middot;  Senior Director, Head of Data @ Moss</pre></div></div>
+      </div>
+    </div>
+
+    <!-- md: who -->
+    <div class="cell md-cell">
+      <div class="md">
+        <h2><span class="sec">1&middot;</span>Who is this</h2>
+        <p><strong>Pierdomenico Fiadino, PhD</strong> &mdash; a data leader with a research background, based
+        near Barcelona. He builds and scales data functions that ship <strong>data products moving business
+        metrics</strong>: product &amp; commercial analytics, analytics engineering, decision science and
+        governance. Currently driving an <strong>AI-first transformation</strong> of the data org at Moss.</p>
+      </div>
+    </div>
+
+    <!-- code[2]: whoami -->
+    <div class="cell code-cell">
+      <div class="io">
+        <div class="prompt pin">In&nbsp;[2]:</div>
+        <div class="body"><div class="input-area"><pre class="src">pf.<span class="nf">whoami</span>()</pre></div></div>
+      </div>
+      <div class="io">
+        <div class="prompt pout">Out[2]:</div>
+        <div class="body"><div class="output-area"><pre class="out-text out-repr">{'name'            : 'Pierdomenico Fiadino, PhD',
+ 'based_in'        : 'Sabadell, Barcelona &middot; ES',
+ 'years_experience': 16,
+ 'years_in_saas'   : 8,
+ 'publications'    : '30+',
+ 'phd'             : 'Data Mining &amp; ML — TU Wien (2015)',
+ 'currently'       : 'AI-first data transformation @ Moss'}</pre></div></div>
+      </div>
+    </div>
+
+    <!-- code[3]: jobs dataframe -->
+    <div class="cell code-cell">
+      <div class="io">
+        <div class="prompt pin">In&nbsp;[3]:</div>
+        <div class="body"><div class="input-area"><pre class="src"><span class="c"># the whole run, as a DataFrame</span>
+pf.jobs</pre></div></div>
+      </div>
+      <div class="io">
+        <div class="prompt pout">Out[3]:</div>
+        <div class="body"><div class="output-area"><div class="df-wrap">
+          <table class="dataframe">
+            <thead><tr>
+              <th></th><th class="txt">company</th><th class="txt">role</th>
+              <th class="txt">sector</th><th>start</th><th>end</th><th>years</th>
+            </tr></thead>
+            <tbody>
+              <tr><th class="idx">0</th><td class="txt">Moss</td><td class="txt">Sr Director, Head of Data</td><td class="txt">FinTech</td><td>2026</td><td class="txt">—</td><td>0.4</td></tr>
+              <tr><th class="idx">1</th><td class="txt">Docplanner</td><td class="txt">Global VP of Data</td><td class="txt">HealthTech</td><td>2024</td><td>2026</td><td>2.0</td></tr>
+              <tr><th class="idx">2</th><td class="txt">Bird</td><td class="txt">Head of Data</td><td class="txt">CPaaS</td><td>2023</td><td>2024</td><td>1.1</td></tr>
+              <tr><th class="idx">3</th><td class="txt">Bitpanda</td><td class="txt">Data Analytics Manager</td><td class="txt">Crypto</td><td>2022</td><td>2022</td><td>1.0</td></tr>
+              <tr><th class="idx">4</th><td class="txt">Typeform</td><td class="txt">DS &amp; Analytics Manager</td><td class="txt">SaaS</td><td>2019</td><td>2021</td><td>2.2</td></tr>
+              <tr><th class="idx">5</th><td class="txt">Zeelo</td><td class="txt">Data Lead</td><td class="txt">Mobility</td><td>2018</td><td>2019</td><td>1.7</td></tr>
+              <tr><th class="idx">6</th><td class="txt">Eurecat</td><td class="txt">Senior Data Scientist</td><td class="txt">R&amp;D</td><td>2016</td><td>2018</td><td>2.1</td></tr>
+              <tr><th class="idx">7</th><td class="txt">FTW Vienna</td><td class="txt">R&amp;D Engineer (Data Mining)</td><td class="txt">Research</td><td>2010</td><td>2015</td><td>5.8</td></tr>
+            </tbody>
+          </table>
+        </div></div></div>
+      </div>
+    </div>
+
+    <!-- md: trajectory -->
+    <div class="cell md-cell">
+      <div class="md">
+        <h2><span class="sec">2&middot;</span>Seniority, over time</h2>
+        <p>A monotonic climb: <strong>R&amp;D engineer &rarr; senior data scientist &rarr; lead &rarr; manager
+        &rarr; head/VP &rarr; director</strong>. Individual-contributor research in the early 2010s, people-
+        and org-leadership from 2018 on.</p>
+      </div>
+    </div>
+
+    <!-- code[5]: seniority step -->
+    <div class="cell code-cell">
+      <div class="io">
+        <div class="prompt pin">In&nbsp;[4]:</div>
+        <div class="body"><div class="input-area"><pre class="src">ax <span class="o">=</span> pf.trajectory.<span class="nf">plot</span>.<span class="nf">step</span>(where<span class="o">=</span><span class="s">"post"</span>, lw<span class="o">=</span><span class="mi">2.2</span>)
+ax.<span class="nf">set_yticks</span>(<span class="nb">range</span>(<span class="mi">1</span>, <span class="mi">7</span>), pf.levels)
+ax.<span class="nf">set_title</span>(<span class="s">"Seniority level over time"</span>)</pre></div></div>
+      </div>
+      <div class="io">
+        <div class="prompt pout">Out[4]:</div>
+        <div class="body"><div class="output-area">
+          <pre class="out-text out-repr">Text(0.5, 1.0, 'Seniority level over time')</pre>
+          <div class="mpl-out" id="chart-seniority"></div>
+        </div></div>
+      </div>
+    </div>
+
+    <!-- md: skills -->
+    <div class="cell md-cell">
+      <div class="md">
+        <h2><span class="sec">3&middot;</span>Focus areas</h2>
+        <p>Relative emphasis across the toolkit &mdash; heavy on <strong>analytics</strong> and
+        <strong>data leadership</strong>, with a hands-on <strong>analytics-engineering</strong> streak and a
+        growing <strong>AI/ML</strong> weight from the research past.</p>
+      </div>
+    </div>
+
+    <!-- code[6]: skills barh -->
+    <div class="cell code-cell">
+      <div class="io">
+        <div class="prompt pin">In&nbsp;[5]:</div>
+        <div class="body"><div class="input-area"><pre class="src">pf.skills.<span class="nf">sort_values</span>().<span class="nf">plot</span>.<span class="nf">barh</span>(
+    color<span class="o">=</span><span class="s">"#1f77b4"</span>, title<span class="o">=</span><span class="s">"Focus areas (relative emphasis)"</span>)</pre></div></div>
+      </div>
+      <div class="io">
+        <div class="prompt pout">Out[5]:</div>
+        <div class="body"><div class="output-area">
+          <pre class="out-text out-repr">&lt;Axes: title={'center': 'Focus areas (relative emphasis)'}&gt;</pre>
+          <div class="mpl-out" id="chart-skills"></div>
+        </div></div>
+      </div>
+    </div>
+
+    <!-- md: publications -->
+    <div class="cell md-cell">
+      <div class="md">
+        <h2><span class="sec">4&middot;</span>A research past</h2>
+        <p><strong>30+ peer-reviewed publications</strong> in networking, data mining and machine learning,
+        clustered around the PhD years at TU Wien and FTW Vienna (2011&ndash;2018).</p>
+      </div>
+    </div>
+
+    <!-- code[7]: pubs bar -->
+    <div class="cell code-cell">
+      <div class="io">
+        <div class="prompt pin">In&nbsp;[6]:</div>
+        <div class="body"><div class="input-area"><pre class="src">counts <span class="o">=</span> pf.publications.<span class="nf">groupby</span>(<span class="s">"year"</span>).<span class="nf">size</span>()
+counts.<span class="nf">plot</span>.<span class="nf">bar</span>(color<span class="o">=</span><span class="s">"#1f77b4"</span>, title<span class="o">=</span><span class="s">"Publications per year"</span>)
+<span class="nb">print</span>(<span class="s">f"total: {counts.sum()}+ peer-reviewed publications"</span>)</pre></div></div>
+      </div>
+      <div class="io">
+        <div class="prompt pout">Out[6]:</div>
+        <div class="body"><div class="output-area">
+          <pre class="out-text out-stream">total: 30+ peer-reviewed publications</pre>
+          <div class="mpl-out" id="chart-pubs"></div>
+        </div></div>
+      </div>
+    </div>
+
+    <!-- md: education -->
+    <div class="cell md-cell">
+      <div class="md">
+        <h2><span class="sec">5&middot;</span>Education</h2>
+      </div>
+    </div>
+
+    <!-- code[8]: education df -->
+    <div class="cell code-cell">
+      <div class="io">
+        <div class="prompt pin">In&nbsp;[7]:</div>
+        <div class="body"><div class="input-area"><pre class="src">pf.education</pre></div></div>
+      </div>
+      <div class="io">
+        <div class="prompt pout">Out[7]:</div>
+        <div class="body"><div class="output-area"><div class="df-wrap">
+          <table class="dataframe">
+            <thead><tr>
+              <th></th><th class="txt">degree</th><th class="txt">field</th>
+              <th class="txt">institution</th><th>year</th>
+            </tr></thead>
+            <tbody>
+              <tr><th class="idx">0</th><td class="txt">PhD</td><td class="txt">Data Mining &amp; Machine Learning</td><td class="txt">TU Wien</td><td>2015</td></tr>
+              <tr><th class="idx">1</th><td class="txt">MSc</td><td class="txt">Computer Engineering</td><td class="txt">Sapienza, Rome</td><td>2010</td></tr>
+              <tr><th class="idx">2</th><td class="txt">BSc</td><td class="txt">Computer Engineering</td><td class="txt">Sapienza, Rome</td><td>2008</td></tr>
+            </tbody>
+          </table>
+        </div></div></div>
+      </div>
+    </div>
+
+    <!-- md: contact -->
+    <div class="cell md-cell">
+      <div class="md">
+        <h2><span class="sec">6&middot;</span>Get in touch</h2>
+        <p>The kernel is still warm. Reach out, grab the CV, or call <code>pf.help()</code> in the cell below.</p>
+        <div class="link-row">
+          <a href="/resume.pdf">&#128196; resume.pdf</a>
+          <a href="mailto:p@fiadino.org">&#9993; p@fiadino.org</a>
+          <a href="https://linkedin.com/in/fiadino" target="_blank" rel="noopener">&#128188; LinkedIn</a>
+          <a href="https://github.com/pierdom" target="_blank" rel="noopener">&#128187; GitHub</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- code[ ]: interactive REPL -->
+    <div class="cell code-cell selected editing" id="repl-cell">
+      <div class="io">
+        <div class="prompt pin" id="repl-prompt">In&nbsp;[&nbsp;]:</div>
+        <div class="body">
+          <div class="input-area">
+            <div class="code-edit" id="repl-input" contenteditable="true" spellcheck="false"
+                 data-ph="pf.help()      # type a command, then Shift+Enter"></div>
+          </div>
+          <div class="run-tip"><span class="kbd">Shift</span> + <span class="kbd">Enter</span> to run</div>
+        </div>
+      </div>
+      <div id="repl-out"></div>
+    </div>
+
+  </div>
+
+  <div class="nb-footer">
+    <span>&copy; 1997&ndash;2026 Pierdomenico Fiadino</span>
+    <a class="alt" href="/terminal">&#62;_ terminal</a>
+    <a class="alt" href="/retro">&#128250; retro</a>
+    <a class="alt" href="https://www.fiadino.org">&#8962; main site</a>
+  </div>
+
+  <script>
+  /* ══ matplotlib-flavoured SVG renderer ═══════════════════════════ */
+  const SVGNS = 'http://www.w3.org/2000/svg';
+  function E(tag, attrs, text) {
+    const e = document.createElementNS(SVGNS, tag);
+    for (const k in attrs) e.setAttribute(k, attrs[k]);
+    if (text != null) e.textContent = text;
+    return e;
+  }
+  function figure(w, h, title) {
+    const svg = E('svg', { viewBox: `0 0 ${w} ${h}`, class: 'mpl',
+      'font-family': "'DejaVu Sans', Verdana, sans-serif" });
+    svg.appendChild(E('rect', { x: 0, y: 0, width: w, height: h, fill: '#ffffff' }));
+    if (title) svg.appendChild(E('text', { x: w / 2, y: 20, 'text-anchor': 'middle',
+      'font-size': 14.5, fill: '#1a1a1a' }, title));
+    return svg;
+  }
+  function spines(svg, L, T, pw, ph) {
+    const col = '#333', sw = 1;
+    svg.appendChild(E('line', { x1: L, y1: T, x2: L, y2: T + ph, stroke: col, 'stroke-width': sw }));
+    svg.appendChild(E('line', { x1: L, y1: T + ph, x2: L + pw, y2: T + ph, stroke: col, 'stroke-width': sw }));
+  }
+  function niceMax(v) {
+    const exp = Math.floor(Math.log10(v));
+    const f = v / Math.pow(10, exp);           // 1..10
+    const nf = f <= 1 ? 1 : f <= 2 ? 2 : f <= 3 ? 3 : f <= 5 ? 5 : f <= 8 ? 8 : 10;
+    return nf * Math.pow(10, exp);
+  }
+  const fmt = n => Number.isInteger(n) ? String(n) : n.toFixed(1);
+
+  function drawBarh(id, rows, color, title) {
+    const w = 620, h = 40 + rows.length * 34 + 46, L = 118, T = 36, R = 26, B = 40;
+    const pw = w - L - R, ph = h - T - B;
+    const svg = figure(w, h, title);
+    const xmax = niceMax(Math.max(...rows.map(r => r[1])));
+    spines(svg, L, T, pw, ph);
+    // x ticks
+    const nticks = 4;
+    for (let i = 0; i <= nticks; i++) {
+      const v = xmax * i / nticks, x = L + pw * i / nticks;
+      svg.appendChild(E('line', { x1: x, y1: T + ph, x2: x, y2: T + ph + 5, stroke: '#333', 'stroke-width': 1 }));
+      svg.appendChild(E('text', { x: x, y: T + ph + 18, 'text-anchor': 'middle', 'font-size': 11.5, fill: '#333' }, fmt(v)));
+    }
+    const band = ph / rows.length, bh = band * 0.62;
+    rows.forEach((r, i) => {
+      const y = T + i * band + (band - bh) / 2, bw = r[1] / xmax * pw;
+      svg.appendChild(E('rect', { x: L, y: y, width: Math.max(bw, 0.5), height: bh, fill: color }));
+      svg.appendChild(E('text', { x: L - 8, y: y + bh / 2 + 4, 'text-anchor': 'end', 'font-size': 11.5, fill: '#333' }, r[0]));
+      svg.appendChild(E('text', { x: L + bw + 6, y: y + bh / 2 + 4, 'text-anchor': 'start', 'font-size': 10.5, fill: '#888' },
+        fmt(r[1])));
+    });
+    document.getElementById(id).appendChild(svg);
+  }
+
+  function drawBar(id, rows, color, title) {
+    const w = 620, h = 360, L = 52, T = 36, R = 24, B = 44;
+    const pw = w - L - R, ph = h - T - B;
+    const svg = figure(w, h, title);
+    const ymax = niceMax(Math.max(...rows.map(r => r[1])));
+    spines(svg, L, T, pw, ph);
+    for (let i = 0; i <= ymax; i++) {
+      const y = T + ph - (i / ymax) * ph;
+      svg.appendChild(E('line', { x1: L - 5, y1: y, x2: L, y2: y, stroke: '#333', 'stroke-width': 1 }));
+      svg.appendChild(E('text', { x: L - 9, y: y + 4, 'text-anchor': 'end', 'font-size': 11.5, fill: '#333' }, i));
+    }
+    const band = pw / rows.length, bw = band * 0.7;
+    rows.forEach((r, i) => {
+      const x = L + i * band + (band - bw) / 2, bh = r[1] / ymax * ph;
+      svg.appendChild(E('rect', { x: x, y: T + ph - bh, width: bw, height: bh, fill: color }));
+      svg.appendChild(E('text', { x: x + bw / 2, y: T + ph + 17, 'text-anchor': 'middle', 'font-size': 11, fill: '#333' }, r[0]));
+    });
+    document.getElementById(id).appendChild(svg);
+  }
+
+  function drawStep(id, pts, ylabels, color, title) {
+    const w = 620, h = 360, L = 92, T = 36, R = 24, B = 40;
+    const pw = w - L - R, ph = h - T - B;
+    const svg = figure(w, h, title);
+    const x0 = 2010, x1 = 2026, y0 = 0.5, y1 = 6.5;
+    const sx = v => L + (v - x0) / (x1 - x0) * pw;
+    const sy = v => T + ph - (v - y0) / (y1 - y0) * ph;
+    spines(svg, L, T, pw, ph);
+    // y ticks + labels
+    for (let i = 1; i <= 6; i++) {
+      const y = sy(i);
+      svg.appendChild(E('line', { x1: L - 5, y1: y, x2: L, y2: y, stroke: '#333', 'stroke-width': 1 }));
+      svg.appendChild(E('text', { x: L - 9, y: y + 4, 'text-anchor': 'end', 'font-size': 11, fill: '#333' }, ylabels[i - 1]));
+    }
+    // x ticks every 2y
+    for (let yr = 2010; yr <= 2026; yr += 4) {
+      const x = sx(yr);
+      svg.appendChild(E('line', { x1: x, y1: T + ph, x2: x, y2: T + ph + 5, stroke: '#333', 'stroke-width': 1 }));
+      svg.appendChild(E('text', { x: x, y: T + ph + 18, 'text-anchor': 'middle', 'font-size': 11.5, fill: '#333' }, yr));
+    }
+    // step path (where='post')
+    let d = `M ${sx(pts[0][0])} ${sy(pts[0][1])}`;
+    for (let i = 1; i < pts.length; i++) {
+      d += ` L ${sx(pts[i][0])} ${sy(pts[i - 1][1])} L ${sx(pts[i][0])} ${sy(pts[i][1])}`;
+    }
+    svg.appendChild(E('path', { d, fill: 'none', stroke: color, 'stroke-width': 2.2 }));
+    pts.forEach(p => svg.appendChild(E('circle', { cx: sx(p[0]), cy: sy(p[1]), r: 3.4, fill: color })));
+    document.getElementById(id).appendChild(svg);
+  }
+
+  drawStep('chart-seniority', [
+    [2010, 1], [2016, 2], [2018, 3], [2019, 4], [2023, 5], [2024, 5], [2026, 6]
+  ], ['IC', 'Sr DS', 'Lead', 'Mgr', 'Head/VP', 'Dir'], '#1f77b4', 'Seniority level over time');
+
+  drawBarh('chart-skills', [
+    ['Governance', 75], ['AI & ML', 82], ['Analytics Eng.', 80],
+    ['BI & Reporting', 88], ['Data Leadership', 92], ['Analytics', 95]
+  ], '#1f77b4', 'Focus areas (relative emphasis)');
+
+  drawBar('chart-pubs', [
+    [2011, 2], [2012, 3], [2013, 4], [2014, 5], [2015, 6], [2016, 4], [2017, 3], [2018, 2]
+  ], '#1f77b4', 'Publications per year');
+
+  /* ══ interactive kernel (the last cell) ═════════════════════════ */
+  const kdot   = document.getElementById('kdot');
+  const replIn = document.getElementById('repl-input');
+  const replOut= document.getElementById('repl-out');
+  const replCell = document.getElementById('repl-cell');
+  const replPrompt = document.getElementById('repl-prompt');
+  let counter = 8;
+
+  const esc = s => s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+
+  function kernelBusy(on) { kdot.classList.toggle('busy', on); }
+
+  const COMMANDS = {
+    'pf.help()': () => ({ t: 'stream', v:
+`Available commands:
+  pf.whoami()     &rarr;  who is this
+  pf.hire()       &rarr;  the pitch
+  pf.contact()    &rarr;  email + socials
+  pf.cv()         &rarr;  open resume.pdf
+  pf.skills       &rarr;  focus areas
+  pf.jobs         &rarr;  full career DataFrame (scroll up)
+  pf.retro()      &rarr;  the 90s edition
+  pf.terminal()   &rarr;  the terminal edition
+  pf.home()       &rarr;  back to fiadino.org
+  clear           &rarr;  clear the output` }),
+    'pf.whoami()': () => ({ t: 'repr', v:
+`{'name': 'Pierdomenico Fiadino, PhD',
+ 'role': 'Senior Director, Head of Data @ Moss',
+ 'years': 16, 'phd': 'TU Wien, 2015'}` }),
+    'pf.hire()': () => ({ t: 'stream', v:
+`Building or scaling a data function? I've done zero-to-one (Bitpanda)
+and 40+ person global orgs (Docplanner). Product &amp; commercial analytics,
+analytics engineering, governance, and an AI-first bent.
+&rarr; <a href="mailto:p@fiadino.org?subject=Let's%20talk%20data">p@fiadino.org</a>` }),
+    'pf.contact()': () => ({ t: 'stream', v:
+`email     <a href="mailto:p@fiadino.org">p@fiadino.org</a>
+linkedin  <a href="https://linkedin.com/in/fiadino" target="_blank" rel="noopener">/in/fiadino</a>
+github    <a href="https://github.com/pierdom" target="_blank" rel="noopener">@pierdom</a>` }),
+    'pf.skills': () => ({ t: 'repr', v:
+`Analytics          95
+Data Leadership    92
+BI & Reporting     88
+AI & ML            82
+Analytics Eng.     80
+Governance         75
+dtype: int64` }),
+    'pf.cv()': () => { window.open('/resume.pdf', '_blank'); return { t: 'stream', v: 'opening resume.pdf ...' }; },
+    'pf.retro()': () => { setTimeout(() => location.href = '/retro', 500); return { t: 'stream', v: 'rebooting into 1997 ...' }; },
+    'pf.terminal()': () => { setTimeout(() => location.href = '/terminal', 500); return { t: 'stream', v: 'dropping to a shell ...' }; },
+    'pf.home()': () => { setTimeout(() => location.href = 'https://www.fiadino.org', 500); return { t: 'stream', v: 'returning to fiadino.org ...' }; },
+    'import antigravity': () => { window.open('https://xkcd.com/353/', '_blank'); return { t: 'stream', v: 'https://xkcd.com/353/' }; },
+  };
+
+  function evaluate(raw) {
+    const src = raw.trim();
+    if (!src) return null;
+    if (src === 'clear') { replOut.innerHTML = ''; return null; }
+    if (COMMANDS[src]) return COMMANDS[src]();
+    // friendly aliases
+    const alias = src.replace(/\s+/g, '');
+    for (const key in COMMANDS) if (key.replace(/\s+/g,'') === alias) return COMMANDS[key]();
+    // a plausible python traceback
+    const name = src.split(/[.( ]/)[0];
+    const known = ['pf','pd','plt','piero'];
+    if (src.endsWith(')') || known.includes(name)) {
+      return { t: 'err', name: 'AttributeError',
+        v: `module 'piero' has no attribute '${esc(src.replace(/^pf\.?/, '').replace(/\(.*$/, '') || src)}'`,
+        where: `Cell In[${counter}], line 1\n----&gt; 1 ${esc(src)}` };
+    }
+    return { t: 'err', name: 'NameError', v: `name '${esc(name)}' is not defined`,
+      where: `Cell In[${counter}], line 1\n----&gt; 1 ${esc(src)}` };
+  }
+
+  function renderInputEcho(n, src) {
+    const cell = document.createElement('div');
+    cell.className = 'io';
+    cell.innerHTML =
+      `<div class="prompt pin">In&nbsp;[${n}]:</div>` +
+      `<div class="body"><div class="input-area"><pre class="src">${esc(src)}</pre></div></div>`;
+    return cell;
+  }
+  function renderOutput(n, res) {
+    if (!res) return null;
+    const cell = document.createElement('div');
+    cell.className = 'io';
+    if (res.t === 'err') {
+      cell.innerHTML =
+        `<div class="prompt"></div><div class="body"><div class="output-area err">` +
+        `<pre class="out-text"><span class="esep">---------------------------------------------------------------------------</span>\n` +
+        `<span class="ename">${res.name}</span>${' '.repeat(Math.max(1, 26 - res.name.length))}Traceback (most recent call last)\n` +
+        `${res.where}\n\n<span class="ename">${res.name}</span>: ${res.v}</pre></div></div>`;
+    } else {
+      const cls = res.t === 'repr' ? 'out-repr' : 'out-stream';
+      const promptCls = res.t === 'repr' ? 'prompt pout' : 'prompt';
+      const promptTxt = res.t === 'repr' ? `Out[${n}]:` : '';
+      cell.innerHTML =
+        `<div class="${promptCls}">${promptTxt}</div>` +
+        `<div class="body"><div class="output-area"><pre class="out-text ${cls}">${res.v}</pre></div></div>`;
+    }
+    return cell;
+  }
+
+  function runRepl() {
+    const src = replIn.innerText;
+    if (!src.trim()) return;
+    counter++;
+    kernelBusy(true);
+    replPrompt.innerHTML = 'In&nbsp;[*]:';
+    setTimeout(() => {
+      const res = evaluate(src);
+      replOut.appendChild(renderInputEcho(counter, src.trim()));
+      const out = renderOutput(counter, res);
+      if (out) replOut.appendChild(out);
+      replPrompt.innerHTML = `In&nbsp;[&nbsp;]:`;
+      replIn.innerHTML = '';
+      kernelBusy(false);
+      replIn.focus();
+      replCell.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+    }, 260);
+  }
+
+  replIn.addEventListener('keydown', e => {
+    if (e.key === 'Enter' && (e.shiftKey || e.ctrlKey)) { e.preventDefault(); runRepl(); }
+  });
+  document.getElementById('tb-run').addEventListener('click', runRepl);
+  document.getElementById('tb-restart').addEventListener('click', () => {
+    kernelBusy(true);
+    replOut.innerHTML = '';
+    counter = 8;
+    setTimeout(() => { kernelBusy(false); replIn.focus(); }, 700);
+  });
+
+  /* click-to-select cells (visual only) */
+  document.querySelectorAll('.cell').forEach(c => {
+    c.addEventListener('click', () => {
+      document.querySelectorAll('.cell.selected').forEach(x => {
+        if (x !== c) x.classList.remove('selected', 'editing');
+      });
+      c.classList.add('selected');
+      if (c.querySelector('.code-edit')) c.classList.add('editing');
+    });
+  });
+
+  /* ══ Konami code ════════════════════════════════════════════════ */
+  const KON = ['ArrowUp','ArrowUp','ArrowDown','ArrowDown','ArrowLeft','ArrowRight','ArrowLeft','ArrowRight','b','a'];
+  let kpos = 0;
+  window.addEventListener('keydown', e => {
+    const k = e.key.length === 1 ? e.key.toLowerCase() : e.key;
+    kpos = (k === KON[kpos]) ? kpos + 1 : (k === KON[0] ? 1 : 0);
+    if (kpos === KON.length) { kpos = 0; konami(); }
+  });
+  function konami() {
+    counter++;
+    replOut.appendChild(renderInputEcho(counter, 'import this  # the Zen of Piero'));
+    const zen = document.createElement('div');
+    zen.className = 'io';
+    zen.innerHTML =
+      `<div class="prompt"></div><div class="body"><div class="output-area"><pre class="out-text out-stream">` +
+`The Zen of Piero
+----------------
+Measure what matters, then question the measure.
+Ship the dashboard; delete it when nobody reads it.
+A model in production beats a paper in review.
+Governance is a love language.
+If the pipeline is silent, it is probably lying.
+Now stop reading and go build something. &#127881;</pre></div></div>`;
+    replOut.appendChild(zen);
+    for (let i = 0; i < 70; i++) confetti();
+    replCell.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+  }
+  function confetti() {
+    const c = document.createElement('div');
+    c.className = 'confetti';
+    const colors = ['#f37726','#1f77b4','#4caf50','#d84315','#303f9f','#f5b800'];
+    c.style.left = Math.random() * 100 + 'vw';
+    c.style.background = colors[Math.floor(Math.random() * colors.length)];
+    c.style.transform = `rotate(${Math.random() * 360}deg)`;
+    document.body.appendChild(c);
+    const dur = 2200 + Math.random() * 1600;
+    c.animate([
+      { top: '-12px', opacity: 1 },
+      { top: '100vh', opacity: .9, transform: `translateX(${(Math.random()-.5)*260}px) rotate(${Math.random()*720}deg)` }
+    ], { duration: dur, easing: 'cubic-bezier(.3,.1,.5,1)' }).onfinish = () => c.remove();
+  }
+  </script>
+
+  <script defer src="https://app.rybbit.io/api/script.js" data-site-id="f25f9e1f5d82"></script>
+</body>
+</html>
