@@ -1,3 +1,4 @@
 User-agent: *
 Disallow: /retro/
 Disallow: /terminal/
+Disallow: /notebook/

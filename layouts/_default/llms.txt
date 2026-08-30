@@ -1,0 +1,23 @@
+# {{ site.Params.Author.name }}
+
+> {{ site.Params.description }}
+
+Currently leading an AI-first, AI-native transformation of the data function at Moss — building self-serve analytics, data-driven RevOps automation, and decision science capabilities powered by AI.
+
+## Pages
+
+{{- range slice "/about" "/jobs" "/education" "/publications" }}
+{{- with site.GetPage . }}
+- [{{ .Title }}]({{ .Permalink }}): {{ .Params.description }}
+{{- end }}
+{{- end }}
+
+## Contact
+
+{{- range site.Params.Author.links }}
+{{- range $name, $url := . }}
+{{- if not (strings.HasPrefix $url "mailto:") }}
+- {{ $name | title }}: {{ $url }}
+{{- end }}
+{{- end }}
+{{- end }}
