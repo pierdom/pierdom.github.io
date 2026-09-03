@@ -651,3 +651,8 @@ html {
   opacity: 1;
   text-decoration: underline;
 }
+/* Header nav: keep multi-word menu entries on one line (e.g. "About me"). */
+.main-menu nav a,
+.main-menu nav a span {
+  white-space: nowrap;
+}

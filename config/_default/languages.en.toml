@@ -9,6 +9,8 @@ title = "Pierdomenico (Piero) Fiadino - Data and Insights leader"
   rtl = false
   dateFormat = "2 January 2006"
   logo = "img/r2d2_xs.png"
+  # Short name for the header bar; the long `title` above is kept for SEO/<title>.
+  headerTitle = "Pierdomenico Fiadino"
   description = "Pierdomenico Fiadino — Data leader with 16 years of experience across R&D and SaaS. PhD in Data Mining, Head of Data @ Moss."
   copyright = "©2026 All Rights Reserved"
 
