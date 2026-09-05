@@ -3,11 +3,35 @@ title: "Education"
 date: 2023-01-09T00:08:14+01:00
 draft: false
 layout: simple_custom
-description: "Academic background of Pierdomenico Fiadino — PhD in Data Mining and Machine Learning from TU Wien, MSc in Computer Engineering."
+description: "Academic background of Pierdomenico Fiadino — PhD in Data Mining and Machine Learning from TU Wien, MSc and BSc in Computer Engineering from Sapienza, plus 30+ peer-reviewed publications and two conference awards."
 ---
 
 <style>
 .edu-card-degree { font-size: 1.15em; }
+/* Research-output callout. Mirrored in custom.css; kept inline so it survives
+   aggressive CSS caching in local dev (see CLAUDE.md). */
+.research-output {
+  border: 1px solid rgba(96,165,250,.35);
+  border-top: 3px solid rgba(96,165,250,.8);
+  background: rgba(96,165,250,.07);
+  padding: 22px 24px; margin: 8px 0 4px;
+}
+.research-output-head { font-size: 1.12em; font-weight: 700; margin: 0 0 10px; }
+.research-output p { font-size: .94em; line-height: 1.6; margin: 0 0 14px; }
+.research-output-stats { display: flex; flex-wrap: wrap; gap: 26px; margin: 0 0 18px; }
+.ro-stat-num { font-size: 1.45em; font-weight: 700; line-height: 1.1; }
+.ro-stat-label { font-size: .76em; opacity: .65; margin-top: 3px; line-height: 1.35; }
+.research-output-awards { list-style: none; padding: 0; margin: 0 0 18px; }
+.research-output-awards li {
+  font-size: .87em; line-height: 1.5; padding: 5px 0 5px 24px; position: relative;
+}
+.research-output-awards li::before {
+  content: '\f559'; font-family: 'Font Awesome 5 Free'; font-weight: 900;
+  position: absolute; left: 0; top: 5px; color: #d97706; font-size: .95em;
+}
+.dark .research-output-awards li::before { color: #fbbf24; }
+.research-output .profile-btn { font-size: .95em; }
+.research-output-actions { display: flex; flex-wrap: wrap; gap: 10px; }
 </style>
 
 <div class="not-prose">
@@ -73,6 +97,43 @@ description: "Academic background of Pierdomenico Fiadino — PhD in Data Mining
     <span class="edu-field-value">Computer Engineering</span>
     <span class="edu-field-label">Dissertation</span>
     <span class="edu-field-value edu-dissertation">Design and implementation of a Java application for p2p file sharing</span>
+  </div>
+</div>
+
+<h2 style="margin-top:38px;">Research output</h2>
+
+<div class="research-output">
+  <div class="research-output-head">30+ peer-reviewed publications, 2012&ndash;2018</div>
+  <p>The work behind the PhD and the R&amp;D years: data mining and machine learning on massive network datasets &mdash; traffic analysis, human mobility, user profiling, anomaly detection. It is a closed chapter, but a good one, and the technical depth still earns its keep.</p>
+  <div class="research-output-stats">
+    <div>
+      <div class="ro-stat-num">30+</div>
+      <div class="ro-stat-label">papers in international<br>conferences and journals</div>
+    </div>
+    <div>
+      <div class="ro-stat-num">700+</div>
+      <div class="ro-stat-label">citations<br>(Google Scholar)</div>
+    </div>
+    <div>
+      <div class="ro-stat-num">16</div>
+      <div class="ro-stat-label">h-index</div>
+    </div>
+    <div>
+      <div class="ro-stat-num">2</div>
+      <div class="ro-stat-label">conference<br>awards</div>
+    </div>
+  </div>
+  <ul class="research-output-awards">
+    <li><strong>ACM SIGCOMM 2015</strong> &mdash; Student Research Competition, Runner-Up</li>
+    <li><strong>ITC 25 (2013)</strong> &mdash; Best Paper Award</li>
+  </ul>
+  <div class="research-output-actions">
+    <a class="profile-btn profile-btn-primary" href="/publications/">
+      <i class="fas fa-book-open"></i> Browse the research archive
+    </a>
+    <a class="profile-btn" href="https://scholar.google.com/citations?user=Xp4MNSUAAAAJ&amp;hl=en" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-graduation-cap"></i> Google Scholar
+    </a>
   </div>
 </div>
 

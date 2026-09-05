@@ -685,3 +685,39 @@ html {
 .pub-archive-note { border-left: 4px solid rgba(148,163,184,.75); background: rgba(148,163,184,.1); padding: 14px 18px; margin: 0 0 18px; }
 .pub-archive-note p { font-size: .92em; line-height: 1.6; margin: 0 0 9px; }
 .pub-archive-note p:last-child { margin-bottom: 0; opacity: .82; }
+
+/* Primary variant of .profile-btn — was only defined inline in about.html,
+   promoted here so the Education page's research-archive CTA picks it up too. */
+.profile-btn.profile-btn-primary {
+  background: rgba(96,165,250,0.15);
+  border-color: rgba(96,165,250,0.7);
+}
+.profile-btn.profile-btn-primary:hover {
+  background: rgba(96,165,250,0.25);
+  border-color: rgba(96,165,250,1);
+}
+
+/* Research-output callout on the Education page. Mirrored inline in
+   education.html (see CLAUDE.md on the dev CSS caching caveat). */
+.research-output {
+  border: 1px solid rgba(96,165,250,.35);
+  border-top: 3px solid rgba(96,165,250,.8);
+  background: rgba(96,165,250,.07);
+  padding: 22px 24px; margin: 8px 0 4px;
+}
+.research-output-head { font-size: 1.12em; font-weight: 700; margin: 0 0 10px; }
+.research-output p { font-size: .94em; line-height: 1.6; margin: 0 0 14px; }
+.research-output-stats { display: flex; flex-wrap: wrap; gap: 26px; margin: 0 0 18px; }
+.ro-stat-num { font-size: 1.45em; font-weight: 700; line-height: 1.1; }
+.ro-stat-label { font-size: .76em; opacity: .65; margin-top: 3px; line-height: 1.35; }
+.research-output-awards { list-style: none; padding: 0; margin: 0 0 18px; }
+.research-output-awards li {
+  font-size: .87em; line-height: 1.5; padding: 5px 0 5px 24px; position: relative;
+}
+.research-output-awards li::before {
+  content: '\f559'; font-family: 'Font Awesome 5 Free'; font-weight: 900;
+  position: absolute; left: 0; top: 5px; color: #d97706; font-size: .95em;
+}
+.dark .research-output-awards li::before { color: #fbbf24; }
+.research-output .profile-btn { font-size: .95em; }
+.research-output-actions { display: flex; flex-wrap: wrap; gap: 10px; }
