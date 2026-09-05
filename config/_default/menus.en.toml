@@ -34,11 +34,6 @@
     weight = 30
     url = "/education/"
 
-[[main]]
-    name = "Publications"
-    pageRef = "page"
-    weight = 40
-    url = "/publications/"
 
 #[[main]]
 #  name = "Blog"
@@ -61,10 +56,14 @@
 # the copyright notice. Configure as per the main menu above.
 
 
-# [[footer]]
-#   name = "Tags"
-#   pageRef = "tags"
-#   weight = 10
+# Publications live in the footer, not the main nav: the research archive
+# (2012–2018) is deliberately de-weighted so it doesn't dominate how the site
+# reads to search engines and LLMs. See /about for the positioning rationale.
+[[footer]]
+    name = "Research archive"
+    pageRef = "page"
+    weight = 10
+    url = "/publications/"
 
 # [[footer]]
 #   name = "Categories"

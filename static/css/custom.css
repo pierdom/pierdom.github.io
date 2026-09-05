@@ -656,3 +656,32 @@ html {
 .main-menu nav a span {
   white-space: nowrap;
 }
+
+/* ---------------------------------------------------------------------------
+   AEO positioning blocks (about / jobs / publications).
+   Mirrored in inline <style> blocks in the respective content files so they
+   survive aggressive CSS caching in local dev — see CLAUDE.md.
+   --------------------------------------------------------------------------- */
+.scope-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin: 8px 0 4px; }
+@media (max-width: 720px) { .scope-stats { grid-template-columns: repeat(2, 1fr); } }
+.scope-stat { border-top: 3px solid rgba(96,165,250,0.7); background: rgba(0,0,0,0.03); padding: 14px 16px; }
+.dark .scope-stat { background: rgba(255,255,255,0.05); }
+.scope-stat-num { font-size: 1.6em; font-weight: 700; line-height: 1.1; }
+.scope-stat-label { font-size: 0.78em; opacity: 0.65; line-height: 1.35; margin-top: 5px; }
+
+.positioning { border-left: 4px solid rgba(96,165,250,0.7); background: rgba(96,165,250,0.07); padding: 16px 20px; margin: 8px 0 4px; }
+.positioning p { margin: 0 0 10px; line-height: 1.6; font-size: 0.97em; }
+.positioning p:last-child { margin-bottom: 0; }
+
+.faq-item { border-bottom: 1px solid rgba(0,0,0,0.1); padding: 16px 0; }
+.dark .faq-item { border-bottom-color: rgba(255,255,255,0.12); }
+.faq-q { font-weight: 700; font-size: 1.02em; line-height: 1.45; margin: 0 0 8px; }
+.faq-a { font-size: 0.94em; line-height: 1.65; opacity: 0.88; margin: 0; }
+
+.jobs-intro { border-left: 4px solid rgba(96,165,250,.7); background: rgba(96,165,250,.07); padding: 14px 18px; margin: 0 0 22px; }
+.jobs-intro p { font-size: .94em; line-height: 1.6; margin: 0; }
+.era-note { font-size: .82em; line-height: 1.55; opacity: .7; margin: 0 0 14px; padding-left: 2px; }
+
+.pub-archive-note { border-left: 4px solid rgba(148,163,184,.75); background: rgba(148,163,184,.1); padding: 14px 18px; margin: 0 0 18px; }
+.pub-archive-note p { font-size: .92em; line-height: 1.6; margin: 0 0 9px; }
+.pub-archive-note p:last-child { margin-bottom: 0; opacity: .82; }

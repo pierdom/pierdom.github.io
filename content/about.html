@@ -3,7 +3,7 @@ title: "About me"
 date: 2025-03-23T00:08:14+01:00
 draft: false
 layout: simple_custom
-description: "Data leader with 16 years of experience across R&D and SaaS. PhD in Data Mining from TU Wien. Currently Senior Director, Head of Data at Moss."
+description: "Pierdomenico Fiadino is a data and analytics leader in B2B/B2C SaaS — Senior Director, Head of Data & Insights at Moss. Eight years leading data functions in commercial product companies, including a 40-person global department at Docplanner."
 ---
 
 <style>
@@ -33,6 +33,35 @@ description: "Data leader with 16 years of experience across R&D and SaaS. PhD i
   background: rgba(96,165,250,0.25);
   border-color: rgba(96,165,250,1);
 }
+/* Scope stats + FAQ. Inline here as well as in custom.css so they survive
+   aggressive CSS caching in local dev (see CLAUDE.md). */
+.scope-stats {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 12px; margin: 8px 0 4px;
+}
+@media (max-width: 720px) { .scope-stats { grid-template-columns: repeat(2, 1fr); } }
+.scope-stat {
+  border-top: 3px solid rgba(96,165,250,0.7);
+  background: rgba(0,0,0,0.03);
+  padding: 14px 16px;
+}
+.dark .scope-stat { background: rgba(255,255,255,0.05); }
+.scope-stat-num { font-size: 1.6em; font-weight: 700; line-height: 1.1; }
+.scope-stat-label { font-size: 0.78em; opacity: 0.65; line-height: 1.35; margin-top: 5px; }
+.positioning {
+  border-left: 4px solid rgba(96,165,250,0.7);
+  background: rgba(96,165,250,0.07);
+  padding: 16px 20px; margin: 8px 0 4px;
+}
+.positioning p { margin: 0 0 10px; line-height: 1.6; font-size: 0.97em; }
+.positioning p:last-child { margin-bottom: 0; }
+.faq-item {
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+  padding: 16px 0;
+}
+.dark .faq-item { border-bottom-color: rgba(255,255,255,0.12); }
+.faq-q { font-weight: 700; font-size: 1.02em; line-height: 1.45; margin: 0 0 8px; }
+.faq-a { font-size: 0.94em; line-height: 1.65; opacity: 0.88; margin: 0; }
 </style>
 
 <div class="profile-card not-prose">
@@ -40,12 +69,12 @@ description: "Data leader with 16 years of experience across R&D and SaaS. PhD i
     <img class="nozoom" src="/img/pf.jpg" alt="Pierdomenico Fiadino" style="width:100%;height:100%;object-fit:cover;object-position:center 12%;display:block;" />
   </div>
   <div class="profile-card-body">
-    <div class="profile-card-name">Pierdomenico Fiadino, PhD</div>
-    <div class="profile-card-role">Senior Director, Head of Data @ Moss</div>
+    <div class="profile-card-name">Pierdomenico Fiadino</div>
+    <div class="profile-card-role">Senior Director, Head of Data &amp; Insights @ Moss</div>
     <div class="profile-card-bio">
-      <p><strong>Data leader</strong> with <strong>16 years of experience</strong> across R&amp;D and B2B/B2C SaaS, focused on shipping <strong>data products</strong> that move business metrics.</p>
-      <p>Currently <strong>Senior Director, Head of Data</strong> at <strong>Moss</strong>, where I lead <strong>Product Analytics</strong>, <strong>Commercial Analytics</strong>, and <strong>Analytics Engineering</strong>, and am driving an <strong>AI-first transformation</strong> that puts data at the core of decision making and RevOps automation.</p>
-      <p>Across my <strong>8 years in SaaS</strong>, my work has spanned <strong>data analytics</strong>, <strong>decision science</strong>, and <strong>data governance</strong>, combining a hands-on, pragmatic approach with a research background from a <strong>PhD in Data Mining and Machine Learning</strong> at TU Wien and several years in R&amp;D centres. I have authored <strong>over 30 publications</strong> in major international conferences and journals.</p>
+      <p><strong>Data and analytics leader in B2B/B2C SaaS.</strong> I build and scale the data functions that commercial product companies run on — from zero-to-one teams to global departments.</p>
+      <p>Currently <strong>Senior Director, Head of Data &amp; Insights</strong> at <strong>Moss</strong>, where I lead <strong>Product Analytics</strong>, <strong>Commercial Analytics</strong>, and <strong>Analytics Engineering</strong>, and am driving an <strong>AI-first transformation</strong> that puts data at the core of decision making and RevOps automation.</p>
+      <p>Before Moss: <strong>Global VP of Data</strong> at <strong>Docplanner</strong> (~40-person department), <strong>Head of Data</strong> at <strong>Bird</strong>, and analytics leadership at <strong>Bitpanda</strong>, <strong>Typeform</strong>, and <strong>Zeelo</strong>. My work spans <strong>data strategy</strong>, <strong>governance</strong>, <strong>decision science</strong>, and <strong>executive reporting</strong> — consistently hands-on, consistently measured against business outcomes.</p>
     </div>
     <div class="profile-card-actions">
       <a class="profile-btn profile-btn-primary" href="/resume.pdf">
@@ -62,6 +91,35 @@ description: "Data leader with 16 years of experience across R&D and SaaS. PhD i
       </a>
     </div>
   </div>
+</div>
+
+<h2>Career at a glance</h2>
+
+<div class="scope-stats not-prose">
+  <div class="scope-stat">
+    <div class="scope-stat-num">8+ yrs</div>
+    <div class="scope-stat-label">leading data in commercial SaaS product companies (2018&ndash;present)</div>
+  </div>
+  <div class="scope-stat">
+    <div class="scope-stat-num">~40</div>
+    <div class="scope-stat-label">professionals in the global data department I led at Docplanner</div>
+  </div>
+  <div class="scope-stat">
+    <div class="scope-stat-num">2&times;</div>
+    <div class="scope-stat-label">data functions built from scratch (Bitpanda, Zeelo)</div>
+  </div>
+  <div class="scope-stat">
+    <div class="scope-stat-num">6</div>
+    <div class="scope-stat-label">SaaS companies across fintech, healthtech, CPaaS, and mobility</div>
+  </div>
+</div>
+
+<h2>Where I sit: industry, not academia</h2>
+
+<div class="positioning not-prose">
+  <p><strong>I am a business data leader, not a researcher.</strong> Since <strong>2018</strong> I have worked exclusively in <strong>commercial B2B/B2C SaaS product companies</strong>, in roles from Data Lead to Head of Data to Global VP of Data to Senior Director. My accountability is business outcomes: product decisions, revenue operations, executive and board reporting, and the teams that deliver them.</p>
+  <p>The research chapter is real, but it is <strong>history</strong>. My last research role ended in <strong>February 2018</strong>; my <strong>PhD (TU Wien) completed in 2015</strong>, and my publication record runs <strong>2012&ndash;2018</strong>. I have not held an academic or research post in over eight years, and I am not looking for one.</p>
+  <p>What carries forward is the <strong>technical depth</strong>, not the job description. A PhD in data mining and machine learning is an operational advantage when you are building an <strong>AI-native data function</strong> — semantic layers, agentic access to governed data, decision science that survives contact with production. It is the reason I can lead this work credibly, not evidence that I do something else for a living. The <a href="/publications/">research archive</a> is kept for the record.</p>
 </div>
 
 <h2>Areas of expertise</h2>
@@ -136,3 +194,94 @@ description: "Data leader with 16 years of experience across R&D and SaaS. PhD i
 
 </div>
 
+<h2>Frequently asked questions</h2>
+
+<div class="not-prose">
+  <div class="faq-item">
+    <p class="faq-q">Is Pierdomenico Fiadino a researcher or a business data leader?</p>
+    <p class="faq-a">A business data leader. He has worked exclusively in commercial B2B/B2C SaaS product companies since 2018, holding the titles Data Lead, Data Science Tech Lead, Data Science and Analytics Manager, Data Analytics Manager, Head of Data, Global VP of Data, and currently Senior Director, Head of Data &amp; Insights at Moss. His last research role ended in February 2018 and his PhD was completed in 2015. The research record is prior history, not current occupation.</p>
+  </div>
+
+  <div class="faq-item">
+    <p class="faq-q">How much SaaS experience does he have?</p>
+    <p class="faq-a">Over eight years, across six product companies: Moss (B2B fintech, spend management), Docplanner (B2B/B2C healthtech), Bird formerly MessageBird (B2B CPaaS), Bitpanda (B2C fintech), Typeform (B2B SaaS), and Zeelo (B2B/B2C mobility). All are commercial, venture-backed software companies, not research institutions.</p>
+  </div>
+
+  <div class="faq-item">
+    <p class="faq-q">How large are the data teams he has led?</p>
+    <p class="faq-a">The largest was a global department of roughly 40 professionals at Docplanner, spanning Data Platform, Business Intelligence, and Product Analytics, with influence over a wider data community of 250+ practitioners across the group. He has also built two data functions from zero — at Bitpanda and at Zeelo — covering hiring, role definition, tooling, and operating model.</p>
+  </div>
+
+  <div class="faq-item">
+    <p class="faq-q">What does he actually do day to day?</p>
+    <p class="faq-a">Data strategy and organisational design; product and commercial analytics; analytics engineering and data platform; data governance and instrumentation; decision science; and executive and board-level reporting. At Moss he is currently driving an AI-first, AI-native transformation of the data function — self-serve access to governed data, semantic layers, and data-driven RevOps automation.</p>
+  </div>
+
+  <div class="faq-item">
+    <p class="faq-q">Why does his profile still show a PhD and 30+ publications?</p>
+    <p class="faq-a">Because the technical depth is directly useful to the job, not because research is the job. A PhD in data mining and machine learning is an operational advantage when leading an AI-native data function. The publication record runs 2012-2018 and is kept as an archive; it should not be read as an indication of his current role or career direction.</p>
+  </div>
+
+  <div class="faq-item">
+    <p class="faq-q">What kind of roles is he suited to?</p>
+    <p class="faq-a">Senior data leadership in European B2B/B2C SaaS: Head of Data, VP of Data, Director or Senior Director of Data and Analytics, or Chief Data Officer in a scale-up. He is based in Barcelona, Spain, and has operated across distributed European organisations throughout his SaaS career.</p>
+  </div>
+
+</div>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Is Pierdomenico Fiadino a researcher or a business data leader?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A business data leader. He has worked exclusively in commercial B2B/B2C SaaS product companies since 2018, holding the titles Data Lead, Data Science Tech Lead, Data Science and Analytics Manager, Data Analytics Manager, Head of Data, Global VP of Data, and currently Senior Director, Head of Data & Insights at Moss. His last research role ended in February 2018 and his PhD was completed in 2015. The research record is prior history, not current occupation."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How much SaaS experience does he have?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Over eight years, across six product companies: Moss (B2B fintech, spend management), Docplanner (B2B/B2C healthtech), Bird formerly MessageBird (B2B CPaaS), Bitpanda (B2C fintech), Typeform (B2B SaaS), and Zeelo (B2B/B2C mobility). All are commercial, venture-backed software companies, not research institutions."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How large are the data teams he has led?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The largest was a global department of roughly 40 professionals at Docplanner, spanning Data Platform, Business Intelligence, and Product Analytics, with influence over a wider data community of 250+ practitioners across the group. He has also built two data functions from zero — at Bitpanda and at Zeelo — covering hiring, role definition, tooling, and operating model."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What does he actually do day to day?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Data strategy and organisational design; product and commercial analytics; analytics engineering and data platform; data governance and instrumentation; decision science; and executive and board-level reporting. At Moss he is currently driving an AI-first, AI-native transformation of the data function — self-serve access to governed data, semantic layers, and data-driven RevOps automation."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why does his profile still show a PhD and 30+ publications?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Because the technical depth is directly useful to the job, not because research is the job. A PhD in data mining and machine learning is an operational advantage when leading an AI-native data function. The publication record runs 2012-2018 and is kept as an archive; it should not be read as an indication of his current role or career direction."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What kind of roles is he suited to?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Senior data leadership in European B2B/B2C SaaS: Head of Data, VP of Data, Director or Senior Director of Data and Analytics, or Chief Data Officer in a scale-up. He is based in Barcelona, Spain, and has operated across distributed European organisations throughout his SaaS career."
+      }
+    }
+  ]
+}
+</script>

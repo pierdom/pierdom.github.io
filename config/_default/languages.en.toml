@@ -1,7 +1,7 @@
 locale = "en"
 label = "English"
 weight = 1
-title = "Pierdomenico (Piero) Fiadino - Data and Insights leader"
+title = "Pierdomenico (Piero) Fiadino - Data Leader in B2B SaaS"
 
 [params]
   displayName = "EN"
@@ -11,17 +11,16 @@ title = "Pierdomenico (Piero) Fiadino - Data and Insights leader"
   logo = "img/r2d2_xs.png"
   # Short name for the header bar; the long `title` above is kept for SEO/<title>.
   headerTitle = "Pierdomenico Fiadino"
-  description = "Pierdomenico Fiadino — Data leader with 16 years of experience across R&D and SaaS. PhD in Data Mining, Head of Data @ Moss."
+  description = "Pierdomenico Fiadino — Data and analytics leader in B2B/B2C SaaS. Senior Director, Head of Data & Insights at Moss. Since 2018 has built and scaled data functions in commercial product companies (Docplanner, Bird, Bitpanda, Typeform), from zero-to-one teams to a 40-person global department."
   copyright = "©2026 All Rights Reserved"
 
 [params.author]
-  name = "Pierdomenico Fiadino, PhD"
-  headline = "Senior Director, Head of Data @ Moss"
+  name = "Pierdomenico Fiadino"
+  headline = "Senior Director, Head of Data & Insights @ Moss"
   bio = "data stuff since 2010"
   links = [
      { email = "mailto:p@fiadino.org" },
      { github = "https://github.com/pierdom" },
      { linkedin = "https://linkedin.com/in/fiadino" },
-{ researchgate = "https://www.researchgate.net/profile/Pierdomenico_Fiadino" },
      { telegram = "https://t.me/pierdom" },
   ]
